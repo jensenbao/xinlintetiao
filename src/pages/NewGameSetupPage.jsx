@@ -11,16 +11,12 @@ import {
 import { searchLocalCharacters } from '../utils/localCharacterRepository.js';
 import './NewGameSetupPage.css';
 
-const LOCAL_ADDED_CHARACTER_PATH = 'seeds/characters/added/';
-const DEFAULT_CHARACTER_ID = DEFAULT_PRESET_CHARACTER_IDS[0] || '';
+const LOCAL_CUSTOM_CHARACTER_PATH = 'seeds/characters/custom/';
+const HAS_DEFAULT_CHARACTERS = DEFAULT_PRESET_CHARACTER_IDS.length > 0;
 
-const extractLocalAddedIdFromSourcePath = (sourcePath) => {
+const isLocalCustomCharacterSource = (sourcePath) => {
   const normalizedPath = String(sourcePath || '').replace(/\\/g, '/');
-  const markerIndex = normalizedPath.indexOf(LOCAL_ADDED_CHARACTER_PATH);
-  if (markerIndex < 0) return '';
-  const relativePath = normalizedPath.slice(markerIndex + LOCAL_ADDED_CHARACTER_PATH.length);
-  const segments = relativePath.split('/').filter(Boolean);
-  return String(segments[0] || '').trim();
+  return normalizedPath.includes(LOCAL_CUSTOM_CHARACTER_PATH);
 };
 
 const NewGameSetupPage = ({ onBack, onConfirmStart, onCharacterPoolChange, loading = false }) => {
@@ -34,8 +30,8 @@ const NewGameSetupPage = ({ onBack, onConfirmStart, onCharacterPoolChange, loadi
     setCustomCharacterIds(savedCustomIds);
     setSelectedCustomCharacterId(savedCustomIds[0] || '');
 
-    if (DEFAULT_CHARACTER_ID) {
-      saveActiveCharacterIds([DEFAULT_CHARACTER_ID]);
+    if (HAS_DEFAULT_CHARACTERS) {
+      saveActiveCharacterIds(DEFAULT_PRESET_CHARACTER_IDS);
     }
 
     let cancelled = false;
@@ -43,7 +39,8 @@ const NewGameSetupPage = ({ onBack, onConfirmStart, onCharacterPoolChange, loadi
       try {
         const results = await searchLocalCharacters('', 50);
         const localCustomIds = results
-          .map((item) => extractLocalAddedIdFromSourcePath(item?.source?.path))
+          .filter((item) => isLocalCustomCharacterSource(item?.source?.path))
+          .map((item) => String(item?.code || '').trim())
           .filter(Boolean);
         const merged = saveCustomCharacterIds([
           ...DEFAULT_PRESET_CHARACTER_IDS,
@@ -69,16 +66,17 @@ const NewGameSetupPage = ({ onBack, onConfirmStart, onCharacterPoolChange, loadi
     };
   }, []);
 
-  const activateCharacter = (id) => {
-    if (!id) return;
-    saveActiveCharacterIds([id]);
+  const activateCharacters = (ids) => {
+    const normalized = Array.isArray(ids) ? ids.filter(Boolean) : [];
+    if (normalized.length === 0) return;
+    saveActiveCharacterIds(normalized);
     onCharacterPoolChange?.();
   };
 
   const handleCustomCharacterToggle = (enabled) => {
     if (!enabled) {
       setUseCustomCharacter(false);
-      activateCharacter(DEFAULT_CHARACTER_ID);
+      activateCharacters(DEFAULT_PRESET_CHARACTER_IDS);
       return;
     }
 
@@ -86,14 +84,14 @@ const NewGameSetupPage = ({ onBack, onConfirmStart, onCharacterPoolChange, loadi
     if (!nextCustomId) return;
     setUseCustomCharacter(true);
     setSelectedCustomCharacterId(nextCustomId);
-    activateCharacter(nextCustomId);
+    activateCharacters([nextCustomId]);
   };
 
   const handleConfirmStart = () => {
-    const selectedId = useCustomCharacter
-      ? (selectedCustomCharacterId || customCharacterIds[0])
-      : DEFAULT_CHARACTER_ID;
-    activateCharacter(selectedId);
+    const selectedIds = useCustomCharacter
+      ? [selectedCustomCharacterId || customCharacterIds[0]]
+      : DEFAULT_PRESET_CHARACTER_IDS;
+    activateCharacters(selectedIds);
     onConfirmStart?.();
   };
 
@@ -137,7 +135,7 @@ const NewGameSetupPage = ({ onBack, onConfirmStart, onCharacterPoolChange, loadi
 
         <div className="newgame-actions">
           <button className="newgame-back-btn" onClick={onBack} disabled={loading}>Back</button>
-          <button className="newgame-start-btn" onClick={handleConfirmStart} disabled={loading || !DEFAULT_CHARACTER_ID}>
+          <button className="newgame-start-btn" onClick={handleConfirmStart} disabled={loading || !HAS_DEFAULT_CHARACTERS}>
             {loading ? 'Creating...' : 'Start New Game'}
           </button>
         </div>

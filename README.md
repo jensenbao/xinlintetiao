@@ -294,7 +294,7 @@ This demo presents the full playable chain in one continuous run:
 
 - App launches at `http://localhost:5173`
 - Save server responds on `/health`
-- New game can load the bundled local default character (`5738g`)
+- New game randomly draws from the bundled local default characters (Captain Quick and Aquabyte-98)
 - Dialogue and emotion panel update during play
 - Mixing board interaction updates gameplay state
 - Save slot data is written locally

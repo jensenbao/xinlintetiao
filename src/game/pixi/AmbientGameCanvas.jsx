@@ -20,11 +20,6 @@ const HARDCODED_CUTOUT_BINDINGS = Object.freeze({
     ...GENERATED_STAGE_PROFILE,
     useRawSource: false,
   },
-  '0613g': {
-    src: '/asset/角色/cutout/0613g_cutout.png',
-    ...GENERATED_STAGE_PROFILE,
-    useRawSource: true,
-  },
   '2928g': {
     src: '/asset/角色/cutout/2928g_cutout.png',
     ...GENERATED_STAGE_PROFILE,

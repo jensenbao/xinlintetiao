@@ -64,8 +64,18 @@ const imageFileToDataUrl = async (filePath) => {
   return `data:${mimeType};base64,${buffer.toString('base64')}`;
 };
 
-const findLocalSourcePortrait = async (rootDir, code) => {
-  const roleDir = path.join(rootDir, 'seeds', 'characters', 'added', code);
+const resolveCustomCharacterAssetDir = ({ rootDir, character }) => {
+  const manifestPath = String(character?.source?.path || '').trim();
+  if (!manifestPath) return '';
+
+  const customRoot = path.resolve(rootDir, 'seeds', 'characters', 'custom');
+  const roleDir = path.dirname(path.resolve(rootDir, manifestPath));
+  if (roleDir === customRoot || !roleDir.startsWith(`${customRoot}${path.sep}`)) return '';
+  return roleDir;
+};
+
+const findLocalSourcePortrait = async (roleDir) => {
+  if (!roleDir) return '';
   const entries = await fs.readdir(roleDir, { withFileTypes: true }).catch(() => []);
   const candidates = entries
     .filter((entry) => entry.isFile() && /^portrait\.(png|jpe?g|webp)$/i.test(entry.name))
@@ -481,7 +491,12 @@ export const generateCharacterImages = async ({ rootDir, code, force = false }) 
     throw error;
   }
 
-  const roleDir = path.join(rootDir, 'seeds', 'characters', 'added', normalizedCode);
+  const roleDir = resolveCustomCharacterAssetDir({ rootDir, character });
+  if (!roleDir) {
+    const error = new Error('custom_character_asset_dir_not_found');
+    error.code = 'custom_character_asset_dir_not_found';
+    throw error;
+  }
   const conceptPath = path.join(roleDir, 'concept.png');
   const pixelPath = path.join(roleDir, 'pixel.png');
   const generationPath = path.join(roleDir, 'image-generation.json');
@@ -509,7 +524,7 @@ export const generateCharacterImages = async ({ rootDir, code, force = false }) 
   }
 
   const sourcePortrait = String(character?.portrait?.dataUrl || '').trim()
-    || await findLocalSourcePortrait(rootDir, normalizedCode);
+    || await findLocalSourcePortrait(roleDir);
   if (!sourcePortrait.startsWith('data:image/')) {
     const error = new Error('missing_source_portrait');
     error.code = 'missing_source_portrait';
@@ -594,7 +609,23 @@ export const removeCharacterAssets = async ({ rootDir, code }) => {
     throw error;
   }
 
-  const roleDir = path.join(rootDir, 'seeds', 'characters', 'added', normalizedCode);
+  const character = await getCharacterByName({
+    rootDir,
+    query: normalizedCode,
+    inferPortraitGender: false,
+  });
+  if (!character) {
+    const error = new Error('character_not_found');
+    error.code = 'character_not_found';
+    throw error;
+  }
+
+  const roleDir = resolveCustomCharacterAssetDir({ rootDir, character });
+  if (!roleDir) {
+    const error = new Error('custom_character_asset_dir_not_found');
+    error.code = 'custom_character_asset_dir_not_found';
+    throw error;
+  }
   const publicCutoutPath = path.join(rootDir, 'public', 'asset', '角色', 'cutout', `${normalizedCode}_cutout.png`);
 
   const [removedCacheDir, removedCutout] = await Promise.all([

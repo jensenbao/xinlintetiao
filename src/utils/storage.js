@@ -80,18 +80,23 @@ const normalizeCharacterIds = (ids) => {
   return Array.from(dedup);
 };
 
-const pickSingleActiveId = (candidateIds, customIds, { forceLockedPresetWhenNoUserCharacters = false } = {}) => {
+const normalizeActiveCharacterSelection = (candidateIds, customIds, { forceLockedPresetWhenNoUserCharacters = false } = {}) => {
   const normalizedCustom = normalizeCharacterIds(customIds);
   const valid = normalizeCharacterIds(candidateIds).filter((id) => normalizedCustom.includes(id));
   const hasUserCharacters = hasAnyUserAddedCharacter(normalizedCustom);
+  const presetPool = normalizedCustom.filter((id) => isPresetCharacterId(id));
 
   if (forceLockedPresetWhenNoUserCharacters && !hasUserCharacters) {
-    const lockedPresetIds = normalizedCustom.filter((id) => isPresetCharacterLockedUntilUserAdded(id));
-    const pickedLocked = valid.find((id) => lockedPresetIds.includes(id)) || lockedPresetIds[0];
-    if (pickedLocked) return [pickedLocked];
+    const lockedPresetIds = presetPool.filter((id) => isPresetCharacterLockedUntilUserAdded(id));
+    if (lockedPresetIds.length > 0) return lockedPresetIds;
   }
 
-  if (valid.length > 0) return [valid[0]];
+  const validUserCharacters = valid.filter((id) => !isPresetCharacterId(id));
+  if (validUserCharacters.length > 0) return [validUserCharacters[0]];
+
+  const validPresets = valid.filter((id) => isPresetCharacterId(id));
+  if (validPresets.length > 0) return presetPool;
+
   if (normalizedCustom.length > 0) return [normalizedCustom[0]];
   return [];
 };
@@ -358,7 +363,10 @@ export const getCustomCharacterIds = () => {
     if (raw === null) {
       return normalizeCharacterIds([...DEFAULT_INITIAL_CHARACTER_IDS, ...getKnownAddedCharacterIds()]);
     }
-    return normalizeCharacterIds(JSON.parse(raw));
+    return normalizeCharacterIds([
+      ...DEFAULT_INITIAL_CHARACTER_IDS,
+      ...JSON.parse(raw),
+    ]);
   } catch (error) {
     console.error('Failed to load custom character IDs:', error);
     return normalizeCharacterIds([...DEFAULT_INITIAL_CHARACTER_IDS, ...getKnownAddedCharacterIds()]);
@@ -370,9 +378,9 @@ export const saveCustomCharacterIds = (ids) => {
     const normalized = normalizeCharacterIds(ids);
     localStorage.setItem(STORAGE_KEYS.CUSTOM_CHARACTER_IDS, JSON.stringify(normalized));
 
-    // active 列表必须是 custom 列表子集，且仅允许一个激活角色
+    // 默认模式允许整个预置池；自定义角色模式仍保持单选。
     const currentActive = getActiveCharacterIds();
-    const nextActive = pickSingleActiveId(currentActive, normalized, {
+    const nextActive = normalizeActiveCharacterSelection(currentActive, normalized, {
       forceLockedPresetWhenNoUserCharacters: true
     });
     localStorage.setItem(STORAGE_KEYS.ACTIVE_CHARACTER_IDS, JSON.stringify(nextActive));
@@ -420,17 +428,17 @@ export const getActiveCharacterIds = () => {
     const custom = getCustomCharacterIds();
     const raw = JSON.parse(localStorage.getItem(STORAGE_KEYS.ACTIVE_CHARACTER_IDS) || 'null');
     if (!raw) {
-      return pickSingleActiveId(custom, custom, {
+      return normalizeActiveCharacterSelection(custom, custom, {
         forceLockedPresetWhenNoUserCharacters: true
       });
     }
-    return pickSingleActiveId(raw, custom, {
+    return normalizeActiveCharacterSelection(raw, custom, {
       forceLockedPresetWhenNoUserCharacters: true
     });
   } catch (error) {
     console.error('Failed to load active character IDs:', error);
     const custom = getCustomCharacterIds();
-    return pickSingleActiveId(custom, custom, {
+    return normalizeActiveCharacterSelection(custom, custom, {
       forceLockedPresetWhenNoUserCharacters: true
     });
   }
@@ -439,7 +447,7 @@ export const getActiveCharacterIds = () => {
 export const saveActiveCharacterIds = (ids) => {
   try {
     const custom = getCustomCharacterIds();
-    const normalized = pickSingleActiveId(ids, custom, {
+    const normalized = normalizeActiveCharacterSelection(ids, custom, {
       forceLockedPresetWhenNoUserCharacters: true
     });
     localStorage.setItem(STORAGE_KEYS.ACTIVE_CHARACTER_IDS, JSON.stringify(normalized));

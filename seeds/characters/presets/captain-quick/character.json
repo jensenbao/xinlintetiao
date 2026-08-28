@@ -1,10 +1,11 @@
 {
-  "version": 1,
+  "schemaVersion": 1,
   "id": "5738g",
-  "name": "Captain Quick",
+  "slug": "captain-quick",
+  "displayName": "Captain Quick",
+  "kind": "preset",
   "preset": true,
   "lockedUntilUserAdded": true,
-  "enabledByDefault": true,
   "character": {
     "code": "5738g",
     "displayName": "Captain Quick",
@@ -83,14 +84,22 @@
     },
     "source": {
       "type": "preset",
-      "path": "seeds/characters/presets/5738g/source.yaml",
+      "path": "source.yaml",
       "url": null
     },
     "portrait": {
-      "path": "seeds/characters/presets/5738g/portrait.png",
+      "path": "portrait.png",
       "url": null,
       "mimeType": "image/png"
     }
+  },
+  "assets": {
+    "source": "source.yaml",
+    "portrait": "portrait.png",
+    "concept": null,
+    "pixel": null,
+    "generation": null,
+    "publicCutout": "public/asset/角色/cutout/5738g_cutout.png"
   },
   "emotionSchemaVersion": 2,
   "currentEmotionWeights": {

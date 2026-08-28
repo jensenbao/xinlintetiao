@@ -27,28 +27,28 @@ Important note:
 
 | Asset Path | Role ID | Provenance Statement | Reference URL | Usage Note |
 |---|---|---|---|---|
-| `public/asset/角色/cutout/0613g_cutout.png` | `0613g` | Imported as Storyworld-linked role asset | `https://github.com/venetanji/polyu-storyworld` | Project-context demo; follow upstream terms |
+| `public/asset/角色/cutout/0055g_cutout.png` | Aquabyte-98 | Preset role visual aligned with local character manifest | `seeds/characters/presets/aquabyte-98/source.yaml` | Project-context demo; show with attribution line |
 | `public/asset/角色/cutout/2928g_cutout.png` | `2928g` | Imported as Storyworld-linked role asset | `https://github.com/venetanji/polyu-storyworld` | Project-context demo; follow upstream terms |
 | `public/asset/角色/cutout/5208g_cutout.png` | `5208g` | Imported as Storyworld-linked role asset | `https://github.com/venetanji/polyu-storyworld` | Project-context demo; follow upstream terms |
-| `public/asset/角色/cutout/5738g_cutout.png` | `5738g` | Preset role visual aligned with local seed profile | `seeds/characters/presets/5738g/source.yaml` | Project-context demo; show with attribution line |
+| `public/asset/角色/cutout/5738g_cutout.png` | Captain Quick | Preset role visual aligned with local character manifest | `seeds/characters/presets/captain-quick/source.yaml` | Project-context demo; show with attribution line |
 | `public/asset/角色/cutout/1512g_cutout.png` | `1512g` | Team-provided visual in active asset pack | team internal evidence | Add owner/source note in final slide |
 | `public/asset/角色/cutout/1601_cutout.png` | `1601` / `1601g` | Team-provided visual in active asset pack | team internal evidence | Add owner/source note in final slide |
 | `public/asset/角色/微信图片_20260418170446_294_154.jpg` | `5738g` reference | Team local reference portrait used in production prep | team internal evidence | Keep reference note explicit in presentation |
-| `seeds/characters/presets/5738g/微信图片_20260418170446_294_154.jpg` | `5738g` seed reference | Team local seed-side portrait copy | team internal evidence | Keep source note aligned with above row |
+| `seeds/characters/presets/captain-quick/微信图片_20260418170446_294_154.jpg` | Captain Quick seed reference | Team local seed-side portrait copy | team internal evidence | Keep source note aligned with above row |
 | `public/asset/角色/调酒师头像.png` | bartender | Team-authored bartender asset | team internal | Add creator name(s) |
 | `public/asset/角色/调酒师动画.mp4` | bartender | Team-authored bartender animation | team internal | Add creator name(s) |
 
 ## Repository Evidence for Role Mapping
 
-- `seeds/characters/added/0613g/profile.json`
+- `seeds/characters/presets/aquabyte-98/character.json`
 - `seeds/characters/added/2928g/profile.json`
 - `seeds/characters/added/5208g/profile.json`
-- `seeds/characters/presets/5738g/profile.json`
+- `seeds/characters/presets/captain-quick/character.json`
 - `server/local-character-service.mjs` (local-only character loading)
 
 ## Reference Line Templates
 
-- `0613g - cutout - Source: venetanji/polyu-storyworld (project-context integration) - Accessed: 2026-04-24 - Non-commercial project-context demo`
+- `0055g - Aquabyte-98 character seed/cutout - Source chain: local character manifest and archived source - Non-commercial project-context demo`
 - `2928g - cutout - Source: venetanji/polyu-storyworld (project-context integration) - Accessed: 2026-04-24 - Non-commercial project-context demo`
 - `5208g - cutout - Source: venetanji/polyu-storyworld (project-context integration) - Accessed: 2026-04-24 - Non-commercial project-context demo`
 - `5738g - character seed/cutout - Source chain: local seed + Storyworld-linked workflow - Accessed: 2026-04-24 - Non-commercial project-context demo`

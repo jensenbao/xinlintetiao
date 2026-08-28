@@ -1,31 +1,41 @@
 # Characters Seed Directory
 
-This directory centralizes role management:
+This directory centralizes local NPC asset management:
 
-- presets/: built-in preset character asset folders
-- added/: user-added character asset folders stored locally
+- `defaults.json`: the only registry that decides which preset characters load by default
+- `presets/`: bundled character asset packages
+- `custom/`: locally stored custom character asset packages
 
-Preset folder layout (recommended):
+Canonical folder layout:
 
-- seeds/characters/presets/<roleId>/profile.json
-- seeds/characters/presets/<roleId>/source.yaml
-- seeds/characters/presets/<roleId>/portrait.png (optional)
+```text
+seeds/characters/
+├─ defaults.json
+├─ presets/<readable-slug>/
+│  ├─ character.json
+│  ├─ source.yaml
+│  └─ portrait.*
+└─ custom/<readable-slug>/
+   ├─ character.json
+   ├─ source.yaml
+   ├─ portrait.*
+   ├─ concept.png (optional)
+   ├─ pixel.png (optional)
+   └─ image-generation.json (optional)
+```
 
-Added folder layout (recommended):
+Rules:
 
-- seeds/characters/added/<roleId>/profile.json
-- seeds/characters/added/<roleId>/source.yaml
-- seeds/characters/added/<roleId>/portrait.png (optional, reserved for future image assets)
+- Every NPC has exactly one `character.json` runtime manifest.
+- Folder names use readable slugs; stable internal IDs remain inside the manifest for save compatibility.
+- `source.yaml` is an archive and attribution source, not a runtime character definition.
+- Character loading is local-only. The runtime indexes only `character.json` under `presets/` and `custom/`.
+- Adding a preset does not make it a default. Add its slug to `defaults.json` explicitly.
 
-Runtime lookup uses profile.json as the primary source. source.yaml is kept as raw archive data.
+Current default preset manifests:
 
-Backward compatibility:
-
-- Legacy flat files in added/ (e.g. <roleId>.json, <roleId>.yaml) are still readable.
-- Character loading is local-only. Add or update role folders in this directory before using their IDs in the game.
-
-Current preset source consumed by frontend:
-- seeds/characters/presets/5738g/profile.json
+- `seeds/characters/presets/captain-quick/character.json`
+- `seeds/characters/presets/aquabyte-98/character.json`
 
 ## Compliance Requirements (Mandatory)
 
@@ -33,7 +43,7 @@ Every character used in demos/presentations must include traceable attribution m
 
 Required for each role folder:
 
-- `profile.json`
+- `character.json`
 - `source.yaml`
 - Optional portrait/cutout files only when provenance is documented
 

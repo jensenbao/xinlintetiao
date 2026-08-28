@@ -54,9 +54,7 @@ const getFilePriority = (filePath) => {
 
 const shouldIndexCharacterFile = (filePath) => {
   const fileName = String(path.basename(filePath || '')).toLowerCase();
-  if (!fileName) return false;
-  if (fileName === 'image-generation.json') return false;
-  return YAML_EXT_RE.test(fileName) || JSON_EXT_RE.test(fileName);
+  return fileName === 'character.json';
 };
 
 const fileExists = async (target) => {
@@ -636,7 +634,7 @@ const listImageFilesInDir = async (dir) => {
 };
 
 const getPresetCharacterDir = (rootDir) => path.join(rootDir, 'seeds', 'characters', 'presets');
-const getAddedCharacterDir = (rootDir) => path.join(rootDir, 'seeds', 'characters', 'added');
+const getCustomCharacterDir = (rootDir) => path.join(rootDir, 'seeds', 'characters', 'custom');
 
 const getPresetCharacterAssetDir = (rootDir, code) => {
   const normalized = normalizeCode(code);
@@ -644,64 +642,24 @@ const getPresetCharacterAssetDir = (rootDir, code) => {
   return path.join(getPresetCharacterDir(rootDir), normalized);
 };
 
-const getAddedCharacterAssetDir = (rootDir, code) => {
-  const normalized = normalizeCode(code);
-  if (!normalized) return null;
-  return path.join(getAddedCharacterDir(rootDir), normalized);
-};
-
 export const invalidateLocalCharacterCache = ({ rootDir, code }) => {
   const normalizedCode = normalizeCode(code);
   if (!rootDir || !normalizedCode) return false;
 
-  const addedCharacterDir = getAddedCharacterAssetDir(rootDir, normalizedCode);
   cache.localIndex.ts = 0;
   cache.localIndex.entries = cache.localIndex.entries.filter((entry) => entry?.code !== normalizedCode);
-
-  if (addedCharacterDir) {
-    for (const filePath of cache.localContextByFile.keys()) {
-      if (typeof filePath !== 'string') continue;
-      if (filePath.startsWith(addedCharacterDir)) {
-        cache.localContextByFile.delete(filePath);
-      }
-    }
-  }
+  cache.localContextByFile.clear();
 
   return true;
-};
-
-const getPresetCharacterProfilePath = (rootDir, code) => {
-  const normalized = normalizeCode(code);
-  if (!normalized) return null;
-  return path.join(getPresetCharacterDir(rootDir), normalized, 'profile.json');
-};
-
-const getLegacyPresetCharacterProfilePath = (rootDir, code) => {
-  const normalized = normalizeCode(code);
-  if (!normalized) return null;
-  return path.join(getPresetCharacterDir(rootDir), `${normalized}.json`);
-};
-
-const getAddedCharacterProfilePath = (rootDir, code) => {
-  const normalized = normalizeCode(code);
-  if (!normalized) return null;
-  return path.join(getAddedCharacterDir(rootDir), normalized, 'profile.json');
-};
-
-const getLegacyAddedCharacterProfilePath = (rootDir, code) => {
-  const normalized = normalizeCode(code);
-  if (!normalized) return null;
-  return path.join(getAddedCharacterDir(rootDir), `${normalized}.json`);
 };
 
 const loadLocalPortrait = async (rootDir, code) => {
   const normalizedCode = normalizeCode(code);
   if (!rootDir || !normalizedCode) return null;
 
-  const candidateDirs = [
-    getAddedCharacterAssetDir(rootDir, normalizedCode),
-    getPresetCharacterAssetDir(rootDir, normalizedCode),
-  ].filter(Boolean);
+  const localIndex = await buildLocalIndex(rootDir);
+  const matched = localIndex.find((entry) => entry?.code === normalizedCode);
+  const candidateDirs = matched?.filePath ? [path.dirname(matched.filePath)] : [];
 
   for (const dir of candidateDirs) {
     const images = await listImageFilesInDir(dir);
@@ -762,29 +720,6 @@ const enrichCharacterWithPortrait = async ({ rootDir, character, inferPortraitGe
     ...character,
     gender: await resolveOptionalGender({ rootDir, character, inferPortraitGender }),
   };
-};
-
-const findLocalProfileByCode = async (rootDir, code) => {
-  const normalizedCode = normalizeCode(code);
-  if (!normalizedCode) return null;
-
-  const profileCandidates = [
-    getAddedCharacterProfilePath(rootDir, normalizedCode),
-    getLegacyAddedCharacterProfilePath(rootDir, normalizedCode),
-    getPresetCharacterProfilePath(rootDir, normalizedCode),
-    getLegacyPresetCharacterProfilePath(rootDir, normalizedCode),
-  ].filter(Boolean);
-
-  for (const candidate of profileCandidates) {
-    if (!(await fileExists(candidate))) continue;
-    try {
-      return await loadProfileCharacterFromFile(rootDir, candidate, normalizedCode);
-    } catch {
-      // try next profile candidate
-    }
-  }
-
-  return null;
 };
 
 const parseNameList = (value) => {
@@ -1048,9 +983,7 @@ const buildLocalIndex = async (rootDir) => {
 
   const candidateRoots = [
     getPresetCharacterDir(rootDir),
-    getAddedCharacterDir(rootDir),
-    path.join(rootDir, 'story', 'repo'),
-    path.join(rootDir, 'storyworld', 'repo'),
+    getCustomCharacterDir(rootDir),
   ];
 
   const existingRoots = [];
@@ -1063,12 +996,20 @@ const buildLocalIndex = async (rootDir) => {
   for (const baseDir of existingRoots) {
     const characterFiles = await walkCharacterFiles(baseDir);
     for (const filePath of characterFiles) {
-      const code = guessCodeFromFile(filePath);
-      const nextEntry = { code, filePath, baseDir };
-      if (!code) {
-        fallbackEntries.push(nextEntry);
+      let character = null;
+      try {
+        character = await loadProfileCharacterFromFile(rootDir, filePath);
+      } catch {
         continue;
       }
+      const code = normalizeCode(character?.code);
+      if (!code) continue;
+      const nextEntry = {
+        code,
+        displayName: String(character?.displayName || '').trim(),
+        filePath,
+        baseDir,
+      };
 
       const prev = entryByCode.get(code);
       if (!prev) {
@@ -1142,11 +1083,6 @@ export const getCharacterByName = async ({ rootDir, query, inferPortraitGender =
     throw error;
   }
 
-  const byCodeFromProfile = await findLocalProfileByCode(rootDir, normalizedQuery);
-  if (byCodeFromProfile) {
-    return enrichCharacterWithPortrait({ rootDir, character: byCodeFromProfile, inferPortraitGender });
-  }
-
   const byCode = await findLocalByCode(rootDir, normalizedQuery);
   if (byCode) {
     return enrichCharacterWithPortrait({ rootDir, character: byCode, inferPortraitGender });
@@ -1195,7 +1131,7 @@ export const searchCharacters = async ({ rootDir, query = '', limit = 20 }) => {
     } else {
       pushResult({
         code: localCode,
-        displayName: localCode,
+        displayName: entry.displayName || localCode,
         source: {
           type: 'local',
           path: toRelativePath(rootDir, entry.filePath),

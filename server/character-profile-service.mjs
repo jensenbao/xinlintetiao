@@ -1,3 +1,4 @@
+import path from 'node:path';
 import { analyzeCharacterEmotionWithAI } from './emotion-service.mjs';
 
 const normalizeList = (value) => {
@@ -149,6 +150,11 @@ const buildDerivedVoiceProfile = ({ displayName, categoryId, personality, dialog
 export const buildCharacterProfileDocument = async ({ code, character, preset = false, notes } = {}) => {
   const normalizedId = String(code || character?.code || '').trim().toLowerCase();
   const displayName = String(character?.displayName || character?.profile?.name || code || '').trim();
+  const slug = String(character?.slug || displayName)
+    .trim()
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, '-')
+    .replace(/^-|-$/g, '') || normalizedId;
   const emotion = await analyzeCharacterEmotionWithAI({
     character,
     options: {
@@ -158,12 +164,13 @@ export const buildCharacterProfileDocument = async ({ code, character, preset = 
   });
 
   const doc = {
-    version: 1,
+    schemaVersion: 1,
     id: normalizedId,
-    name: displayName,
+    slug,
+    displayName,
+    kind: preset ? 'preset' : 'custom',
     preset,
     lockedUntilUserAdded: Boolean(preset),
-    enabledByDefault: Boolean(preset),
     character: {
       code: String(character?.code || code || '').trim().toLowerCase(),
       displayName,
@@ -214,6 +221,14 @@ export const buildCharacterProfileDocument = async ({ code, character, preset = 
         }
         : null,
     },
+    assets: {
+      source: 'source.yaml',
+      portrait: character?.portrait?.path ? path.basename(character.portrait.path) : null,
+      concept: null,
+      pixel: null,
+      generation: null,
+      publicCutout: normalizedId ? `public/asset/角色/cutout/${normalizedId}_cutout.png` : null,
+    },
     emotionSchemaVersion: 2,
     currentEmotionWeights: emotion.weights,
     currentEmotionTop3: emotion.top3,
@@ -236,8 +251,9 @@ export const buildCharacterProfileDocument = async ({ code, character, preset = 
 export const mapProfileDocumentToCharacter = ({ doc, code, sourcePath = null }) => {
   const embedded = doc?.character || {};
   const normalizedCode = String(embedded?.code || doc?.id || code || '').trim().toLowerCase() || 'unknown';
-  const displayName = String(embedded?.displayName || doc?.name || embedded?.profile?.name || normalizedCode).trim();
-  const sourceType = String(embedded?.source?.type || '').trim() || (doc?.preset ? 'preset' : 'local_profile');
+  const displayName = String(embedded?.displayName || doc?.displayName || embedded?.profile?.name || normalizedCode).trim();
+  const sourceType = String(doc?.kind || embedded?.source?.type || '').trim() || (doc?.preset ? 'preset' : 'custom');
+  const portraitAsset = String(doc?.assets?.portrait || '').trim();
   const profile = {
     name: String(embedded?.profile?.name || displayName).trim(),
     age: embedded?.profile?.age ?? null,
@@ -284,7 +300,14 @@ export const mapProfileDocumentToCharacter = ({ doc, code, sourcePath = null }) 
       path: sourcePath,
       url: null,
     },
-    portrait: embedded?.portrait && typeof embedded.portrait === 'object'
+    portrait: portraitAsset
+      ? {
+        path: portraitAsset,
+        url: null,
+        mimeType: null,
+        dataUrl: null,
+      }
+      : embedded?.portrait && typeof embedded.portrait === 'object'
       ? {
         path: String(embedded.portrait.path || '').trim() || null,
         url: String(embedded.portrait.url || '').trim() || null,

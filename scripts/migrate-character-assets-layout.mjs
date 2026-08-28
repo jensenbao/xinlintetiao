@@ -3,7 +3,7 @@ import path from 'node:path';
 
 const rootDir = process.cwd();
 const presetsDir = path.join(rootDir, 'seeds', 'characters', 'presets');
-const addedDir = path.join(rootDir, 'seeds', 'characters', 'added');
+const customDir = path.join(rootDir, 'seeds', 'characters', 'custom');
 
 const toPosix = (value) => String(value || '').replace(/\\/g, '/');
 
@@ -80,14 +80,14 @@ const main = async () => {
   logs.push('Migrating preset character assets...');
   logs.push(...await migrateFlatFilesInRoot({
     baseDir: presetsDir,
-    profileName: 'profile.json',
+    profileName: 'character.json',
     yamlName: 'source.yaml',
   }));
 
-  logs.push('Migrating added character assets...');
+  logs.push('Migrating custom character assets...');
   logs.push(...await migrateFlatFilesInRoot({
-    baseDir: addedDir,
-    profileName: 'profile.json',
+    baseDir: customDir,
+    profileName: 'character.json',
     yamlName: 'source.yaml',
   }));
 

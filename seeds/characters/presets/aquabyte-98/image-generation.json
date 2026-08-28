@@ -1,0 +1,29 @@
+{
+  "version": 1,
+  "code": "0055g",
+  "generatedAt": "2026-04-26T19:42:07.439Z",
+  "provider": "openrouter",
+  "endpoint": "https://openrouter.ai/api/v1",
+  "model": "google/gemini-3.1-flash-image-preview",
+  "dimensions": {
+    "concept": {
+      "width": 1920,
+      "height": 1080,
+      "ratio": "16:9"
+    },
+    "pixel": {
+      "width": 1080,
+      "height": 1920,
+      "ratio": "9:16"
+    }
+  },
+  "references": {
+    "concept": "Art-assets/Art assets/生图参考/角色概念图.png",
+    "style": "Art-assets/Art assets/生图参考/风格参考.png"
+  },
+  "files": {
+    "concept": "seeds/characters/presets/aquabyte-98/concept.png",
+    "pixel": "seeds/characters/presets/aquabyte-98/pixel.png",
+    "publicCutout": "public/asset/角色/cutout/0055g_cutout.png"
+  }
+}
