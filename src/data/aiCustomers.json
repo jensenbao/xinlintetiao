@@ -1,0 +1,367 @@
+{
+  "customerCategories": {
+    "workplace": {
+      "id": "workplace",
+      "category": "Working Professionals",
+      "description": "People navigating workplace pressure, such as office workers, managers, or founders",
+      "ageRange": [
+        25,
+        45
+      ],
+      "avatarOptions": [
+        "👔",
+        "💼",
+        "🧑‍💻",
+        "👨‍💼",
+        "👩‍💼"
+      ],
+      "personalityPool": [
+        "rational",
+        "guarded",
+        "prideful",
+        "tired",
+        "driven",
+        "perfectionist",
+        "workaholic",
+        "anxious"
+      ],
+      "toneOptions": [
+        "formal",
+        "tired",
+        "cynical"
+      ],
+      "lengthOptions": [
+        "short",
+        "medium"
+      ],
+      "featurePool": [
+        "dodges the core issue",
+        "formulaic answers",
+        "emotionally restrained",
+        "heavy workplace jargon",
+        "asks counter-questions often"
+      ],
+      "surfaceEmotionPool": [
+        "trust",
+        "joy"
+      ],
+      "realEmotionPool": [
+        "fear",
+        "sadness",
+        "anger",
+        "disgust"
+      ],
+      "trustThresholdRange": {
+        "low": [
+          0.25,
+          0.35
+        ],
+        "medium": [
+          0.55,
+          0.65
+        ],
+        "high": [
+          0.75,
+          0.85
+        ]
+      },
+      "preferredIce": [
+        "normal",
+        "no_ice"
+      ],
+      "preferredGarnishes": [
+        "bitters"
+      ],
+      "preferredDecorations": [
+        "mint"
+      ],
+      "triggerKeywordThemes": [
+        "work",
+        "emotion",
+        "life"
+      ],
+      "memoryStyleOptions": [
+        "comparative",
+        "analytical"
+      ],
+      "metaphorLevelOptions": [
+        "low",
+        "none"
+      ]
+    },
+    "artistic": {
+      "id": "artistic",
+      "category": "Artistic Souls",
+      "description": "People drawn to art, literature, and music; emotional and imaginative",
+      "ageRange": [
+        20,
+        35
+      ],
+      "avatarOptions": [
+        "🎨",
+        "📚",
+        "🎸",
+        "🎭",
+        "✍️"
+      ],
+      "personalityPool": [
+        "emotional",
+        "metaphorical",
+        "sensitive",
+        "romantic",
+        "melancholic",
+        "idealistic",
+        "nostalgic"
+      ],
+      "toneOptions": [
+        "poetic",
+        "dreamy",
+        "melancholic"
+      ],
+      "lengthOptions": [
+        "medium",
+        "long"
+      ],
+      "featurePool": [
+        "heavy metaphor use",
+        "rhetorical questions",
+        "stream of consciousness",
+        "poetic phrasing",
+        "literary references"
+      ],
+      "surfaceEmotionPool": [
+        "surprise",
+        "sadness",
+        "trust",
+        "anticipation"
+      ],
+      "realEmotionPool": [
+        "sadness",
+        "anticipation",
+        "fear",
+        "anger",
+        "disgust"
+      ],
+      "trustThresholdRange": {
+        "low": [
+          0.2,
+          0.3
+        ],
+        "medium": [
+          0.5,
+          0.6
+        ],
+        "high": [
+          0.7,
+          0.8
+        ]
+      },
+      "preferredIce": [
+        "no_ice",
+        "normal"
+      ],
+      "preferredGarnishes": [
+        "bitters"
+      ],
+      "preferredDecorations": [
+        "mint"
+      ],
+      "triggerKeywordThemes": [
+        "past",
+        "dream",
+        "feeling",
+        "art"
+      ],
+      "memoryStyleOptions": [
+        "associative",
+        "emotional"
+      ],
+      "metaphorLevelOptions": [
+        "high",
+        "medium"
+      ]
+    },
+    "student": {
+      "id": "student",
+      "category": "Students",
+      "description": "Students or recent graduates facing pressure from studies, social life, and growing up",
+      "ageRange": [
+        18,
+        25
+      ],
+      "avatarOptions": [
+        "🎒",
+        "📖",
+        "🎓",
+        "💻",
+        "🎮"
+      ],
+      "personalityPool": [
+        "simple-hearted",
+        "direct",
+        "easily flustered",
+        "sensitive",
+        "curious",
+        "lost",
+        "enthusiastic"
+      ],
+      "toneOptions": [
+        "casual",
+        "nervous",
+        "excited"
+      ],
+      "lengthOptions": [
+        "long",
+        "medium"
+      ],
+      "featurePool": [
+        "lots of fillers",
+        "repeats themselves",
+        "emotionally transparent",
+        "internet slang",
+        "self-doubt"
+      ],
+      "surfaceEmotionPool": [
+        "fear",
+        "surprise",
+        "joy",
+        "anticipation"
+      ],
+      "realEmotionPool": [
+        "fear",
+        "trust",
+        "sadness",
+        "anger",
+        "anticipation"
+      ],
+      "trustThresholdRange": {
+        "low": [
+          0.1,
+          0.2
+        ],
+        "medium": [
+          0.35,
+          0.45
+        ],
+        "high": [
+          0.6,
+          0.7
+        ]
+      },
+      "preferredIce": [
+        "more_ice",
+        "normal"
+      ],
+      "preferredGarnishes": [
+        "bitters"
+      ],
+      "preferredDecorations": [
+        "mint"
+      ],
+      "triggerKeywordThemes": [
+        "school",
+        "social",
+        "self",
+        "future"
+      ],
+      "memoryStyleOptions": [
+        "emotional",
+        "associative"
+      ],
+      "metaphorLevelOptions": [
+        "none",
+        "low"
+      ]
+    },
+    "midlife": {
+      "id": "midlife",
+      "category": "Midlife Crossroads",
+      "description": "People facing layered pressure around family, career, and health in midlife",
+      "ageRange": [
+        40,
+        55
+      ],
+      "avatarOptions": [
+        "🧔",
+        "👨‍👧",
+        "🏠",
+        "⌚",
+        "🚗"
+      ],
+      "personalityPool": [
+        "steady",
+        "restrained",
+        "uncertain",
+        "nostalgic",
+        "highly responsible",
+        "worn out"
+      ],
+      "toneOptions": [
+        "tired",
+        "nostalgic",
+        "philosophical"
+      ],
+      "lengthOptions": [
+        "medium",
+        "short"
+      ],
+      "featurePool": [
+        "sighs often",
+        "talks about the past",
+        "leaves thoughts unfinished",
+        "frequent silence",
+        "self-deprecating humor"
+      ],
+      "surfaceEmotionPool": [
+        "trust",
+        "joy",
+        "sadness"
+      ],
+      "realEmotionPool": [
+        "fear",
+        "anger",
+        "sadness",
+        "surprise",
+        "disgust"
+      ],
+      "trustThresholdRange": {
+        "low": [
+          0.3,
+          0.4
+        ],
+        "medium": [
+          0.6,
+          0.7
+        ],
+        "high": [
+          0.8,
+          0.9
+        ]
+      },
+      "preferredIce": [
+        "normal",
+        "no_ice"
+      ],
+      "preferredGarnishes": [
+        "bitters"
+      ],
+      "preferredDecorations": [
+        "mint"
+      ],
+      "triggerKeywordThemes": [
+        "family",
+        "career",
+        "health",
+        "time"
+      ],
+      "memoryStyleOptions": [
+        "comparative",
+        "nostalgic"
+      ],
+      "metaphorLevelOptions": [
+        "medium",
+        "low"
+      ]
+    }
+  }
+}

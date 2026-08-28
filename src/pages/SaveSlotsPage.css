@@ -1,0 +1,112 @@
+.save-slots-page {
+  min-height: 100vh;
+  padding: 24px;
+  background: radial-gradient(circle at 20% 20%, rgba(56, 120, 180, 0.15), transparent 35%),
+    radial-gradient(circle at 80% 15%, rgba(239, 85, 59, 0.15), transparent 30%),
+    #09131a;
+  color: #e5effa;
+}
+
+.save-slots-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+.save-slots-header h1 {
+  margin: 0;
+  font-size: 28px;
+  letter-spacing: 1px;
+}
+
+.save-slots-back,
+.save-slots-primary,
+.save-slot-actions button {
+  border: 1px solid rgba(130, 179, 214, 0.45);
+  background: rgba(20, 39, 55, 0.78);
+  color: #e5effa;
+  padding: 8px 12px;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.save-slots-primary {
+  border-color: rgba(58, 166, 255, 0.6);
+}
+
+.save-slots-error {
+  margin-bottom: 14px;
+  padding: 10px 12px;
+  border: 1px solid rgba(245, 95, 95, 0.45);
+  background: rgba(115, 35, 35, 0.35);
+  border-radius: 8px;
+}
+
+.save-slots-empty {
+  min-height: 320px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  border: 1px dashed rgba(130, 179, 214, 0.35);
+  border-radius: 12px;
+}
+
+.save-slots-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.save-slot-card {
+  border: 1px solid rgba(130, 179, 214, 0.35);
+  border-radius: 10px;
+  background: rgba(13, 30, 44, 0.75);
+  padding: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.save-slot-main h3 {
+  margin: 0 0 6px;
+  font-size: 18px;
+}
+
+.save-slot-main p {
+  margin: 4px 0;
+  font-size: 13px;
+  color: rgba(226, 241, 255, 0.78);
+}
+
+.save-slot-actions {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+}
+
+.save-slot-actions .danger {
+  border-color: rgba(237, 96, 96, 0.58);
+  color: #ffd1d1;
+}
+
+@media (max-width: 700px) {
+  .save-slots-page {
+    padding: 16px;
+  }
+
+  .save-slot-card {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .save-slot-actions {
+    width: 100%;
+    justify-content: flex-start;
+  }
+}

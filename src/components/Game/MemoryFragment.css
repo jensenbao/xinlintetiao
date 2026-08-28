@@ -1,0 +1,181 @@
+/* ===== 回忆碎片遮罩 ===== */
+
+.memory-fragment-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 9000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0.85);
+  animation: fragmentOverlayIn 0.6s ease;
+}
+
+@keyframes fragmentOverlayIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+/* ===== 碎片卡片 ===== */
+
+.memory-fragment {
+  max-width: 480px;
+  width: 90%;
+  max-height: 80vh;
+  padding: 32px;
+  border-radius: 16px;
+  background: linear-gradient(135deg, rgba(20, 20, 45, 0.95), rgba(10, 10, 30, 0.95));
+  animation: fragmentCardIn 0.8s ease;
+  overflow-y: auto;
+}
+
+@keyframes fragmentCardIn {
+  from { opacity: 0; transform: translateY(20px) scale(0.95); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+.fragment-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 20px;
+}
+
+.fragment-icon {
+  font-size: 18px;
+  color: #9382dc;
+}
+
+.fragment-label {
+  font-size: 13px;
+  color: rgba(147, 130, 220, 0.8);
+  letter-spacing: 2px;
+}
+
+.fragment-clarity-badge {
+  margin-left: auto;
+  font-size: 11px;
+  padding: 2px 8px;
+  border-radius: 8px;
+  background: rgba(147, 130, 220, 0.15);
+  color: rgba(147, 130, 220, 0.7);
+  border: 1px solid rgba(147, 130, 220, 0.2);
+}
+
+.fragment-text {
+  font-size: 15px;
+  line-height: 1.9;
+  color: rgba(255, 255, 255, 0.85);
+  margin: 0;
+  white-space: pre-line;
+  word-break: break-word;
+}
+
+.fragment-dismiss {
+  display: block;
+  margin: 24px auto 0;
+  padding: 8px 32px;
+  background: rgba(147, 130, 220, 0.15);
+  border: 1px solid rgba(147, 130, 220, 0.3);
+  border-radius: 8px;
+  color: rgba(147, 130, 220, 0.8);
+  font-size: 13px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.fragment-dismiss:hover {
+  background: rgba(147, 130, 220, 0.25);
+  border-color: rgba(147, 130, 220, 0.5);
+}
+
+/* ===== 清晰度变体 ===== */
+
+.memory-fragment.clarity-vague {
+  border-left: 3px solid rgba(255, 255, 255, 0.15);
+}
+.memory-fragment.clarity-vague .fragment-text {
+  opacity: 0.6;
+  filter: blur(0.3px);
+  font-style: italic;
+}
+
+.memory-fragment.clarity-hazy {
+  border-left: 3px solid rgba(255, 255, 255, 0.3);
+}
+.memory-fragment.clarity-hazy .fragment-text {
+  opacity: 0.75;
+}
+
+.memory-fragment.clarity-clear {
+  border-left: 3px solid rgba(147, 130, 220, 0.6);
+}
+.memory-fragment.clarity-clear .fragment-text {
+  opacity: 0.9;
+}
+
+.memory-fragment.clarity-vivid {
+  border-left: 3px solid #9382dc;
+  background: linear-gradient(135deg, rgba(25, 20, 50, 0.95), rgba(15, 12, 35, 0.95));
+  box-shadow: 0 0 30px rgba(147, 130, 220, 0.15);
+}
+.memory-fragment.clarity-vivid .fragment-text {
+  opacity: 1;
+  color: #fff;
+}
+
+/* ===== 内联版本（DayEndModal 中使用）===== */
+
+.memory-fragment-inline {
+  padding: 16px;
+  border-radius: 10px;
+  background: rgba(147, 130, 220, 0.08);
+  margin: 12px 0;
+  animation: fragmentInlineIn 0.5s ease;
+}
+
+@keyframes fragmentInlineIn {
+  from { opacity: 0; transform: translateX(-10px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+
+.memory-fragment-inline.clarity-vague {
+  border-left: 2px solid rgba(255, 255, 255, 0.15);
+}
+.memory-fragment-inline.clarity-hazy {
+  border-left: 2px solid rgba(255, 255, 255, 0.3);
+}
+.memory-fragment-inline.clarity-clear {
+  border-left: 2px solid rgba(147, 130, 220, 0.6);
+}
+.memory-fragment-inline.clarity-vivid {
+  border-left: 2px solid #9382dc;
+  background: rgba(147, 130, 220, 0.12);
+}
+
+.fragment-header-inline {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 8px;
+}
+
+.fragment-header-inline .fragment-icon {
+  font-size: 14px;
+}
+
+.fragment-header-inline .fragment-label {
+  font-size: 11px;
+}
+
+.fragment-text-inline {
+  font-size: 13px;
+  line-height: 1.7;
+  color: rgba(255, 255, 255, 0.7);
+  margin: 0;
+}
+
+.memory-fragment-inline.clarity-vague .fragment-text-inline {
+  opacity: 0.6;
+  font-style: italic;
+}

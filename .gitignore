@@ -1,0 +1,54 @@
+# dependencies
+node_modules/
+
+# build output
+dist/
+build/
+.cache/
+
+# environment variables
+.env
+.env.local
+.env.production.local
+.env.development.local
+
+# logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# editor files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# operating system
+.DS_Store
+Thumbs.db
+
+# temp files
+*.tmp
+*.temp
+~$*.docx
+.process-book-en-print-tmp.html
+
+# design docs
+docs/design/
+
+# runtime save slots
+saves/*
+!saves/.gitkeep
+
+# generated character assets
+seeds/characters/added/
+public/asset/角色/cutout/*
+!public/asset/角色/cutout/5738g_cutout.png
+
+# Python
+venv/
+__pycache__/
+*.pyc
+

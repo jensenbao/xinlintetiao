@@ -1,0 +1,590 @@
+/* ========================================
+   游戏顶部导航栏（精简版）
+   ======================================== */
+
+/* ---- 帮助图标按钮 ---- */
+.header-icon-btn {
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, rgba(168, 85, 247, 0.15), rgba(126, 34, 206, 0.15));
+  border: 1px solid rgba(168, 85, 247, 0.35);
+  border-radius: 50%;
+  color: var(--color-primary, #A855F7);
+  font-size: 16px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  flex-shrink: 0;
+}
+
+.header-icon-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(168, 85, 247, 0.25);
+  background: linear-gradient(135deg, rgba(168, 85, 247, 0.25), rgba(126, 34, 206, 0.25));
+}
+
+/* ---- 三栏布局 ---- */
+.header-left {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-shrink: 0;
+}
+
+.header-left .back-button {
+  padding: 8px 14px;
+  font-size: 14px;
+  border-radius: 8px;
+}
+
+.header-center {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex: 1;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-shrink: 0;
+  position: relative;
+  z-index: 3001;
+}
+
+/* ---- 顾客进度（紧凑版） ---- */
+.customer-compact {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 12px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 10px;
+}
+
+.customer-avatar-mini {
+  display: flex;
+  align-items: center;
+}
+
+.customer-name-mini {
+  font-size: 13px;
+  color: #fff;
+  font-weight: 600;
+  max-width: 80px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.queue-badge {
+  font-size: 10px;
+  color: rgba(255, 255, 255, 0.5);
+  padding: 2px 6px;
+  background: rgba(255, 255, 255, 0.06);
+  border-radius: 6px;
+}
+
+/* ---- 氛围指示器（折叠版） ---- */
+.atmo-compact {
+  position: relative;
+}
+
+.atmo-icon-btn {
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(139, 92, 246, 0.15);
+  border: 1px solid rgba(139, 92, 246, 0.3);
+  border-radius: 10px;
+  font-size: 18px;
+  cursor: default;
+  position: relative;
+  transition: all 0.2s ease;
+}
+
+.atmo-compact:hover .atmo-icon-btn {
+  background: rgba(139, 92, 246, 0.25);
+  border-color: rgba(139, 92, 246, 0.5);
+}
+
+.atmo-dot {
+  position: absolute;
+  top: 4px;
+  right: 4px;
+  width: 6px;
+  height: 6px;
+  background: var(--color-primary, #A855F7);
+  border-radius: 50%;
+  box-shadow: 0 0 6px rgba(168, 85, 247, 0.5);
+}
+
+.atmo-detail-panel {
+  position: absolute;
+  top: calc(100% + 8px);
+  right: 0;
+  min-width: 180px;
+  padding: 14px;
+  background: linear-gradient(135deg, rgba(26, 26, 58, 0.98), rgba(10, 10, 26, 0.98));
+  border: 1px solid rgba(139, 92, 246, 0.3);
+  border-radius: 12px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+  z-index: 3100;
+  animation: atmoDetailIn 0.15s ease;
+}
+
+@keyframes atmoDetailIn {
+  from { opacity: 0; transform: translateY(-4px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.atmo-detail-row {
+  font-size: 13px;
+  color: rgba(255, 255, 255, 0.8);
+  padding: 4px 0;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.atmo-detail-modifiers {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+  margin-top: 8px;
+  padding-top: 8px;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.atmo-modifier-tag {
+  padding: 3px 8px;
+  background: rgba(168, 85, 247, 0.15);
+  border: 1px solid rgba(168, 85, 247, 0.3);
+  border-radius: 6px;
+  font-size: 11px;
+  color: var(--color-primary, #A855F7);
+  font-weight: 600;
+}
+
+.chapter-badge {
+  font-size: 10px;
+  color: rgba(147, 130, 220, 0.6);
+  padding: 2px 6px;
+  background: rgba(147, 130, 220, 0.1);
+  border-radius: 6px;
+  white-space: nowrap;
+}
+
+/* ---- 响应式 ---- */
+@media (max-width: 768px) {
+  .header-center {
+    order: 3;
+    width: 100%;
+    justify-content: center;
+  }
+
+  .customer-name-mini {
+    max-width: 60px;
+  }
+
+  .atmo-detail-panel {
+    right: -10px;
+  }
+}
+
+/* ========================================
+   UI Refresh Showcase - Header
+   ======================================== */
+
+.header-left,
+.header-center,
+.header-right {
+  gap: 10px;
+}
+
+.header-icon-btn,
+.customer-compact,
+.atmo-icon-btn {
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.03));
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.06);
+}
+
+.customer-name-mini,
+.queue-badge {
+  font-family: var(--font-display);
+  letter-spacing: 0.04em;
+}
+
+.queue-badge,
+.chapter-badge {
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  color: rgba(255, 255, 255, 0.6);
+}
+
+.atmo-detail-panel {
+  background: linear-gradient(180deg, rgba(7, 12, 20, 0.98), rgba(8, 10, 16, 0.94));
+  border: 1px solid rgba(103, 196, 255, 0.18);
+  box-shadow: 0 18px 28px rgba(0, 0, 0, 0.28);
+}
+
+/* ========================================
+   UI Polish V2 - Header (Restrained)
+   ======================================== */
+
+.header-left,
+.header-center,
+.header-right {
+  gap: 8px;
+}
+
+.header-icon-btn {
+  background: linear-gradient(135deg, rgba(168, 85, 247, 0.15), rgba(126, 34, 206, 0.15));
+  border: 1px solid rgba(168, 85, 247, 0.35);
+}
+
+.customer-compact {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: none;
+}
+
+.customer-name-mini {
+  font-family: inherit;
+  letter-spacing: 0;
+}
+
+.queue-badge,
+.chapter-badge {
+  background: rgba(255, 255, 255, 0.06);
+  border: none;
+}
+
+.atmo-icon-btn {
+  background: rgba(139, 92, 246, 0.15);
+  border: 1px solid rgba(139, 92, 246, 0.3);
+  box-shadow: none;
+}
+
+.atmo-detail-panel {
+  background: linear-gradient(135deg, rgba(26, 26, 58, 0.98), rgba(10, 10, 26, 0.98));
+  border: 1px solid rgba(139, 92, 246, 0.3);
+}
+
+/* ========================================
+   UI Phase 3 - Pixel HUD Header
+   ======================================== */
+
+.header-left,
+.header-center,
+.header-right {
+  gap: 10px;
+}
+
+.header-center {
+  justify-content: center;
+}
+
+.header-left .back-button,
+.header-icon-btn,
+.customer-compact,
+.day-badge,
+.atmo-icon-btn,
+.audio-btn {
+  background: linear-gradient(180deg, rgba(78, 58, 136, 0.7), rgba(42, 28, 76, 0.62));
+  border: 1px solid rgba(228, 220, 255, 0.16);
+  box-shadow:
+    0 8px 18px rgba(16, 10, 34, 0.14),
+    inset 0 1px 0 rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+
+.header-left .back-button,
+.header-icon-btn,
+.atmo-icon-btn,
+.audio-btn {
+  border-radius: 14px;
+}
+
+.header-left .back-button {
+  font-family: "zpix", "PressStart2P", sans-serif;
+  letter-spacing: 0.08em;
+  color: #fff8ff;
+}
+
+.day-badge,
+.customer-compact {
+  min-height: 42px;
+  border-radius: 14px;
+}
+
+.day-badge {
+  background: linear-gradient(180deg, rgba(118, 82, 192, 0.78), rgba(62, 42, 114, 0.68));
+  border-color: rgba(214, 192, 255, 0.2);
+}
+
+.day-text,
+.customer-name-mini {
+  font-family: "zpix", "PressStart2P", sans-serif;
+  letter-spacing: 0.06em;
+  color: #fff8ff;
+}
+
+.queue-badge,
+.chapter-badge {
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: rgba(255, 255, 255, 0.1);
+  color: rgba(246, 246, 255, 0.7);
+}
+
+.customer-compact {
+  padding: 8px 12px;
+}
+
+.customer-avatar-mini {
+  width: 26px;
+  height: 26px;
+  justify-content: center;
+}
+
+.atmo-icon-btn {
+  width: 40px;
+  height: 40px;
+}
+
+.atmo-dot {
+  background: #ffc56e;
+  box-shadow: 0 0 8px rgba(255, 197, 110, 0.6);
+}
+
+.atmo-detail-panel {
+  min-width: 210px;
+  background: linear-gradient(180deg, rgba(30, 24, 58, 0.96), rgba(16, 12, 32, 0.94));
+  border: 1px solid rgba(228, 220, 255, 0.14);
+  border-radius: 16px;
+  box-shadow: 0 16px 34px rgba(10, 6, 22, 0.26);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+}
+
+.atmo-detail-row,
+.atmo-modifier-tag {
+  color: rgba(248, 246, 255, 0.86);
+}
+
+.audio-controls {
+  gap: 10px;
+}
+
+.audio-btn {
+  color: #fff;
+}
+
+.copyright-btn {
+  width: auto;
+  min-width: 104px;
+  padding: 0 12px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-family: "zpix", "PressStart2P", sans-serif;
+  font-size: 10px;
+  line-height: 1;
+  white-space: nowrap;
+}
+
+.copyright-btn-label {
+  transform: translateY(1px);
+}
+
+.audio-settings-panel {
+  width: min(280px, calc(100vw - 24px));
+  max-width: calc(100vw - 24px);
+  box-sizing: border-box;
+  padding: 12px 14px;
+  overflow: hidden;
+  background: linear-gradient(180deg, rgba(34, 24, 62, 0.96), rgba(16, 12, 32, 0.94));
+  border: 1px solid rgba(228, 220, 255, 0.14);
+  box-shadow: 0 18px 34px rgba(10, 6, 22, 0.26);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+}
+
+.audio-setting-item {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  align-items: center;
+  column-gap: 10px;
+}
+
+.audio-setting-item label {
+  min-width: 52px;
+  white-space: nowrap;
+}
+
+.audio-setting-item input[type="range"] {
+  width: 100%;
+  min-width: 0;
+}
+
+.audio-setting-item span {
+  min-width: 48px;
+  text-align: right;
+  white-space: nowrap;
+  justify-self: end;
+  font-variant-numeric: tabular-nums;
+}
+
+@media (max-width: 768px) {
+  .header-left,
+  .header-center,
+  .header-right {
+    gap: 8px;
+  }
+
+  .header-center {
+    justify-content: flex-start;
+  }
+
+  .day-badge,
+  .customer-compact {
+    min-height: 38px;
+  }
+
+  .day-text,
+  .customer-name-mini {
+    font-size: 11px;
+  }
+
+  .queue-badge {
+    font-size: 10px;
+  }
+}
+
+/* ========================================
+   UI Phase 4 - Compact Header Fit
+   ======================================== */
+
+.header-left,
+.header-center,
+.header-right {
+  gap: 8px;
+  min-width: 0;
+}
+
+.header-left,
+.header-right {
+  flex-wrap: nowrap;
+}
+
+.header-center {
+  flex-wrap: nowrap;
+  justify-content: center;
+  overflow-x: auto;
+  overflow-y: hidden;
+  scrollbar-width: none;
+}
+
+.header-center::-webkit-scrollbar {
+  display: none;
+}
+
+.header-left .back-button,
+.header-icon-btn,
+.customer-compact,
+.day-badge,
+.atmo-icon-btn,
+.audio-btn {
+  min-height: 36px;
+  border-radius: 12px;
+}
+
+.header-left .back-button {
+  padding: 7px 12px;
+  font-size: 11px;
+}
+
+.header-icon-btn,
+.atmo-icon-btn,
+.audio-btn {
+  width: 36px;
+  height: 36px;
+}
+
+.copyright-btn {
+  width: auto;
+  min-width: 104px;
+}
+
+.day-badge,
+.customer-compact {
+  min-height: 36px;
+}
+
+.customer-compact {
+  gap: 6px;
+  padding: 6px 10px;
+}
+
+.customer-avatar-mini {
+  width: 24px;
+  height: 24px;
+}
+
+.day-text,
+.customer-name-mini {
+  font-size: 10px;
+}
+
+.queue-badge,
+.chapter-badge {
+  font-size: 9px;
+  padding: 2px 5px;
+}
+
+@media (max-width: 768px) {
+  .header-left .back-button,
+  .header-icon-btn,
+  .customer-compact,
+  .day-badge,
+  .atmo-icon-btn,
+  .audio-btn {
+    min-height: 34px;
+  }
+
+  .header-left .back-button {
+    padding: 6px 10px;
+    font-size: 10px;
+  }
+
+  .header-icon-btn,
+  .atmo-icon-btn,
+  .audio-btn {
+    width: 34px;
+    height: 34px;
+  }
+
+  .copyright-btn {
+    width: auto;
+    min-width: 92px;
+    padding: 0 10px;
+    font-size: 9px;
+  }
+
+  .day-text,
+  .customer-name-mini {
+    font-size: 9px;
+  }
+}

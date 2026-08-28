@@ -1,0 +1,169 @@
+/* 事件弹出通知样式 */
+
+.event-notification-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.8);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10002;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  backdrop-filter: blur(4px);
+}
+
+.event-notification-overlay.fade-in {
+  opacity: 1;
+}
+
+.event-notification-card {
+  max-width: 460px;
+  width: 90%;
+  padding: 30px 28px;
+  background: linear-gradient(135deg, rgba(26, 26, 58, 0.98), rgba(15, 15, 40, 0.98));
+  border: 2px solid rgba(255, 183, 3, 0.4);
+  border-radius: 20px;
+  box-shadow: 0 15px 50px rgba(0, 0, 0, 0.5), 0 0 30px rgba(255, 183, 3, 0.15);
+  animation: eventSlideIn 0.4s ease-out;
+}
+
+@keyframes eventSlideIn {
+  from {
+    opacity: 0;
+    transform: translateY(-30px) scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* 事件标题 */
+.event-header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  margin-bottom: 16px;
+}
+
+.event-type-icon {
+  font-size: 24px;
+  animation: eventPulse 2s ease-in-out infinite;
+}
+
+@keyframes eventPulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.15); }
+}
+
+.event-type-name {
+  font-size: 18px;
+  font-weight: 700;
+  color: #FFB703;
+}
+
+/* 事件叙述 */
+.event-narrative {
+  padding: 14px 18px;
+  background: rgba(255, 255, 255, 0.04);
+  border-radius: 12px;
+  border-left: 3px solid rgba(255, 183, 3, 0.5);
+  margin-bottom: 20px;
+}
+
+.event-narrative p {
+  margin: 0;
+  font-size: 15px;
+  color: rgba(255, 255, 255, 0.9);
+  line-height: 1.7;
+  font-style: italic;
+}
+
+/* 玩家选择按钮 */
+.event-choices {
+  display: flex;
+  gap: 12px;
+}
+
+.event-choice-btn {
+  flex: 1;
+  padding: 14px 16px;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 12px;
+  color: #ffffff;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-align: center;
+  line-height: 1.4;
+}
+
+.event-choice-btn:hover:not(:disabled) {
+  background: rgba(168, 85, 247, 0.15);
+  border-color: rgba(168, 85, 247, 0.5);
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(168, 85, 247, 0.2);
+}
+
+.event-choice-btn.selected {
+  background: linear-gradient(135deg, rgba(168, 85, 247, 0.3), rgba(126, 34, 206, 0.3));
+  border-color: #A855F7;
+  color: #A855F7;
+  transform: scale(1.02);
+  box-shadow: 0 5px 20px rgba(168, 85, 247, 0.3);
+}
+
+.event-choice-btn.not-selected {
+  opacity: 0.4;
+  transform: scale(0.98);
+}
+
+.event-choice-btn:disabled {
+  cursor: default;
+}
+
+.choice-text {
+  display: block;
+}
+
+/* 关闭按钮（无选择时） */
+.event-dismiss-btn {
+  width: 100%;
+  padding: 14px;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 10px;
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 15px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.event-dismiss-btn:hover {
+  background: rgba(255, 255, 255, 0.15);
+}
+
+/* ==================== 响应式 ==================== */
+
+@media (max-width: 768px) {
+  .event-notification-card {
+    padding: 24px 20px;
+    margin: 15px;
+  }
+
+  .event-choices {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .event-narrative p {
+    font-size: 14px;
+  }
+}

@@ -1,0 +1,37 @@
+{
+  "version": 1,
+  "day": 1,
+  "money": 0,
+  "trustLevel": 0.3,
+  "stats": {
+    "totalServed": 0,
+    "successCount": 0,
+    "failureCount": 0,
+    "totalDays": 1
+  },
+  "unlockedItems": {
+    "emotions": [
+      "nostalgia",
+      "courage",
+      "loneliness",
+      "relief",
+      "anxiety",
+      "calm",
+      "regret",
+      "aspiration",
+      "pressure",
+      "dependence",
+      "confusion",
+      "happiness"
+    ],
+    "glasses": ["martini"],
+    "iceTypes": ["no_ice"],
+    "garnishes": [],
+    "decorations": [],
+    "ingredients": ["vodka", "juice_orange", "juice_lemon", "soda", "syrup"],
+    "aiCustomers": ["workplace"],
+    "successCount": 0
+  },
+  "legacyStorageSnapshot": {},
+  "updatedAt": 0
+}

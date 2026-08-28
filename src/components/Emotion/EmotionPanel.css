@@ -1,0 +1,938 @@
+/* 情绪识别面板样式 */
+.emotion-panel {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  background: linear-gradient(180deg, rgba(26, 26, 58, 0.95) 0%, rgba(10, 10, 26, 0.95) 100%);
+  border-radius: 20px;
+  padding: 20px;
+  overflow-y: auto;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.emotion-panel::-webkit-scrollbar {
+  flex: 1;
+  font-size: 16px;
+  font-weight: bold;
+  color: #ffffff;
+}
+
+.trust-badge {
+  padding: 6px 12px;
+  background: linear-gradient(135deg, rgba(139, 92, 246, 0.3), rgba(100, 70, 200, 0.3));
+  border: 1px solid rgba(139, 92, 246, 0.5);
+  border-radius: 20px;
+  font-size: 12px;
+  color: #B8A9F7;
+}
+
+.hints-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.hint-card {
+  padding: 16px;
+  background: rgba(0, 0, 0, 0.3);
+  border-radius: 12px;
+  border-left: 4px solid rgba(255, 183, 3, 0.5);
+  transition: all 0.3s ease;
+}
+
+.hint-card:hover {
+  background: rgba(0, 0, 0, 0.4);
+  transform: translateX(4px);
+}
+
+.hint-card.hint-level-low {
+  border-left-color: rgba(150, 150, 180, 0.6);
+}
+
+.hint-card.hint-level-medium {
+  border-left-color: rgba(255, 183, 3, 0.7);
+}
+
+.hint-card.hint-level-high {
+  border-left-color: rgba(168, 85, 247, 0.8);
+  background: rgba(168, 85, 247, 0.05);
+}
+
+.hint-text {
+  font-size: 14px;
+  color: rgba(255, 255, 255, 0.9);
+  line-height: 1.6;
+  margin-bottom: 8px;
+}
+
+.hint-level-badge {
+  display: inline-block;
+  padding: 4px 10px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  font-size: 11px;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.hint-card.hint-level-high .hint-level-badge {
+  background: rgba(168, 85, 247, 0.2);
+  color: #A855F7;
+}
+
+/* 无线索提示 */
+.no-hints {
+  text-align: center;
+  padding: 30px 20px;
+  color: rgba(255, 255, 255, 0.6);
+}
+
+.no-hints-icon {
+  font-size: 48px;
+  margin-bottom: 16px;
+  opacity: 0.5;
+}
+
+.no-hints p {
+  margin: 0;
+  font-size: 14px;
+}
+
+.no-hints-tip {
+  margin-top: 8px !important;
+  font-size: 12px !important;
+  color: rgba(255, 183, 3, 0.8);
+}
+
+/* 情绪网格 */
+.emotion-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+/* 情绪卡片 */
+.emotion-card {
+  position: relative;
+  padding: 16px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 2px solid rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-align: center;
+  min-height: 140px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  overflow: hidden;
+}
+
+.emotion-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+}
+
+.emotion-card.active {
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.emotion-card.selected {
+  border-width: 3px;
+  box-shadow: 0 0 20px rgba(168, 85, 247, 0.3);
+}
+
+/* ====== 未猜中情绪 - 迷雾效果 ====== */
+.emotion-card.unrevealed::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(
+    0deg,
+    transparent 0px,
+    transparent 2px,
+    rgba(0, 0, 0, 0.05) 2px,
+    rgba(0, 0, 0, 0.05) 4px
+  );
+  animation: scanlineMove 1s linear infinite;
+  pointer-events: none;
+  border-radius: inherit;
+  z-index: 1;
+}
+
+@keyframes scanlineMove {
+  0% { transform: translateY(0); }
+  100% { transform: translateY(4px); }
+}
+
+/* 静态噪点效果 */
+.emotion-card.unrevealed::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+  opacity: 0.03;
+  pointer-events: none;
+  border-radius: inherit;
+  animation: noiseFlicker 0.5s steps(5) infinite;
+  z-index: 1;
+}
+
+@keyframes noiseFlicker {
+  0% { opacity: 0.02; }
+  50% { opacity: 0.04; }
+  100% { opacity: 0.02; }
+}
+
+/* 情绪图标包装器 - 用于光环效果 */
+.emotion-icon-wrapper {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* 悬停时显示光环 */
+.emotion-card:hover .emotion-icon-wrapper::before {
+  content: '';
+  position: absolute;
+  inset: -12px;
+  border-radius: 50%;
+  background: radial-gradient(
+    circle,
+    var(--emotion-glow-color, rgba(255, 255, 255, 0.1)) 0%,
+    transparent 70%
+  );
+  animation: iconHalo 1.5s ease-in-out infinite;
+  z-index: 0;
+}
+
+@keyframes iconHalo {
+  0%, 100% { transform: scale(1); opacity: 0.5; }
+  50% { transform: scale(1.1); opacity: 1; }
+}
+
+/* 不同情绪的光环颜色 */
+.emotion-card[data-emotion="anger"] { --emotion-glow-color: rgba(255, 68, 68, 0.15); }
+.emotion-card[data-emotion="sadness"] { --emotion-glow-color: rgba(68, 102, 255, 0.15); }
+.emotion-card[data-emotion="joy"] { --emotion-glow-color: rgba(255, 204, 0, 0.15); }
+.emotion-card[data-emotion="fear"] { --emotion-glow-color: rgba(153, 68, 255, 0.15); }
+.emotion-card[data-emotion="calm"] { --emotion-glow-color: rgba(0, 204, 170, 0.15); }
+.emotion-card[data-emotion="hope"] { --emotion-glow-color: rgba(255, 136, 204, 0.15); }
+.emotion-card[data-emotion="loneliness"] { --emotion-glow-color: rgba(102, 136, 170, 0.15); }
+.emotion-card[data-emotion="nostalgia"] { --emotion-glow-color: rgba(170, 136, 102, 0.15); }
+.emotion-card[data-emotion="anxiety"] { --emotion-glow-color: rgba(255, 100, 100, 0.15); }
+.emotion-card[data-emotion="frustration"] { --emotion-glow-color: rgba(255, 120, 50, 0.15); }
+.emotion-card[data-emotion="confusion"] { --emotion-glow-color: rgba(150, 150, 200, 0.15); }
+.emotion-card[data-emotion="exhaustion"] { --emotion-glow-color: rgba(100, 100, 130, 0.15); }
+
+/* ====== 猜中情绪 - 揭示动画 ====== */
+.emotion-card.reveal-success {
+  animation: revealSuccess 1s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+@keyframes revealSuccess {
+  0% {
+    transform: scale(1) rotateY(0);
+    filter: blur(2px) brightness(1);
+  }
+  25% {
+    transform: scale(1.1) rotateY(90deg);
+    filter: blur(4px) brightness(1.5);
+  }
+  50% {
+    transform: scale(1.15) rotateY(180deg);
+    filter: blur(0) brightness(1.3);
+    box-shadow: 0 0 30px rgba(168, 85, 247, 0.5);
+  }
+  75% {
+    transform: scale(1.05) rotateY(270deg);
+  }
+  100% {
+    transform: scale(1) rotateY(360deg);
+    filter: blur(0) brightness(1);
+    box-shadow: 0 0 20px rgba(168, 85, 247, 0.3);
+  }
+}
+
+/* 揭示后的持续光效 */
+.emotion-card.revealed {
+  box-shadow: 
+    0 0 15px rgba(168, 85, 247, 0.2),
+    inset 0 0 20px rgba(168, 85, 247, 0.05);
+  border-color: rgba(168, 85, 247, 0.4);
+}
+
+/* 猜错时的挫败感 */
+.emotion-card.reveal-wrong {
+  animation: revealWrong 0.6s ease-out;
+}
+
+@keyframes revealWrong {
+  0%, 100% { transform: translateX(0); }
+  10% { transform: translateX(-8px); border-color: rgba(231, 57, 70, 0.6); }
+  20% { transform: translateX(8px); }
+  30% { transform: translateX(-6px); }
+  40% { transform: translateX(6px); }
+  50% { transform: translateX(-4px); }
+  60% { transform: translateX(4px); }
+  70% { transform: translateX(-2px); }
+  80% { transform: translateX(2px); }
+}
+
+.emotion-icon {
+  font-size: 24px;
+  transition: font-size 0.3s ease;
+  position: relative;
+  z-index: 2;
+}
+
+.emotion-name {
+  font-size: 14px;
+  font-weight: bold;
+  color: #ffffff;
+  position: relative;
+  z-index: 2;
+}
+
+/* 情绪指示器 */
+.emotion-indicator {
+  width: 100%;
+  padding: 6px 8px;
+  border-radius: 6px;
+  margin-top: 8px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 11px;
+}
+
+.indicator-label {
+  color: #ffffff;
+  font-weight: bold;
+  white-space: nowrap;
+}
+
+.intensity-bar {
+  flex: 1;
+  height: 4px;
+  background: rgba(0, 0, 0, 0.3);
+  border-radius: 2px;
+  overflow: hidden;
+}
+
+.intensity-fill {
+  height: 100%;
+  transition: width 0.3s ease;
+}
+
+.intensity-value {
+  color: rgba(255, 255, 255, 0.9);
+  font-weight: bold;
+  white-space: nowrap;
+}
+
+/* 信任度徽章 */
+.confidence-badge {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  padding: 3px 8px;
+  background: rgba(0, 0, 0, 0.5);
+  border-radius: 10px;
+  font-size: 10px;
+  color: rgba(255, 255, 255, 0.8);
+}
+
+/* 选中徽章 */
+.selected-badge {
+  position: absolute;
+  top: 8px;
+  left: 8px;
+  width: 24px;
+  height: 24px;
+  background: linear-gradient(135deg, #A855F7, #7E22CE);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #0a0a1a;
+  font-weight: bold;
+  font-size: 14px;
+}
+
+/* 已选择情绪列表 */
+.selected-emotions {
+  padding: 16px;
+  background: rgba(168, 85, 247, 0.1);
+  border: 1px solid rgba(168, 85, 247, 0.3);
+  border-radius: 12px;
+  margin-top: auto;
+}
+
+.selected-emotions h4 {
+  margin: 0 0 12px 0;
+  font-size: 14px;
+  color: #A855F7;
+}
+
+.selected-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.selected-item {
+  padding: 8px 14px;
+  background: rgba(0, 0, 0, 0.3);
+  border-radius: 20px;
+  font-size: 13px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+/* 悬停提示 */
+.emotion-tooltip {
+  position: fixed;
+  bottom: 30px;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 12px 20px;
+  background: rgba(0, 0, 0, 0.9);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 8px;
+  color: #ffffff;
+  font-size: 13px;
+  text-align: center;
+  z-index: 1000;
+  animation: tooltipFadeIn 0.2s ease;
+}
+
+.emotion-tooltip p {
+  margin: 0;
+}
+
+.tooltip-hint {
+  margin-top: 4px !important;
+  font-size: 11px;
+  color: rgba(255, 255, 255, 0.6);
+}
+
+@keyframes tooltipFadeIn {
+  from {
+    opacity: 0;
+    transform: translateX(-50%) translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+  }
+}
+
+/* 锁定的情绪卡片 */
+.emotion-card.locked {
+  background: rgba(50, 50, 70, 0.5);
+  border: 2px dashed rgba(255, 255, 255, 0.2);
+  cursor: default;
+  opacity: 0.6;
+}
+
+.emotion-card.locked:hover {
+  transform: none;
+  box-shadow: none;
+}
+
+.locked-icon {
+  font-size: 28px !important;
+  opacity: 0.7;
+}
+
+.locked-hint {
+  font-size: 10px;
+  color: rgba(255, 255, 255, 0.5);
+  margin-top: 4px;
+}
+
+/* 猜测按钮 */
+.guess-button {
+  width: 100%;
+  padding: 14px 20px;
+  margin-top: 15px;
+  background: linear-gradient(135deg, rgba(139, 92, 246, 0.3), rgba(100, 70, 200, 0.3));
+  border: 2px solid rgba(139, 92, 246, 0.5);
+  border-radius: 12px;
+  color: #B8A9F7;
+  font-size: 14px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.guess-button:hover {
+  background: linear-gradient(135deg, rgba(139, 92, 246, 0.5), rgba(100, 70, 200, 0.5));
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(139, 92, 246, 0.3);
+}
+
+/* 猜测模式横幅 */
+.guess-mode-banner {
+  margin: 12px 0;
+  padding: 12px 16px;
+  background: linear-gradient(135deg, rgba(139, 92, 246, 0.25), rgba(100, 70, 200, 0.25));
+  border: 2px solid rgba(139, 92, 246, 0.6);
+  border-radius: 10px;
+  color: #B8A9F7;
+  font-size: 13px;
+  text-align: center;
+  animation: bannerPulse 2s ease-in-out infinite;
+}
+
+.guess-mode-banner strong {
+  color: #fff;
+  font-size: 14px;
+}
+
+.guessed-correctly-banner {
+  margin: 12px 0;
+  padding: 12px 16px;
+  background: linear-gradient(135deg, rgba(168, 85, 247, 0.2), rgba(126, 34, 206, 0.2));
+  border: 2px solid rgba(168, 85, 247, 0.5);
+  border-radius: 10px;
+  color: #A855F7;
+  font-size: 13px;
+  text-align: center;
+}
+
+.guessed-correctly-banner strong {
+  color: #fff;
+  font-size: 14px;
+}
+
+.guess-readiness-panel {
+  margin: 10px 0 14px;
+  padding: 12px 14px;
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  background: rgba(18, 20, 40, 0.72);
+}
+
+.guess-readiness-panel.ready {
+  border-color: rgba(168, 85, 247, 0.45);
+  background: linear-gradient(135deg, rgba(168, 85, 247, 0.1), rgba(18, 20, 40, 0.75));
+}
+
+.guess-readiness-panel.pending {
+  border-color: rgba(255, 183, 3, 0.35);
+  background: linear-gradient(135deg, rgba(255, 183, 3, 0.12), rgba(18, 20, 40, 0.75));
+}
+
+.guess-readiness-title {
+  font-size: 13px;
+  color: rgba(255, 255, 255, 0.92);
+  margin-bottom: 8px;
+}
+
+.guess-readiness-steps {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.guess-readiness-steps span {
+  font-size: 11px;
+  padding: 4px 8px;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  color: rgba(255, 255, 255, 0.76);
+}
+
+.guess-readiness-steps span.met {
+  color: #A855F7;
+  border-color: rgba(168, 85, 247, 0.4);
+  background: rgba(168, 85, 247, 0.12);
+}
+
+.guess-readiness-steps span.unmet {
+  color: #ffd58a;
+  border-color: rgba(255, 183, 3, 0.35);
+  background: rgba(255, 183, 3, 0.12);
+}
+
+.dialogue-clues-section {
+  margin: 0 0 16px;
+  padding: 12px;
+  border-radius: 10px;
+  border: 1px solid rgba(167, 139, 250, 0.35);
+  background: rgba(24, 20, 45, 0.72);
+}
+
+.dialogue-clues-header {
+  font-size: 13px;
+  color: #cbb8ff;
+  margin-bottom: 10px;
+}
+
+.dialogue-clues-list {
+  display: grid;
+  gap: 8px;
+}
+
+.dialogue-clue-item {
+  padding: 8px 10px;
+  border-radius: 8px;
+  border-left: 3px solid rgba(139, 92, 246, 0.6);
+  background: rgba(10, 12, 26, 0.6);
+}
+
+.dialogue-clue-label {
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.92);
+}
+
+.dialogue-clue-snippet {
+  margin-top: 4px;
+  font-size: 11px;
+  color: rgba(255, 255, 255, 0.68);
+  line-height: 1.4;
+}
+
+.dialogue-clue-count {
+  margin-top: 4px;
+  font-size: 10px;
+  color: rgba(167, 139, 250, 0.9);
+}
+
+@keyframes bannerPulse {
+  0%, 100% {
+    border-color: rgba(139, 92, 246, 0.4);
+    box-shadow: 0 0 0 rgba(139, 92, 246, 0.4);
+  }
+  50% {
+    border-color: rgba(139, 92, 246, 0.8);
+    box-shadow: 0 0 20px rgba(139, 92, 246, 0.3);
+  }
+}
+
+/* 猜测模式样式 */
+.emotion-card.guess-mode {
+  animation: guessModePulse 2s ease-in-out infinite;
+}
+
+.emotion-card.guess-mode:hover {
+  transform: translateY(-6px) scale(1.05);
+  box-shadow: 0 12px 30px rgba(139, 92, 246, 0.5);
+}
+
+.guess-mode-hint {
+  position: absolute;
+  bottom: 4px;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 2px 8px;
+  background: rgba(139, 92, 246, 0.8);
+  border-radius: 8px;
+  font-size: 10px;
+  color: #ffffff;
+  font-weight: bold;
+  white-space: nowrap;
+  animation: hintBounce 1.5s ease-in-out infinite;
+}
+
+/* 已选择状态的提示 */
+.emotion-card.selected .guess-mode-hint {
+  background: rgba(168, 85, 247, 0.9);
+  color: #0a0a1a;
+  animation: none;
+}
+
+@keyframes guessModePulse {
+  0%, 100% {
+    border-color: rgba(139, 92, 246, 0.3);
+  }
+  50% {
+    border-color: rgba(139, 92, 246, 0.7);
+  }
+}
+
+@keyframes hintBounce {
+  0%, 100% {
+    transform: translateX(-50%) translateY(0);
+  }
+  50% {
+    transform: translateX(-50%) translateY(-3px);
+  }
+}
+
+.all-unlocked-badge {
+  width: 100%;
+  padding: 12px 20px;
+  margin-top: 15px;
+  background: linear-gradient(135deg, rgba(168, 85, 247, 0.2), rgba(126, 34, 206, 0.2));
+  border: 1px solid rgba(168, 85, 247, 0.4);
+  border-radius: 12px;
+  color: #A855F7;
+  font-size: 13px;
+  text-align: center;
+  font-weight: bold;
+}
+
+/* 调酒提示 */
+.cocktail-hint {
+  width: 100%;
+  padding: 12px 16px;
+  margin-top: 15px;
+  background: linear-gradient(135deg, rgba(255, 183, 3, 0.15), rgba(255, 150, 50, 0.15));
+  border: 1px solid rgba(255, 183, 3, 0.3);
+  border-radius: 12px;
+  color: rgba(255, 220, 150, 0.9);
+  font-size: 12px;
+  text-align: center;
+  line-height: 1.5;
+}
+
+.cocktail-hint strong {
+  color: #A855F7;
+}
+
+/* 锁定提示样式 */
+.locked-tooltip {
+  border-color: rgba(139, 92, 246, 0.5);
+}
+
+/* 已解锁可点击样式 */
+.emotion-card.unlocked-clickable {
+  transition: all 0.2s ease;
+}
+
+.emotion-card.unlocked-clickable:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(255, 255, 255, 0.1);
+}
+
+/* 提示标签样式 */
+.tooltip-tag {
+  font-size: 11px;
+  padding: 2px 8px;
+  border-radius: 4px;
+  margin-top: 4px;
+}
+
+.tooltip-tag.surface-tag {
+  background: rgba(255, 200, 100, 0.2);
+  color: #ffc864;
+}
+
+.tooltip-tag.real-tag {
+  background: rgba(168, 85, 247, 0.2);
+  color: #A855F7;
+}
+
+.tooltip-tag.match-tag {
+  background: rgba(139, 92, 246, 0.2);
+  color: #a78bfa;
+}
+
+/* ==================== 情绪猜测控制区（内部） ==================== */
+/* 注意：.start-guess-btn / .guess-actions / .guess-btn / .guess-success
+   公共样式已提取到 App.css，此处仅保留面板特有样式 */
+
+.emotion-guess-controls-inner {
+  margin-top: 12px;
+  padding: 12px;
+  background: rgba(30, 20, 50, 0.6);
+  border-radius: 12px;
+  border: 1px solid rgba(150, 100, 255, 0.2);
+}
+
+/* ========================================
+   UI Refresh Showcase - Emotion Panel
+   ======================================== */
+
+.emotion-panel {
+  position: relative;
+  background: linear-gradient(180deg, rgba(7, 16, 29, 0.96) 0%, rgba(5, 9, 18, 0.92) 100%);
+  border: 1px solid rgba(103, 196, 255, 0.16);
+  box-shadow:
+    0 24px 48px rgba(0, 0, 0, 0.28),
+    inset 0 1px 0 rgba(255, 255, 255, 0.05);
+}
+
+.emotion-panel::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(circle at 85% 12%, rgba(103, 196, 255, 0.16), transparent 24%),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.02), transparent 28%);
+  pointer-events: none;
+}
+
+.emotion-panel > * {
+  position: relative;
+  z-index: 1;
+}
+
+.emotion-header {
+  position: sticky;
+  top: -20px;
+  z-index: 3;
+  margin: -20px -20px 20px;
+  padding: 20px;
+  background: linear-gradient(180deg, rgba(7, 16, 29, 0.96), rgba(7, 16, 29, 0.74));
+  backdrop-filter: blur(18px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.emotion-header h3,
+.selected-emotions h4 {
+  font-family: var(--font-display);
+  font-size: 24px;
+  letter-spacing: 0.04em;
+  color: var(--text-cream);
+}
+
+.emotion-tabs button {
+  min-height: 36px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.05);
+  color: rgba(255, 255, 255, 0.68);
+}
+
+.emotion-tabs button.active {
+  background: linear-gradient(135deg, rgba(103, 196, 255, 0.22), rgba(168, 85, 247, 0.16));
+  border-color: rgba(103, 196, 255, 0.34);
+  color: #dff3ff;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.08);
+}
+
+.emotion-hints-section,
+.dialogue-clues-section,
+.selected-emotions,
+.emotion-legend,
+.guess-mode-banner,
+.guessed-correctly-banner {
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.04), rgba(255, 255, 255, 0.02));
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.05);
+}
+
+.emotion-card {
+  background: linear-gradient(180deg, rgba(14, 20, 34, 0.92), rgba(8, 13, 22, 0.88));
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 18px;
+  box-shadow: 0 12px 20px rgba(0, 0, 0, 0.2);
+}
+
+.emotion-card:hover,
+.emotion-card.unlocked-clickable:hover {
+  transform: translateY(-4px);
+  border-color: rgba(103, 196, 255, 0.24);
+  box-shadow:
+    0 18px 28px rgba(0, 0, 0, 0.26),
+    0 0 0 1px rgba(103, 196, 255, 0.08) inset;
+}
+
+.start-guess-btn,
+.guess-btn.confirm {
+  background: linear-gradient(135deg, #d8c18d 0%, #7be8cf 45%, #20efc1 100%);
+  color: #09111b;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  box-shadow: 0 14px 26px rgba(168, 85, 247, 0.14);
+}
+
+.guess-btn.cancel {
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: rgba(255, 255, 255, 0.84);
+}
+
+/* ========================================
+   UI Polish V2 - Emotion Panel (Restrained)
+   ======================================== */
+
+.emotion-panel {
+  background: linear-gradient(180deg, rgba(26, 26, 58, 0.95) 0%, rgba(10, 10, 26, 0.95) 100%);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+}
+
+.emotion-panel::before {
+  display: none;
+  content: none;
+}
+
+.emotion-header {
+  position: static;
+  top: auto;
+  z-index: auto;
+  margin: 0 0 20px;
+  padding: 0;
+  background: transparent;
+  backdrop-filter: none;
+  border-bottom: none;
+}
+
+.emotion-header h3,
+.selected-emotions h4 {
+  font-family: inherit;
+  font-size: 18px;
+  letter-spacing: 0;
+  color: #ffffff;
+}
+
+.emotion-tabs button {
+  min-height: 0;
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.05);
+  color: rgba(255, 255, 255, 0.6);
+}
+
+.emotion-tabs button.active {
+  background: rgba(139, 92, 246, 0.3);
+  border-color: rgba(139, 92, 246, 0.6);
+  color: #B8A9F7;
+  box-shadow: none;
+}
+
+.emotion-hints-section,
+.dialogue-clues-section,
+.selected-emotions,
+.emotion-legend,
+.guess-mode-banner,
+.guessed-correctly-banner {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: none;
+}
+
+.emotion-card {
+  background: rgba(255, 255, 255, 0.05);
+  border: 2px solid rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  box-shadow: none;
+}
+
+.emotion-card:hover,
+.emotion-card.unlocked-clickable:hover {
+  transform: translateY(-4px);
+  border-color: rgba(255, 255, 255, 0.18);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+}
+
+.start-guess-btn,
+.guess-btn.confirm {
+  background: linear-gradient(135deg, #A855F7 0%, #7E22CE 100%);
+  color: #0a0a1a;
+  border: none;
+  box-shadow: none;
+}
+
+.guess-btn.cancel {
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  color: rgba(255, 255, 255, 0.8);
+}

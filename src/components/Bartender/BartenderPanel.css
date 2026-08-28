@@ -1,0 +1,1839 @@
+/* 调酒操作面板样式 - 分步流程版 */
+.bartender-panel {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  height: 100%;
+  min-height: 0;
+  background: linear-gradient(180deg, rgba(26, 26, 58, 0.95) 0%, rgba(10, 10, 26, 0.95) 100%);
+  border-radius: 20px;
+  padding: 16px;
+  overflow: hidden;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.bartender-panel--stage {
+  display: grid;
+  grid-template-rows: auto minmax(0, 1fr) auto;
+  gap: 10px;
+}
+
+.bartender-panel--stage .bartender-header {
+  margin-bottom: 0;
+}
+
+.bartender-panel__stage-scroll {
+  display: flex;
+  min-height: 0;
+  overflow: hidden;
+}
+
+.bartender-panel__stage-scroll > .pixi-mixing-board {
+  flex: 1;
+  min-height: 0;
+}
+
+.bartender-emotion-step {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  min-height: 0;
+  padding: 22px 18px;
+  border-radius: 18px;
+  background:
+    radial-gradient(circle at top left, rgba(108, 148, 255, 0.16), transparent 34%),
+    linear-gradient(180deg, rgba(18, 24, 42, 0.96) 0%, rgba(8, 11, 24, 0.96) 100%);
+  border: 1px solid rgba(126, 150, 255, 0.18);
+}
+
+.bartender-emotion-step__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 16px;
+}
+
+.bartender-emotion-step__eyebrow {
+  margin-bottom: 8px;
+  font-size: 12px;
+  font-weight: 700;
+  color: rgba(153, 182, 255, 0.82);
+  letter-spacing: 0.08em;
+}
+
+.bartender-emotion-step__header h4 {
+  margin: 0 0 8px;
+  font-size: 28px;
+  color: #f7f8ff;
+}
+
+.bartender-emotion-step__header p {
+  margin: 0;
+  max-width: 720px;
+  font-size: 14px;
+  line-height: 1.6;
+  color: rgba(232, 236, 255, 0.72);
+}
+
+.bartender-emotion-step__count {
+  min-width: 78px;
+  padding: 10px 14px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  text-align: center;
+  font-size: 20px;
+  font-weight: 700;
+  color: #ffffff;
+}
+
+.bartender-emotion-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 14px;
+}
+
+.bartender-emotion-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  min-height: 128px;
+  padding: 16px;
+  border-radius: 16px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 2px solid rgba(255, 255, 255, 0.12);
+  color: #f2f5ff;
+  cursor: pointer;
+  transition: transform 0.18s ease, background 0.18s ease, border-color 0.18s ease;
+}
+
+.bartender-emotion-card:hover {
+  transform: translateY(-2px);
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.bartender-emotion-card.selected {
+  background: rgba(124, 161, 255, 0.14);
+}
+
+.bartender-emotion-card__icon {
+  font-size: 30px;
+}
+
+.bartender-emotion-card__name {
+  font-size: 15px;
+  font-weight: 600;
+}
+
+.bartender-emotion-step__actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+  margin-top: auto;
+}
+
+.bartender-emotion-step__ghost,
+.bartender-emotion-step__confirm {
+  min-width: 132px;
+  padding: 12px 18px;
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: transform 0.18s ease, opacity 0.18s ease, background 0.18s ease;
+}
+
+.bartender-emotion-step__ghost {
+  background: rgba(255, 255, 255, 0.06);
+  color: rgba(255, 255, 255, 0.88);
+}
+
+.bartender-emotion-step__confirm {
+  background: linear-gradient(135deg, rgba(100, 146, 255, 0.95), rgba(124, 104, 255, 0.95));
+  color: #09111f;
+}
+
+.bartender-emotion-step__ghost:hover,
+.bartender-emotion-step__confirm:hover:not(:disabled) {
+  transform: translateY(-1px);
+}
+
+.bartender-emotion-step__confirm:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+/* 头部 */
+.bartender-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+}
+
+.bartender-header__actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.bartender-header h3 {
+  margin: 0;
+  font-size: 16px;
+  color: #ffffff;
+}
+
+.reset-btn {
+  width: 32px;
+  height: 32px;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 8px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.reset-btn:hover {
+  background: rgba(255, 255, 255, 0.2);
+  transform: rotate(180deg);
+}
+
+/* 步骤指示器 */
+.step-indicator {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 12px 0;
+  margin-bottom: 12px;
+  background: rgba(0, 0, 0, 0.2);
+  border-radius: 12px;
+}
+
+.step-dot {
+  display: flex;
+  align-items: center;
+  position: relative;
+}
+
+.step-icon {
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255, 255, 255, 0.1);
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  border-radius: 50%;
+  font-size: 16px;
+  transition: all 0.3s ease;
+}
+
+.step-dot.active .step-icon {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  border-color: #764ba2;
+  transform: scale(1.1);
+  box-shadow: 0 0 20px rgba(102, 126, 234, 0.4);
+}
+
+.step-dot.completed .step-icon {
+  background: linear-gradient(135deg, #A855F7 0%, #7E22CE 100%);
+  border-color: #A855F7;
+}
+
+.step-line {
+  width: 20px;
+  height: 2px;
+  background: rgba(255, 255, 255, 0.2);
+  margin: 0 4px;
+}
+
+.step-dot.completed + .step-dot .step-line,
+.step-dot.completed .step-line {
+  background: #A855F7;
+}
+
+/* 步骤容器 */
+.step-container {
+  flex: 1;
+  overflow-y: auto;
+  margin-bottom: 12px;
+}
+
+.step-content {
+  animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.step-title {
+  margin: 0 0 6px 0;
+  font-size: 15px;
+  color: #ffffff;
+  text-align: center;
+}
+
+.step-description {
+  margin: 0 0 16px 0;
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.5);
+  text-align: center;
+}
+
+/* 杯型选择 */
+.glass-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
+}
+
+.glass-card {
+  position: relative;
+  padding: 14px 10px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 2px solid rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  text-align: center;
+}
+
+.glass-card:hover:not(.locked) {
+  background: rgba(255, 255, 255, 0.1);
+  transform: translateY(-2px);
+}
+
+.glass-card.selected {
+  background: rgba(168, 85, 247, 0.15);
+  border-color: rgba(168, 85, 247, 0.6);
+}
+
+.glass-card.locked {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.glass-icon {
+  font-size: 32px;
+  margin-bottom: 6px;
+}
+
+.glass-name {
+  font-size: 13px;
+  color: rgba(255, 255, 255, 0.9);
+  font-weight: 500;
+  margin-bottom: 4px;
+}
+
+.glass-desc {
+  font-size: 10px;
+  color: rgba(255, 255, 255, 0.4);
+  line-height: 1.3;
+}
+
+.locked-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.6);
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+}
+
+.lock-icon {
+  font-size: 20px;
+}
+
+.lock-price {
+  font-size: 12px;
+  color: #ffd700;
+  font-weight: bold;
+}
+
+/* 配料/冰块/装饰卡片 */
+.addon-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
+}
+
+.addon-card {
+  position: relative;
+  padding: 14px 10px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 2px solid rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  text-align: center;
+}
+
+.addon-card:hover:not(.locked) {
+  background: rgba(255, 255, 255, 0.1);
+  transform: translateY(-2px);
+}
+
+.addon-card.selected {
+  background: rgba(168, 85, 247, 0.15);
+  border-color: rgba(168, 85, 247, 0.6);
+}
+
+.addon-card.locked {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.addon-card.skip-card {
+  background: rgba(255, 255, 255, 0.02);
+  border-style: dashed;
+}
+
+.addon-card.skip-card.selected {
+  background: rgba(102, 126, 234, 0.15);
+  border-color: rgba(102, 126, 234, 0.6);
+  border-style: solid;
+}
+
+.addon-icon {
+  font-size: 28px;
+  margin-bottom: 6px;
+}
+
+.addon-name {
+  font-size: 13px;
+  color: rgba(255, 255, 255, 0.9);
+  font-weight: 500;
+  margin-bottom: 4px;
+}
+
+.addon-desc {
+  font-size: 10px;
+  color: rgba(255, 255, 255, 0.4);
+  line-height: 1.3;
+}
+
+.addon-feeling {
+  font-size: 10px;
+  color: rgba(147, 130, 220, 0.8);
+  line-height: 1.4;
+  font-style: italic;
+}
+
+.addon-effects.faded {
+  opacity: 0.4;
+}
+
+/* 情绪预览区域 */
+.emotion-preview-area {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+}
+
+.emotion-step .cocktail-glass {
+  position: relative;
+  width: 160px;
+  height: 200px;
+  border-radius: 16px 16px 30px 30px;
+  border: 3px solid rgba(255, 255, 255, 0.2);
+  overflow: hidden;
+  transition: all 0.3s ease;
+  /* 玻璃质感增强 */
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.06) 0%,
+    rgba(255, 255, 255, 0.02) 40%,
+    rgba(255, 255, 255, 0.04) 100%
+  );
+  backdrop-filter: blur(2px);
+  box-shadow:
+    /* 外部阴影 - 深度感 */
+    0 10px 40px rgba(0, 0, 0, 0.3),
+    0 2px 10px rgba(0, 0, 0, 0.2),
+    /* 内部阴影 - 玻璃厚度 */
+    inset 0 0 30px rgba(255, 255, 255, 0.03),
+    inset 2px 2px 10px rgba(255, 255, 255, 0.04),
+    inset -2px -2px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* 杯沿高光 */
+.emotion-step .cocktail-glass::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 15%;
+  right: 15%;
+  height: 2px;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(255, 255, 255, 0.5) 30%,
+    rgba(255, 255, 255, 0.6) 50%,
+    rgba(255, 255, 255, 0.5) 70%,
+    transparent 100%
+  );
+  border-radius: 50%;
+  z-index: 10;
+}
+
+/* 侧面反光 */
+.emotion-step .cocktail-glass::after {
+  content: '';
+  position: absolute;
+  top: 10%;
+  left: 5%;
+  width: 3px;
+  height: 60%;
+  background: linear-gradient(
+    180deg,
+    transparent 0%,
+    rgba(255, 255, 255, 0.08) 20%,
+    rgba(255, 255, 255, 0.12) 50%,
+    rgba(255, 255, 255, 0.08) 80%,
+    transparent 100%
+  );
+  border-radius: 2px;
+  z-index: 10;
+}
+
+.emotion-step .cocktail-glass.compatible {
+  animation: glassGlow 2s ease infinite;
+}
+
+@keyframes glassGlow {
+  0%, 100% {
+    box-shadow: inset 0 4px 20px rgba(0, 0, 0, 0.3), 0 0 20px rgba(168, 85, 247, 0.3);
+  }
+  50% {
+    box-shadow: inset 0 4px 20px rgba(0, 0, 0, 0.3), 0 0 30px rgba(168, 85, 247, 0.5);
+  }
+}
+
+.emotion-step .cocktail-glass.conflict {
+  animation: glassShake 0.5s ease;
+}
+
+@keyframes glassShake {
+  0%, 100% { transform: translateX(0); }
+  25% { transform: translateX(-5px); }
+  75% { transform: translateX(5px); }
+}
+
+/* 🆕 递酒时摇酒动画 */
+.emotion-step .cocktail-glass.shaking {
+  animation: cocktailShake 0.6s ease-in-out;
+}
+
+@keyframes cocktailShake {
+  0%, 100% { transform: rotate(0deg); }
+  15% { transform: rotate(-12deg); }
+  30% { transform: rotate(10deg); }
+  45% { transform: rotate(-8deg); }
+  60% { transform: rotate(6deg); }
+  75% { transform: rotate(-3deg); }
+  90% { transform: rotate(1deg); }
+}
+
+.glass-placeholder {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  color: rgba(255, 255, 255, 0.3);
+}
+
+.glass-placeholder p:first-child {
+  font-size: 36px;
+  margin: 0 0 8px 0;
+}
+
+.glass-placeholder p:last-child {
+  font-size: 11px;
+  margin: 0;
+}
+
+/* 情绪液体层 */
+.emotion-layer {
+  position: relative;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  font-size: 12px;
+  color: #ffffff;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  /* 液面上升时带有微弱晃动的 overshoot 效果 */
+  transition: height 0.4s cubic-bezier(0.34, 1.56, 0.64, 1), all 0.3s ease;
+  overflow: hidden;
+}
+
+/* 液面波纹效果 */
+.emotion-layer::before {
+  content: '';
+  position: absolute;
+  top: -2px;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(255, 255, 255, 0.2) 25%,
+    rgba(255, 255, 255, 0.3) 50%,
+    rgba(255, 255, 255, 0.2) 75%,
+    transparent 100%
+  );
+  animation: liquidSurface 3s ease-in-out infinite;
+  z-index: 2;
+}
+
+@keyframes liquidSurface {
+  0%, 100% {
+    transform: translateX(-20%) scaleY(1);
+    opacity: 0.6;
+  }
+  50% {
+    transform: translateX(20%) scaleY(1.5);
+    opacity: 1;
+  }
+}
+
+/* 液体内部光泽流动 */
+.emotion-layer::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 50%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(255, 255, 255, 0.08) 50%,
+    transparent 100%
+  );
+  animation: liquidShine 4s ease-in-out infinite;
+  z-index: 1;
+}
+
+@keyframes liquidShine {
+  0% { left: -50%; }
+  100% { left: 150%; }
+}
+
+/* 倒酒动画 */
+.emotion-layer.pouring {
+  animation: pourIn 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+@keyframes pourIn {
+  0% {
+    clip-path: inset(100% 30% 0 30%);
+    opacity: 0.5;
+  }
+  30% {
+    clip-path: inset(50% 10% 0 10%);
+    opacity: 0.8;
+  }
+  100% {
+    clip-path: inset(0 0 0 0);
+    opacity: 1;
+  }
+}
+
+/* ====== 情绪原浆独特视觉 ====== */
+
+/* 愤怒 - 沸腾效果 */
+.emotion-layer[data-emotion="anger"]::before {
+  animation: angerBubble 0.8s ease infinite;
+}
+
+@keyframes angerBubble {
+  0%, 100% { transform: translateX(0) scaleY(1); }
+  25% { transform: translateX(-5%) scaleY(1.4); }
+  75% { transform: translateX(5%) scaleY(1.3); }
+}
+
+/* 悲伤 - 缓慢流动 */
+.emotion-layer[data-emotion="sadness"]::after {
+  animation: liquidShine 8s ease-in-out infinite;
+}
+
+/* 平静 - 微弱起伏 */
+.emotion-layer[data-emotion="calm"]::before {
+  animation: calmWave 5s ease-in-out infinite;
+}
+
+@keyframes calmWave {
+  0%, 100% { transform: translateX(0) scaleY(1); }
+  50% { transform: translateX(10%) scaleY(1.1); }
+}
+
+/* 希望 - 温暖上升气泡 */
+.emotion-layer[data-emotion="hope"] {
+  overflow: visible;
+}
+
+.emotion-layer[data-emotion="hope"]::after {
+  background: linear-gradient(
+    0deg,
+    transparent 0%,
+    rgba(255, 255, 200, 0.12) 50%,
+    transparent 100%
+  );
+  animation: hopeRise 3s ease-in-out infinite;
+  width: 30%;
+  left: 35%;
+}
+
+@keyframes hopeRise {
+  0% { transform: translateY(100%); opacity: 0; }
+  50% { opacity: 1; }
+  100% { transform: translateY(-100%); opacity: 0; }
+}
+
+/* 恐惧 - 不安抖动 */
+.emotion-layer[data-emotion="fear"] {
+  animation: fearTremble 0.3s ease infinite;
+}
+
+@keyframes fearTremble {
+  0%, 100% { transform: translateX(0); }
+  25% { transform: translateX(-1px); }
+  75% { transform: translateX(1px); }
+}
+
+.layer-icon {
+  font-size: 18px;
+}
+
+.layer-name {
+  font-weight: bold;
+  font-size: 11px;
+}
+
+.remove-emotion {
+  position: absolute;
+  right: 6px;
+  width: 20px;
+  height: 20px;
+  background: rgba(0, 0, 0, 0.5);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 50%;
+  color: #ffffff;
+  font-size: 14px;
+  line-height: 1;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.remove-emotion:hover {
+  background: rgba(231, 57, 70, 0.8);
+  transform: scale(1.1);
+}
+
+/* 冲突/适配效果 */
+.conflict-effect {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: repeating-linear-gradient(
+    45deg,
+    transparent,
+    transparent 10px,
+    rgba(0, 0, 0, 0.2) 10px,
+    rgba(0, 0, 0, 0.2) 20px
+  );
+  animation: conflictMove 2s linear infinite;
+  pointer-events: none;
+}
+
+@keyframes conflictMove {
+  0% { background-position: 0 0; }
+  100% { background-position: 28px 28px; }
+}
+
+.compatible-effect {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: radial-gradient(circle at center, transparent 30%, rgba(255, 255, 255, 0.1) 100%);
+  animation: compatiblePulse 3s ease infinite;
+  pointer-events: none;
+}
+
+@keyframes compatiblePulse {
+  0%, 100% { opacity: 0.3; }
+  50% { opacity: 0.6; }
+}
+
+.emotion-status {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.emotion-count {
+  padding: 6px 12px;
+  background: rgba(168, 85, 247, 0.2);
+  border: 1px solid rgba(168, 85, 247, 0.4);
+  border-radius: 10px;
+  font-size: 12px;
+  color: #A855F7;
+  font-weight: bold;
+}
+
+.compatibility-indicator {
+  font-size: 12px;
+  font-weight: bold;
+}
+
+/* 预览步骤 */
+.preview-step {
+  text-align: center;
+}
+
+.preview-cocktail {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 16px;
+}
+
+.preview-glass {
+  width: 120px;
+  height: 160px;
+  border-radius: 12px 12px 24px 24px;
+  border: 3px solid rgba(255, 255, 255, 0.3);
+  overflow: hidden;
+  position: relative;
+}
+
+.preview-glass.compatible {
+  box-shadow: 0 0 20px rgba(168, 85, 247, 0.4);
+}
+
+.preview-glass.conflict {
+  box-shadow: 0 0 20px rgba(231, 57, 70, 0.4);
+}
+
+.preview-layer {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+}
+
+.preview-decoration {
+  position: absolute;
+  top: -10px;
+  right: -10px;
+  font-size: 28px;
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.5));
+}
+
+.preview-details {
+  background: rgba(0, 0, 0, 0.2);
+  border-radius: 12px;
+  padding: 12px;
+}
+
+.preview-item {
+  display: flex;
+  justify-content: space-between;
+  padding: 8px 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.preview-item:last-child {
+  border-bottom: none;
+}
+
+.preview-label {
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.5);
+}
+
+.preview-value {
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.9);
+  font-weight: 500;
+}
+
+.compatibility-row .preview-value {
+  font-weight: bold;
+}
+
+/* 加成提示区域 */
+.preview-bonuses {
+  margin-top: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.preview-bonus {
+  padding: 8px 12px;
+  border-radius: 8px;
+  font-size: 12px;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.preview-bonus.glass-bonus {
+  background: linear-gradient(135deg, rgba(255, 183, 3, 0.2), rgba(255, 149, 0, 0.2));
+  border: 1px solid rgba(255, 183, 3, 0.4);
+  color: #FFB703;
+}
+
+.preview-bonus.perfect-match {
+  background: linear-gradient(135deg, rgba(168, 85, 247, 0.15), rgba(126, 34, 206, 0.15));
+  border: 1px solid rgba(168, 85, 247, 0.4);
+  color: #A855F7;
+}
+
+.preview-bonus.combo-bonus {
+  background: linear-gradient(135deg, rgba(147, 112, 219, 0.2), rgba(102, 126, 234, 0.2));
+  border: 1px solid rgba(147, 112, 219, 0.5);
+  color: #9370DB;
+  flex-wrap: wrap;
+}
+
+.preview-bonus.combo-bonus .combo-desc {
+  font-size: 10px;
+  font-weight: normal;
+  color: rgba(255, 255, 255, 0.6);
+  width: 100%;
+  margin-top: 4px;
+}
+
+/* 导航按钮 */
+.step-navigation {
+  display: flex;
+  gap: 10px;
+}
+
+.nav-btn {
+  flex: 1;
+  padding: 14px;
+  border-radius: 12px;
+  font-size: 14px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.prev-btn {
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.prev-btn:hover {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+.next-btn {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  border: none;
+  color: #ffffff;
+}
+
+.next-btn:hover:not(.disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 5px 20px rgba(102, 126, 234, 0.4);
+}
+
+.next-btn.disabled {
+  background: rgba(255, 255, 255, 0.1);
+  color: rgba(255, 255, 255, 0.3);
+  cursor: not-allowed;
+}
+
+.serve-btn {
+  background: linear-gradient(135deg, #A855F7, #7E22CE);
+  border: none;
+  color: #0a0a1a;
+  animation: buttonPulse 2s ease infinite;
+}
+
+.serve-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(168, 85, 247, 0.4);
+}
+
+@keyframes buttonPulse {
+  0%, 100% {
+    box-shadow: 0 0 20px rgba(168, 85, 247, 0.3);
+  }
+  50% {
+    box-shadow: 0 0 30px rgba(168, 85, 247, 0.5);
+  }
+}
+
+/* ============ 原浆混合步骤样式 ============ */
+
+/* 目标提示 */
+.target-hint {
+  background: rgba(255, 183, 3, 0.15);
+  border: 1px solid rgba(255, 183, 3, 0.3);
+  border-radius: 8px;
+  padding: 10px 12px;
+  margin: 12px 0;
+  font-size: 12px;
+  color: #FFB703;
+  text-align: center;
+}
+
+/* 调酒建议 */
+.mixing-suggestions {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin: 12px 0;
+}
+
+.suggestion {
+  padding: 8px 12px;
+  border-radius: 8px;
+  font-size: 12px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+}
+
+.suggestion.hint {
+  background: rgba(69, 123, 157, 0.2);
+  border: 1px solid rgba(69, 123, 157, 0.3);
+  color: #A8DADC;
+}
+
+.suggestion.warning {
+  background: rgba(255, 107, 107, 0.15);
+  border: 1px solid rgba(255, 107, 107, 0.3);
+  color: #FF6B6B;
+}
+
+.suggestion.success {
+  background: rgba(168, 85, 247, 0.15);
+  border: 1px solid rgba(168, 85, 247, 0.3);
+  color: #A855F7;
+}
+
+.suggestion .recommended {
+  font-weight: 600;
+  color: #FFB703;
+}
+
+/* 分类标签 */
+.category-tabs {
+  display: flex;
+  gap: 6px;
+  margin: 12px 0;
+  padding: 4px;
+  background: rgba(0, 0, 0, 0.2);
+  border-radius: 10px;
+}
+
+.category-tab {
+  flex: 1;
+  padding: 8px 4px;
+  background: transparent;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+}
+
+.category-tab:hover {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.category-tab.active {
+  background: linear-gradient(135deg, rgba(102, 126, 234, 0.3), rgba(118, 75, 162, 0.3));
+}
+
+.category-tab .cat-icon {
+  font-size: 18px;
+}
+
+.category-tab .cat-name {
+  font-size: 10px;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.category-tab.active .cat-name {
+  color: #fff;
+  font-weight: 600;
+}
+
+/* 原浆网格 */
+.ingredient-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 8px;
+  margin-bottom: 12px;
+}
+
+.ingredient-card {
+  background: rgba(255, 255, 255, 0.05);
+  border: 2px solid rgba(255, 255, 255, 0.1);
+  border-radius: 10px;
+  padding: 10px;
+  transition: all 0.2s ease;
+}
+
+.ingredient-card:hover {
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.ingredient-card.active {
+  background: rgba(168, 85, 247, 0.1);
+  border-color: rgba(168, 85, 247, 0.4);
+}
+
+.ingredient-card.maxed {
+  opacity: 0.6;
+}
+
+.ing-header {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 6px;
+}
+
+.ing-icon {
+  font-size: 20px;
+}
+
+.ing-name {
+  font-size: 12px;
+  color: #fff;
+  font-weight: 500;
+}
+
+.ing-stats {
+  display: flex;
+  gap: 8px;
+  font-size: 10px;
+  color: rgba(255, 255, 255, 0.6);
+  margin-bottom: 8px;
+}
+
+.ing-stats span {
+  white-space: nowrap;
+}
+
+/* 🆕 数值淡化模式（transitional） */
+.ing-stats.faded {
+  opacity: 0.4;
+  font-size: 9px;
+}
+
+/* 🆕 feeling 文本显示 */
+.ing-feeling {
+  font-size: 10px;
+  color: rgba(147, 130, 220, 0.7);
+  line-height: 1.4;
+  margin-bottom: 6px;
+  font-style: italic;
+}
+
+.ing-feeling.prominent {
+  font-size: 11px;
+  color: rgba(147, 130, 220, 0.9);
+  margin-bottom: 8px;
+}
+
+/* strict 模式下 feeling 仅悬停可见 */
+.ing-feeling-tooltip {
+  display: none;
+  font-size: 9px;
+  color: rgba(147, 130, 220, 0.5);
+  font-style: italic;
+  margin-bottom: 4px;
+}
+
+.ingredient-card:hover .ing-feeling-tooltip {
+  display: block;
+}
+
+.ing-controls {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.ing-btn {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  border: none;
+  font-size: 18px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.ing-btn.minus {
+  background: rgba(255, 107, 107, 0.2);
+  color: #FF6B6B;
+}
+
+.ing-btn.minus:hover {
+  background: rgba(255, 107, 107, 0.4);
+}
+
+.ing-btn.plus {
+  background: rgba(168, 85, 247, 0.2);
+  color: #A855F7;
+}
+
+.ing-btn.plus:hover:not(.disabled) {
+  background: rgba(168, 85, 247, 0.4);
+}
+
+.ing-btn.plus.disabled {
+  background: rgba(255, 255, 255, 0.1);
+  color: rgba(255, 255, 255, 0.3);
+  cursor: not-allowed;
+}
+
+.ing-count {
+  min-width: 24px;
+  text-align: center;
+  font-size: 16px;
+  font-weight: bold;
+  color: #fff;
+}
+
+/* 份数计数器 */
+.portions-counter {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 12px;
+  background: rgba(0, 0, 0, 0.2);
+  border-radius: 8px;
+  margin-bottom: 12px;
+}
+
+.portions-counter span {
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.clear-btn {
+  padding: 4px 12px;
+  background: rgba(255, 107, 107, 0.2);
+  border: 1px solid rgba(255, 107, 107, 0.3);
+  border-radius: 6px;
+  color: #FF6B6B;
+  font-size: 11px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.clear-btn:hover {
+  background: rgba(255, 107, 107, 0.3);
+}
+
+/* 当前配方预览 */
+.current-mix {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  padding: 10px;
+  background: rgba(102, 126, 234, 0.1);
+  border-radius: 8px;
+  align-items: center;
+}
+
+.mix-label {
+  font-size: 11px;
+  color: rgba(255, 255, 255, 0.6);
+  margin-right: 4px;
+}
+
+.mix-item {
+  padding: 4px 8px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 6px;
+  font-size: 11px;
+  color: #fff;
+}
+
+/* 预览混合数据 */
+.preview-mixture {
+  margin-top: 12px;
+  padding: 10px;
+  background: rgba(0, 0, 0, 0.2);
+  border-radius: 8px;
+}
+
+.mixture-row {
+  display: flex;
+  justify-content: space-around;
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.8);
+}
+
+/* master 模式隐藏数值 */
+.preview-mixture.master-hidden {
+  background: rgba(139, 92, 246, 0.1);
+  border: 1px dashed rgba(139, 92, 246, 0.3);
+}
+
+.preview-mixture.master-hidden .mixture-row {
+  justify-content: center;
+  font-style: italic;
+  color: rgba(167, 139, 250, 0.8);
+  font-size: 13px;
+}
+
+.preview-ingredient {
+  margin-right: 8px;
+}
+
+/* 预览警告 */
+.preview-warning {
+  margin-top: 12px;
+  padding: 10px 12px;
+  background: rgba(255, 107, 107, 0.15);
+  border: 1px solid rgba(255, 107, 107, 0.3);
+  border-radius: 8px;
+  font-size: 12px;
+  color: #FF6B6B;
+  text-align: center;
+}
+
+/* 禁用状态 */
+.bartender-panel.disabled {
+  position: relative;
+}
+
+.disabled-overlay {
+  position: absolute;
+  top: 60px;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(10, 10, 26, 0.9);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 0 0 20px 20px;
+}
+
+.disabled-message {
+  text-align: center;
+  color: rgba(255, 255, 255, 0.6);
+}
+
+.disabled-message .lock-icon {
+  font-size: 48px;
+  display: block;
+  margin-bottom: 12px;
+}
+
+.disabled-message p {
+  font-size: 14px;
+  margin: 0;
+}
+
+/* 响应式 */
+@media (max-width: 500px) {
+  .step-indicator {
+    padding: 8px 0;
+  }
+  
+  .step-icon {
+    width: 28px;
+    height: 28px;
+    font-size: 12px;
+  }
+  
+  .step-line {
+    width: 12px;
+  }
+  
+  .glass-grid,
+  .addon-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 8px;
+  }
+  
+  .glass-card,
+  .addon-card {
+    padding: 10px 8px;
+  }
+  
+  .glass-icon,
+  .addon-icon {
+    font-size: 24px;
+  }
+  
+  .emotion-step .cocktail-glass {
+    width: 140px;
+    height: 180px;
+  }
+  
+  .category-tabs {
+    flex-wrap: wrap;
+  }
+  
+  .category-tab {
+    flex: 0 0 calc(50% - 3px);
+  }
+  
+  .ingredient-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* 道具三维影响显示 */
+.addon-effects {
+  display: flex;
+  gap: 4px;
+  flex-wrap: wrap;
+  margin-top: 6px;
+  padding-top: 6px;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  justify-content: center;
+}
+
+.effect-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 2px;
+  padding: 2px 6px;
+  background: rgba(102, 126, 234, 0.2);
+  border: 1px solid rgba(102, 126, 234, 0.3);
+  border-radius: 8px;
+  font-size: 11px;
+  font-weight: 600;
+  color: #ffffff;
+  white-space: nowrap;
+}
+
+.effect-tag.neutral {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: rgba(255, 255, 255, 0.2);
+  color: rgba(255, 255, 255, 0.6);
+}
+
+/* 杯型容量要求提示 */
+.glass-requirement {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 16px;
+  margin-bottom: 12px;
+  border-radius: 12px;
+  font-size: 13px;
+  font-weight: 500;
+  transition: all 0.3s ease;
+}
+
+.glass-requirement.incomplete {
+  background: rgba(255, 179, 71, 0.15);
+  border: 1.5px solid rgba(255, 179, 71, 0.4);
+  color: #FFB347;
+}
+
+.glass-requirement.complete {
+  background: rgba(168, 85, 247, 0.15);
+  border: 1.5px solid rgba(168, 85, 247, 0.4);
+  color: #A855F7;
+}
+
+.glass-requirement .glass-icon {
+  font-size: 20px;
+}
+
+.glass-requirement .requirement-text {
+  flex: 1;
+}
+
+.glass-requirement strong {
+  font-weight: 700;
+  color: #ffffff;
+}
+
+/* 份数计数器状�?*/
+.portions-counter span.complete {
+  color: #A855F7;
+  font-weight: 600;
+}
+
+.portions-counter span.incomplete {
+  color: #FFB347;
+}
+
+/* 杯型卡片容量显示 */
+.glass-capacity {
+  font-size: 11px;
+  color: rgba(255, 255, 255, 0.6);
+  margin-top: 4px;
+  font-weight: 500;
+  text-align: center;
+}
+
+/* 🆕 受事件约束的原料 - 缺货样式 */
+.ingredient-card.restricted {
+  opacity: 0.35;
+  pointer-events: none;
+  filter: grayscale(0.8);
+  position: relative;
+}
+
+.ing-restricted-badge {
+  font-size: 9px;
+  padding: 1px 5px;
+  background: rgba(255, 80, 80, 0.3);
+  border: 1px solid rgba(255, 80, 80, 0.4);
+  border-radius: 6px;
+  color: #ff8888;
+  font-weight: 600;
+  margin-left: 4px;
+}
+
+/* 酒的态度预览 */
+.cocktail-attitude-preview {
+  margin-top: 12px;
+  padding: 10px 14px;
+  background: rgba(139, 92, 246, 0.08);
+  border: 1px solid rgba(139, 92, 246, 0.2);
+  border-radius: 10px;
+  text-align: center;
+}
+
+.attitude-label {
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.5);
+}
+
+.attitude-text {
+  margin: 6px 0 0;
+  font-size: 13px;
+  color: rgba(255, 255, 255, 0.85);
+  font-style: italic;
+  line-height: 1.5;
+}
+
+/* 材料感觉（核心表达） */
+.attitude-feeling {
+  margin: 8px 0 4px;
+  font-size: 13px;
+  color: rgba(147, 130, 220, 0.9);
+  font-style: italic;
+  line-height: 1.6;
+}
+
+/* 基础态度（辅助说明） */
+.attitude-base {
+  margin: 4px 0 0;
+  font-size: 11px;
+  color: rgba(255, 255, 255, 0.35);
+  line-height: 1.4;
+}
+
+/* 白水按钮 */
+.plain-water-btn {
+  align-self: flex-start;
+  width: auto;
+  padding: 4px 0;
+  margin-top: 0;
+  background: transparent;
+  border: 0;
+  border-radius: 0;
+  color: rgba(255, 255, 255, 0.38);
+  font-size: 11px;
+  cursor: pointer;
+  transition: color 0.2s ease, opacity 0.2s ease;
+}
+
+.plain-water-btn:hover {
+  color: rgba(168, 218, 220, 0.7);
+  background: transparent;
+}
+
+/* ========================================
+   UI Refresh Showcase - Mixing Stage
+   ======================================== */
+
+.bartender-panel {
+  position: relative;
+  background: linear-gradient(180deg, rgba(9, 14, 25, 0.95), rgba(5, 8, 14, 0.92));
+  border: 1px solid rgba(255, 210, 145, 0.16);
+  box-shadow:
+    0 26px 60px rgba(0, 0, 0, 0.32),
+    inset 0 1px 0 rgba(255, 255, 255, 0.05);
+}
+
+.bartender-panel::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(circle at 12% 8%, rgba(255, 193, 110, 0.12), transparent 20%),
+    radial-gradient(circle at 82% 0%, rgba(103, 196, 255, 0.14), transparent 18%);
+  pointer-events: none;
+}
+
+.bartender-panel > * {
+  position: relative;
+  z-index: 1;
+}
+
+.bartender-header {
+  padding: 4px 4px 0;
+}
+
+.bartender-header h3 {
+  font-family: var(--font-display);
+  font-size: 24px;
+  color: var(--text-cream);
+  letter-spacing: 0.04em;
+}
+
+.reset-btn,
+.plain-water-btn {
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.04));
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  color: rgba(255, 255, 255, 0.84);
+}
+
+.reset-btn:hover,
+.plain-water-btn:hover {
+  border-color: rgba(255, 193, 110, 0.24);
+  box-shadow: 0 10px 18px rgba(0, 0, 0, 0.2);
+  transform: translateY(-2px);
+}
+
+.plain-water-btn {
+  border-radius: 14px;
+  box-shadow: 0 14px 24px rgba(0, 0, 0, 0.18);
+}
+
+.bartender-panel__stage-scroll > .pixi-mixing-board {
+  border-radius: 26px;
+}
+
+/* ========================================
+   UI Polish V2 - Mixing Panel (Restrained)
+   ======================================== */
+
+.bartender-panel {
+  background: linear-gradient(180deg, rgba(26, 26, 58, 0.95) 0%, rgba(10, 10, 26, 0.95) 100%);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+}
+
+.bartender-panel::before {
+  display: none;
+  content: none;
+}
+
+.bartender-header {
+  padding: 0;
+}
+
+.bartender-header h3 {
+  font-family: inherit;
+  font-size: 16px;
+  color: #ffffff;
+  letter-spacing: 0;
+}
+
+.reset-btn {
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: inherit;
+}
+
+.reset-btn:hover {
+  border-color: rgba(255, 255, 255, 0.28);
+  box-shadow: none;
+  transform: rotate(180deg);
+}
+
+.plain-water-btn {
+  background: transparent;
+  border: 0;
+  border-radius: 0;
+  box-shadow: none;
+  color: rgba(255, 255, 255, 0.38);
+}
+
+.plain-water-btn:hover {
+  color: rgba(168, 218, 220, 0.7);
+  transform: none;
+}
+
+.bartender-panel__stage-scroll > .pixi-mixing-board {
+  border-radius: 24px;
+}
+
+/* ========================================
+   UI Phase 3 - Mixing Shell
+   ======================================== */
+
+.bartender-panel {
+  position: relative;
+  background:
+    linear-gradient(180deg, rgba(44, 30, 84, 0.7), rgba(18, 14, 38, 0.64));
+  border: 1px solid rgba(228, 220, 255, 0.14);
+  border-radius: 24px;
+  box-shadow:
+    0 18px 36px rgba(16, 10, 34, 0.18),
+    inset 0 1px 0 rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(12px) saturate(116%);
+  -webkit-backdrop-filter: blur(12px) saturate(116%);
+}
+
+.bartender-header {
+  margin-bottom: 6px;
+  padding: 4px 2px 0;
+}
+
+.bartender-header h3 {
+  font-family: "PressStart2P", "zpix", sans-serif;
+  font-size: clamp(13px, 1.45vw, 18px);
+  line-height: 1.35;
+  color: #fff8ff;
+}
+
+.reset-btn {
+  border-radius: 12px;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.12), rgba(255, 255, 255, 0.06));
+  border: 1px solid rgba(230, 222, 255, 0.14);
+  color: #fff;
+  box-shadow: 0 8px 16px rgba(16, 10, 34, 0.14);
+}
+
+.reset-btn:hover {
+  border-color: rgba(255, 219, 166, 0.28);
+  box-shadow: 0 10px 18px rgba(16, 10, 34, 0.18);
+  transform: translateY(-1px);
+}
+
+.bartender-emotion-step {
+  padding: 20px 18px;
+  border-radius: 20px;
+  background:
+    linear-gradient(180deg, rgba(52, 38, 98, 0.68), rgba(20, 16, 42, 0.62));
+  border: 1px solid rgba(228, 220, 255, 0.14);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.05);
+}
+
+.bartender-emotion-step__eyebrow {
+  font-family: "zpix", "PressStart2P", sans-serif;
+  font-size: 10px;
+  letter-spacing: 0.12em;
+  color: rgba(244, 236, 255, 0.68);
+}
+
+.bartender-emotion-step__header h4 {
+  font-family: "PressStart2P", "zpix", sans-serif;
+  font-size: clamp(15px, 1.7vw, 22px);
+  line-height: 1.4;
+}
+
+.bartender-emotion-step__count {
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(228, 220, 255, 0.14);
+  border-radius: 16px;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.05);
+}
+
+.bartender-emotion-card {
+  min-height: 132px;
+  border-radius: 18px;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.09), rgba(255, 255, 255, 0.04));
+  border: 1px solid rgba(228, 220, 255, 0.12);
+  box-shadow: 0 10px 22px rgba(14, 10, 28, 0.12);
+}
+
+.bartender-emotion-card:hover {
+  transform: translateY(-2px);
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.13), rgba(255, 255, 255, 0.06));
+}
+
+.bartender-emotion-step__ghost,
+.bartender-emotion-step__confirm,
+.plain-water-btn {
+  border-radius: 14px;
+  box-shadow: 0 10px 18px rgba(14, 10, 28, 0.14);
+}
+
+.bartender-emotion-step__ghost {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: rgba(228, 220, 255, 0.14);
+}
+
+.bartender-emotion-step__confirm {
+  font-family: "zpix", "PressStart2P", sans-serif;
+  letter-spacing: 0.06em;
+}
+
+.plain-water-btn {
+  align-self: stretch;
+  margin-top: 10px;
+  padding: 12px 14px;
+  background: linear-gradient(180deg, rgba(74, 98, 144, 0.22), rgba(42, 60, 104, 0.16));
+  border: 1px solid rgba(192, 220, 255, 0.14);
+  color: rgba(235, 244, 255, 0.9);
+  font-family: "zpix", "PressStart2P", sans-serif;
+  font-size: 11px;
+  letter-spacing: 0.06em;
+}
+
+.plain-water-btn:hover {
+  background: linear-gradient(180deg, rgba(86, 118, 172, 0.3), rgba(46, 68, 118, 0.22));
+  color: #fff;
+  transform: translateY(-1px);
+}

@@ -1,0 +1,34 @@
+/* 顾客头像组件样式 */
+
+.customer-avatar-img {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  /* Keep all customer avatars as WeChat-like rounded squares. */
+  border-radius: var(--ui-avatar-radius, 22%);
+  overflow: hidden;
+  background: rgba(255, 255, 255, 0.03);
+}
+
+.customer-avatar-img.has-image {
+  border: 1.5px solid rgba(79, 195, 247, 0.3);
+  box-shadow: 0 0 8px rgba(79, 195, 247, 0.15);
+}
+
+.customer-avatar-img.has-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: inherit;
+  animation: avatar-fade-in 0.4s ease-out;
+}
+
+@keyframes avatar-fade-in {
+  from { opacity: 0; transform: scale(0.8); }
+  to   { opacity: 1; transform: scale(1); }
+}
+
+.customer-avatar-img.emoji-fallback {
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}

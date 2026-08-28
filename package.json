@@ -1,0 +1,40 @@
+{
+  "name": "future-bartender-game",
+  "version": "1.1.0",
+  "description": "未来酒吧主题调酒互动游戏",
+  "type": "module",
+  "scripts": {
+    "assets:sync": "node scripts/sync-art-assets-to-public.mjs",
+    "predev": "npm run assets:sync",
+    "prebuild": "npm run assets:sync",
+    "dev": "node scripts/dev.mjs",
+    "dev:client": "vite",
+    "dev:server": "node server/save-server.mjs",
+    "env:cnhk": "node scripts/setup-network-profile.mjs cnhk",
+    "env:global": "node scripts/setup-network-profile.mjs global",
+    "check:paths": "node scripts/check-runtime-asset-paths.mjs",
+    "image:remove-white-bg": "node scripts/remove-white-background.mjs",
+    "setup:api": "node scripts/setup-api-keys.mjs",
+    "migrate:characters": "node scripts/migrate-character-assets-layout.mjs",
+    "build": "vite build",
+    "preview": "vite preview",
+    "pdf:process-book:en": "node scripts/export-process-book-pdf.mjs"
+  },
+  "dependencies": {
+    "axios": "^1.6.5",
+    "pixi.js": "^8.16.0",
+    "react": "^18.2.0",
+    "react-dnd": "^16.0.1",
+    "react-dnd-html5-backend": "^16.0.1",
+    "react-dom": "^18.2.0",
+    "yaml": "^2.8.1"
+  },
+  "devDependencies": {
+    "@types/react": "^18.2.48",
+    "@types/react-dom": "^18.2.18",
+    "@vitejs/plugin-react": "^4.2.1",
+    "puppeteer-core": "^22.15.0",
+    "sharp": "^0.34.5",
+    "vite": "^5.0.11"
+  }
+}

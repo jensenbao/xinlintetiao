@@ -1,0 +1,106 @@
+{
+  "weatherIcons": {
+    "clear": "☀️",
+    "rainy": "🌧️",
+    "stormy": "⛈️",
+    "foggy": "🌫️",
+    "snowy": "❄️",
+    "heatwave": "🔥"
+  },
+  "weatherNames": {
+    "clear": "Clear",
+    "rainy": "Rainy",
+    "stormy": "Storm",
+    "foggy": "Fog",
+    "snowy": "Snow",
+    "heatwave": "Heatwave"
+  },
+  "musicIcons": {
+    "jazz_slow": "🎷",
+    "electronic": "🎛️",
+    "classical": "🎻",
+    "silence": "🤫",
+    "lo_fi": "🎧"
+  },
+  "musicNames": {
+    "jazz_slow": "Slow Jazz",
+    "electronic": "Electronic",
+    "classical": "Classical",
+    "silence": "Silence",
+    "lo_fi": "Lo-Fi"
+  },
+  "lightingIcons": {
+    "bright": "💡",
+    "dim_warm": "🕯️",
+    "neon": "🌈",
+    "candlelight": "🕯️",
+    "flickering": "✨"
+  },
+  "lightingNames": {
+    "bright": "Bright",
+    "dim_warm": "Warm Dim",
+    "neon": "Neon",
+    "candlelight": "Candlelight",
+    "flickering": "Flickering"
+  },
+  "crowdNames": {
+    "empty": "Empty",
+    "sparse": "Sparse",
+    "moderate": "Moderate",
+    "crowded": "Crowded"
+  },
+  "crowdIcons": {
+    "empty": "◻️",
+    "sparse": "👤",
+    "moderate": "👥",
+    "crowded": "👥👥"
+  },
+  "fallbackAtmospheres": [
+    {
+      "weather": "rainy",
+      "timeOfDay": "night",
+      "season": "autumn",
+      "lighting": "dim_warm",
+      "music": "jazz_slow",
+      "crowdLevel": "sparse",
+      "scent": "Wood and spirit notes",
+      "narrative": "Rain taps the window, and the bar lights feel like a thin blanket.",
+      "modifiers": {
+        "trustBonus": 0.02,
+        "emotionBias": [
+          "trust",
+          "sadness"
+        ],
+        "targetShift": {
+          "thickness": 0,
+          "sweetness": 1,
+          "strength": 0
+        },
+        "customerCountMod": 0
+      }
+    },
+    {
+      "weather": "clear",
+      "timeOfDay": "late_night",
+      "season": "summer",
+      "lighting": "neon",
+      "music": "electronic",
+      "crowdLevel": "moderate",
+      "scent": "Citrus and cold metal",
+      "narrative": "Neon reflects on the glass; the air hints that something is about to happen.",
+      "modifiers": {
+        "trustBonus": 0,
+        "emotionBias": [
+          "surprise",
+          "anticipation"
+        ],
+        "targetShift": {
+          "thickness": -1,
+          "sweetness": 0,
+          "strength": 1
+        },
+        "customerCountMod": 1
+      }
+    }
+  ]
+}

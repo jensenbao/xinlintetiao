@@ -1,0 +1,96 @@
+/* 商店页面样式 */
+.shop-page {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background: linear-gradient(135deg, #0a0a1a 0%, #1a1a3a 100%);
+  overflow: hidden;
+  animation: homePageFadeIn 0.5s ease-out;
+}
+
+.shop-page-header {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  padding: 20px 30px;
+  background: rgba(0, 0, 0, 0.3);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.shop-page-header h1 {
+  margin: 0;
+  font-size: 28px;
+  color: #ffffff;
+  flex: 1;
+}
+
+.shop-page-header .back-button {
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 8px;
+  color: rgba(255, 255, 255, 0.8);
+  padding: 8px 18px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.shop-page-header .back-button:hover {
+  background: rgba(255, 255, 255, 0.15);
+  border-color: rgba(255, 255, 255, 0.3);
+}
+
+.shop-money-display {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 18px;
+  background: rgba(255, 215, 0, 0.1);
+  border: 1px solid rgba(255, 215, 0, 0.25);
+  border-radius: 20px;
+}
+
+.money-icon {
+  font-size: 18px;
+}
+
+.money-amount {
+  font-size: 18px;
+  font-weight: 700;
+  color: #FFD700;
+  font-family: monospace;
+}
+
+.shop-page-content {
+  flex: 1;
+  padding: 30px;
+  overflow-y: auto;
+  max-width: 900px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+.shop-page-content::-webkit-scrollbar {
+  width: 8px;
+}
+
+.shop-page-content::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 4px;
+}
+
+/* 响应式 */
+@media (max-width: 768px) {
+  .shop-page-header {
+    padding: 15px 20px;
+  }
+
+  .shop-page-header h1 {
+    font-size: 22px;
+  }
+
+  .shop-page-content {
+    padding: 15px;
+  }
+}

@@ -1,0 +1,92 @@
+{
+  "helpSections": [
+    {
+      "id": "basics",
+      "title": "Basics",
+      "icon": "📖",
+      "subsections": [
+        {
+          "id": "core_loop",
+          "title": "Core Loop",
+          "content": "Each guest arrives when it is their turn for the day.\nFlow: Dialogue → Guess true emotions → Mix to target → Serve.\nSuccess or failure affects feedback and trust changes."
+        },
+        {
+          "id": "trust",
+          "title": "Trust",
+          "content": "Trust reflects how much a guest trusts you.\nRange: 0-100%, gained through better dialogue and successful drinks.\nHigher trust means guests open up more.\nAt low trust, conversations are guarded and harder to deepen."
+        },
+        {
+          "id": "emotions",
+          "title": "Emotion System",
+          "content": "Each guest has surface emotions and true emotions.\nSurface emotions are a mask; true emotions are internal.\nUse dialogue clues to pick the 3 emotions that best match their real state.\nAfter confirmation, the system generates your mixing target."
+        }
+      ]
+    },
+    {
+      "id": "mixing",
+      "title": "Mixing System",
+      "icon": "🍸",
+      "subsections": [
+        {
+          "id": "three_dimensions",
+          "title": "Three Dimensions",
+          "content": "Each drink has three dimensions:\n• Body: -3 ~ +3 (texture)\n• Sweetness: -3 ~ +3 (negative=dry/bitter, positive=sweet)\n• Strength: 0 ~ 5 (alcohol intensity)\nTargets specify the requirements for each dimension."
+        },
+        {
+          "id": "attitude",
+          "title": "Drink Attitude",
+          "content": "Every drink conveys an attitude:\n• High strength = \"face it directly\"\n• Low strength = \"rest first\"\n• High sweetness = \"offer hope\"\n• Low sweetness = \"acknowledge bitterness\"\n• High body = \"deeper reflection\"\n• Low body = \"let go of weight\"\n\"This drink says...\" previews that attitude."
+        },
+        {
+          "id": "feeling",
+          "title": "Ingredient Feeling",
+          "content": "Each ingredient has a feeling—an emotional texture.\nWhiskey: \"like the first words after a long silence\"\nCream: \"like a quiet hug\"\nIn later chapters, feeling matters more than numbers."
+        }
+      ]
+    },
+    {
+      "id": "special",
+      "title": "Special Options",
+      "icon": "✨",
+      "subsections": [
+        {
+          "id": "silence",
+          "title": "Silence \"...\"",
+          "content": "You can choose silence (\"...\") in dialogue.\nAt low trust, this may feel unsettling.\nAt high trust, it can be powerful—saying nothing, just being there."
+        },
+        {
+          "id": "plain_water",
+          "title": "Plain Water",
+          "content": "The mixing panel includes a \"Pour Plain Water\" option.\nPlain water means: you don't need alcohol right now, just someone present.\nBest for fragile moments or high-trust moments."
+        }
+      ]
+    },
+    {
+      "id": "story",
+      "title": "Story System",
+      "icon": "📜",
+      "subsections": [
+        {
+          "id": "return_customer",
+          "title": "Returning Guests",
+          "content": "Guests you serve well may return.\nReturning guests follow a full arc:\nIntroduction → Deepening → Turning Point → Resolution → Epilogue\nYour interactions are remembered and become shared memory."
+        },
+        {
+          "id": "crossroads",
+          "title": "Crossroads",
+          "content": "Returning guests may face major life choices.\nYour drinks influence their direction.\nResults are revealed on their next visit—for better or worse."
+        },
+        {
+          "id": "chapters",
+          "title": "Chapter System",
+          "content": "The game has 5 chapters triggered by story progress.\nEach chapter has different atmosphere and mixing modes.\nIn later chapters, numbers matter less and emotional resonance matters more."
+        },
+        {
+          "id": "fragments",
+          "title": "Memory Fragments",
+          "content": "You have your own story too—you just forgot it.\nAs the game progresses, memory fragments appear.\nThey sharpen over time and eventually form a complete past."
+        }
+      ]
+    }
+  ]
+}

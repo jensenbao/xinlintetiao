@@ -1,0 +1,103 @@
+/* ===== 进阶引导弹窗 ===== */
+
+.guide-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 8000;
+  background: rgba(0, 0, 0, 0.5);
+  animation: guideBackdropIn 0.3s ease;
+}
+
+@keyframes guideBackdropIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.guide-popup {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 8001;
+  max-width: 420px;
+  width: 90%;
+  padding: 28px;
+  background: linear-gradient(135deg, rgba(20, 20, 48, 0.97), rgba(12, 12, 32, 0.97));
+  border: 1px solid rgba(168, 85, 247, 0.2);
+  border-radius: 16px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5), 0 0 20px rgba(168, 85, 247, 0.05);
+  animation: guidePopupIn 0.4s ease;
+}
+
+@keyframes guidePopupIn {
+  from { opacity: 0; transform: translate(-50%, -50%) scale(0.92); }
+  to { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+}
+
+/* 回忆碎片特殊样式 */
+.guide-popup.memory {
+  border-color: rgba(147, 130, 220, 0.3);
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5), 0 0 20px rgba(147, 130, 220, 0.1);
+}
+
+.guide-popup.memory .guide-icon {
+  color: #9382dc;
+}
+
+.guide-popup.memory .guide-dismiss {
+  border-color: rgba(147, 130, 220, 0.3);
+  color: rgba(147, 130, 220, 0.8);
+}
+
+.guide-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 16px;
+}
+
+.guide-icon {
+  font-size: 20px;
+}
+
+.guide-title {
+  font-size: 17px;
+  font-weight: 600;
+  color: #fff;
+  margin: 0;
+  letter-spacing: 1px;
+}
+
+.guide-body {
+  margin-bottom: 20px;
+}
+
+.guide-body p {
+  font-size: 13.5px;
+  line-height: 1.7;
+  color: rgba(255, 255, 255, 0.75);
+  margin: 0 0 6px;
+}
+
+.guide-body p:last-child {
+  margin-bottom: 0;
+}
+
+.guide-dismiss {
+  display: block;
+  width: 100%;
+  padding: 10px;
+  background: transparent;
+  border: 1px solid rgba(168, 85, 247, 0.25);
+  border-radius: 8px;
+  color: rgba(168, 85, 247, 0.8);
+  font-size: 13px;
+  cursor: pointer;
+  transition: all 0.2s;
+  letter-spacing: 1px;
+}
+
+.guide-dismiss:hover {
+  background: rgba(168, 85, 247, 0.1);
+  border-color: rgba(168, 85, 247, 0.4);
+}

@@ -1,0 +1,291 @@
+/* 开场序幕 - 赛博朋克沉浸式样式 */
+
+.prologue-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(160deg, #050510, #0a0a25, #0d1035, #080818);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  z-index: 99999;
+  cursor: pointer;
+  user-select: none;
+  overflow: hidden;
+}
+
+/* ====== 扫描线效果 ====== */
+.prologue-scanlines {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  pointer-events: none;
+  background: repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 2px,
+    rgba(255, 255, 255, 0.015) 2px,
+    rgba(255, 255, 255, 0.015) 4px
+  );
+  z-index: 10;
+  animation: scanlineShift 10s linear infinite;
+}
+
+@keyframes scanlineShift {
+  0% { background-position: 0 0; }
+  100% { background-position: 0 100px; }
+}
+
+/* ====== 雨滴粒子 ====== */
+.prologue-rain {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.raindrop {
+  position: absolute;
+  top: -10px;
+  width: 1px;
+  height: 15px;
+  background: linear-gradient(180deg, transparent, rgba(168, 85, 247, 0.4), transparent);
+  animation: rainFall linear infinite;
+}
+
+@keyframes rainFall {
+  0% {
+    transform: translateY(-20px);
+    opacity: 0;
+  }
+  10% {
+    opacity: 1;
+  }
+  90% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(100vh);
+    opacity: 0;
+  }
+}
+
+/* ====== 霓虹光晕 ====== */
+.prologue-glow {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(120px);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.glow-1 {
+  width: 400px;
+  height: 400px;
+  background: rgba(139, 92, 246, 0.08);
+  top: 20%;
+  left: -10%;
+  animation: glowPulse1 8s ease-in-out infinite;
+}
+
+.glow-2 {
+  width: 350px;
+  height: 350px;
+  background: rgba(168, 85, 247, 0.06);
+  bottom: 10%;
+  right: -5%;
+  animation: glowPulse2 10s ease-in-out infinite 2s;
+}
+
+@keyframes glowPulse1 {
+  0%, 100% { opacity: 0.3; transform: scale(1); }
+  50% { opacity: 0.7; transform: scale(1.15); }
+}
+
+@keyframes glowPulse2 {
+  0%, 100% { opacity: 0.25; transform: scale(1); }
+  50% { opacity: 0.6; transform: scale(1.1); }
+}
+
+/* ====== 主内容 ====== */
+.prologue-content {
+  max-width: 650px;
+  padding: 0 40px;
+  text-align: center;
+  opacity: 0;
+  transform: translateY(12px);
+  transition: opacity 0.8s ease, transform 0.8s ease;
+  z-index: 20;
+  position: relative;
+}
+
+.prologue-content.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* 故障转场效果 */
+.prologue-content.glitch-out {
+  animation: glitchOut 0.5s ease-in forwards;
+}
+
+@keyframes glitchOut {
+  0% {
+    opacity: 1;
+    transform: translateY(0);
+    filter: none;
+  }
+  20% {
+    opacity: 1;
+    transform: translate(8px, 0) skewX(2deg);
+    filter: hue-rotate(90deg);
+  }
+  40% {
+    opacity: 0.8;
+    transform: translate(-5px, 2px) skewX(-1deg);
+    filter: hue-rotate(-60deg);
+    text-shadow: 3px 0 #ff0040, -3px 0 #00ffea;
+  }
+  60% {
+    opacity: 0.4;
+    transform: translate(3px, -3px) skewX(3deg);
+  }
+  100% {
+    opacity: 0;
+    transform: translate(0, -20px);
+    filter: blur(4px);
+  }
+}
+
+/* 文字样式 */
+.prologue-text {
+  font-size: 1.25rem;
+  color: rgba(255, 255, 255, 0.92);
+  line-height: 2.2;
+  letter-spacing: 0.08em;
+  margin: 0;
+  font-weight: 300;
+  text-shadow: 0 0 30px rgba(168, 85, 247, 0.15);
+}
+
+/* 打字光标 */
+.typing-cursor {
+  display: inline-block;
+  color: #A855F7;
+  animation: cursorBlink 0.6s steps(2) infinite;
+  font-weight: 400;
+  margin-left: 2px;
+  text-shadow: 0 0 8px rgba(168, 85, 247, 0.6);
+}
+
+@keyframes cursorBlink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+
+/* ====== 底部提示 ====== */
+.prologue-hint {
+  position: absolute;
+  bottom: 55px;
+  font-size: 0.8rem;
+  color: rgba(168, 85, 247, 0.3);
+  letter-spacing: 0.2em;
+  font-family: monospace;
+  opacity: 0;
+  transition: opacity 0.8s ease 0.3s;
+  z-index: 20;
+}
+
+.prologue-hint.visible {
+  opacity: 1;
+  animation: hintPulse 3s ease-in-out infinite;
+}
+
+@keyframes hintPulse {
+  0%, 100% { opacity: 0.3; }
+  50% { opacity: 0.7; }
+}
+
+/* ====== 进度条 ====== */
+.prologue-progress {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: rgba(255, 255, 255, 0.05);
+  z-index: 20;
+}
+
+.prologue-progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #A855F7, #8B5CF6);
+  transition: width 0.6s ease;
+  box-shadow: 0 0 10px rgba(168, 85, 247, 0.5);
+}
+
+/* ====== 跳过按钮 ====== */
+.prologue-skip {
+  position: absolute;
+  top: 30px;
+  right: 35px;
+  background: none;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  color: rgba(255, 255, 255, 0.3);
+  font-size: 0.7rem;
+  font-family: monospace;
+  letter-spacing: 0.15em;
+  padding: 6px 16px;
+  border-radius: 3px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  z-index: 30;
+}
+
+.prologue-skip:hover {
+  color: rgba(255, 255, 255, 0.7);
+  border-color: rgba(255, 255, 255, 0.4);
+  background: rgba(255, 255, 255, 0.05);
+}
+
+/* ====== 响应式 ====== */
+@media (max-width: 768px) {
+  .prologue-content {
+    padding: 0 25px;
+  }
+
+  .prologue-text {
+    font-size: 1.05rem;
+    line-height: 2;
+  }
+
+  .prologue-skip {
+    top: 20px;
+    right: 20px;
+  }
+
+  .glow-1 {
+    width: 250px;
+    height: 250px;
+  }
+
+  .glow-2 {
+    width: 200px;
+    height: 200px;
+  }
+
+  /* 视频模式响应式 */
+  .prologue-overlay.video-mode .prologue-hint {
+    bottom: 60px;
+    font-size: 0.75rem;
+  }
+}
+

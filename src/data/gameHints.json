@@ -1,0 +1,69 @@
+{
+  "gameHints": {
+    "reply_poor": {
+      "icon": "💡",
+      "title": "Dialogue Tip",
+      "message": "Your reply was too short or repetitive. Try a more thoughtful response. Trust decreased slightly."
+    },
+    "cocktail_failed": {
+      "icon": "🍸",
+      "title": "Mixing Tip",
+      "message": "Mix failed. Try learning more about the guest's true emotions. Tip: true emotions are often hidden beneath surface emotions."
+    },
+    "trust_low": {
+      "icon": "🔓",
+      "title": "Trust Tip",
+      "message": "At low trust, guests hide their true emotions. Keep talking sincerely to raise trust."
+    },
+    "trust_medium": {
+      "icon": "✨",
+      "title": "Good News",
+      "message": "Trust increased. The guest is starting to express themselves more naturally."
+    },
+    "trust_high": {
+      "icon": "🎉",
+      "title": "Trust Breakthrough",
+      "message": "The guest fully trusts you now. This is a good time to judge their true state more directly."
+    },
+    "emotion_hint": {
+      "icon": "🎭",
+      "title": "Emotion Reading",
+      "message": "Surface emotions are only the top layer. The key is reading the true state. Correct guesses lead to successful mixes."
+    },
+    "recipe_repeat": {
+      "icon": "⚠️",
+      "title": "Recipe Repeated",
+      "message": "This recipe has already been used. Try a different emotion combination."
+    },
+    "guess_success": {
+      "icon": "🎊",
+      "title": "Guess Successful!",
+      "message": "Great job! You correctly identified the guest's emotions and unlocked new emotion elements."
+    },
+    "guess_failed": {
+      "icon": "💔",
+      "title": "Guess Failed",
+      "message": "Not quite. Those are not the guest's true emotions. Trust dropped significantly..."
+    },
+    "emotion_changed": {
+      "icon": "💭",
+      "title": "Emotion Shift",
+      "message": "After the drink, the guest's emotions seem to have shifted subtly."
+    },
+    "emotion_improved": {
+      "icon": "🌟",
+      "title": "Emotion Improved",
+      "message": "This drink reached the guest. Their emotions are moving in a positive direction."
+    },
+    "dialogue_excellent": {
+      "icon": "💝",
+      "title": "Excellent Dialogue",
+      "message": "Your reply made the guest feel deeply understood. Trust increased greatly."
+    },
+    "dialogue_good": {
+      "icon": "💬",
+      "title": "Good Dialogue",
+      "message": "The guest felt your care. Keep the conversation sincere."
+    }
+  }
+}

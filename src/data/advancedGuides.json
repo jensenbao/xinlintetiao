@@ -1,0 +1,133 @@
+{
+  "ADVANCED_GUIDES": {
+    "attitude_first_view": {
+      "id": "attitude_first_view",
+      "trigger": {
+        "type": "cocktail_preview",
+        "condition": "first_time",
+        "day": {
+          "min": 2
+        }
+      },
+      "content": {
+        "title": "The Drink Is Speaking",
+        "body": "Every drink has an attitude.\nStronger = face the problem; sweeter = offer hope; thicker = deeper reflection.\n\"This drink says...\" tells you what your cocktail is expressing.\nGuest feedback responds to that attitude—try to let the drink say the right thing.",
+        "position": "center",
+        "dismissable": true
+      }
+    },
+    "silence_high_trust": {
+      "id": "silence_high_trust",
+      "trigger": {
+        "type": "trust_level_reached",
+        "condition": "trust >= 0.6",
+        "customerCount": {
+          "min": 3
+        }
+      },
+      "content": {
+        "title": "Sometimes Silence Is Stronger",
+        "body": "Trust between you is already high.\nTry the \"...\" option—say nothing, just stay quietly present.\nAt high trust, silence can be more effective than any words.",
+        "position": "center",
+        "dismissable": true
+      }
+    },
+    "plain_water_intro": {
+      "id": "plain_water_intro",
+      "trigger": {
+        "type": "cocktail_panel_opened",
+        "condition": "customer_seems_fragile",
+        "day": {
+          "min": 3
+        }
+      },
+      "content": {
+        "title": "You Don’t Always Need a Cocktail",
+        "body": "At the bottom of the mixing panel, there is an easy-to-miss button: \"Pour Plain Water\".\nSometimes a person does not need alcohol—just someone to be there.\nIf you feel this is not the moment for a drink, try water.",
+        "position": "center",
+        "dismissable": true,
+        "highlight": ".plain-water-btn"
+      }
+    },
+    "return_customer_first": {
+      "id": "return_customer_first",
+      "trigger": {
+        "type": "customer_entered",
+        "condition": "is_return_customer",
+        "firstTime": true
+      },
+      "content": {
+        "title": "Someone Remembered This Path",
+        "body": "This guest has been here before. You now share \"common memories\".\nThey may bring up your last conversation, or arrive with a new story.\nReturning-customer stories evolve over multiple visits—from first meeting to farewell.",
+        "position": "center",
+        "dismissable": true
+      }
+    },
+    "shared_memory_intro": {
+      "id": "shared_memory_intro",
+      "trigger": {
+        "type": "customer_entered",
+        "condition": "is_return_customer && visit_count >= 2"
+      },
+      "content": {
+        "title": "Your Shared Story",
+        "body": "A \"Shared Memory\" panel now appears above the emotion panel.\nThe system remembers every conversation, every drink, and every choice.\nThese memories will shape your relationship.",
+        "position": "center",
+        "dismissable": true
+      }
+    },
+    "crossroads_first": {
+      "id": "crossroads_first",
+      "trigger": {
+        "type": "crossroads_activated",
+        "firstTime": true
+      },
+      "content": {
+        "title": "Crossroads",
+        "body": "This guest is facing an important life decision.\nYou cannot decide for them—but your drink can influence them.\nA strong cocktail may push toward courage; a gentler one may lead to caution.\nThe outcome is not immediate—you will learn it on their next visit.",
+        "position": "center",
+        "dismissable": true
+      }
+    },
+    "event_first": {
+      "id": "event_first",
+      "trigger": {
+        "type": "event_triggered",
+        "firstTime": true
+      },
+      "content": {
+        "title": "Unexpected Events",
+        "body": "Your bar is not only about dialogue and cocktails.\nSometimes the city seeps in—street incidents, strange guests, unexpected chances.\nYour choices have real consequences. Some events unfold across multiple days.",
+        "position": "center",
+        "dismissable": true
+      }
+    },
+    "feeling_visible": {
+      "id": "feeling_visible",
+      "trigger": {
+        "type": "chapter_reached",
+        "condition": "chapter >= 3"
+      },
+      "content": {
+        "title": "Ingredient Feeling",
+        "body": "From now on, every ingredient has a \"feeling\"—an emotional texture it conveys.\nWhiskey is \"like the first sentence spoken after sitting in silence for a long time\";\ncream is \"like a quiet hug\".\nTry composing with feeling, not just numbers.",
+        "position": "center",
+        "dismissable": true
+      }
+    },
+    "fragment_first": {
+      "id": "fragment_first",
+      "trigger": {
+        "type": "fragment_triggered",
+        "firstTime": true
+      },
+      "content": {
+        "title": "Memory Fragments",
+        "body": "Every day, you listen to other people\u2019s stories... but what about yours? Who are you?\nSomething starts to surface. These are your fragments.\nOver time, they become clearer.",
+        "position": "center",
+        "dismissable": true,
+        "style": "memory"
+      }
+    }
+  }
+}

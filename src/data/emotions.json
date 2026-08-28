@@ -1,0 +1,47 @@
+{
+  "emotions": {},
+  "initialUnlockedEmotions": [],
+  "emotionCompatibility": {
+    "compatible": [],
+    "conflict": []
+  },
+  "glassTypes": {
+    "martini": {
+      "id": "martini",
+      "name": "Martini Glass",
+      "icon": "🍸",
+      "bonus": [
+        "trust",
+        "joy"
+      ],
+      "description": "Classic elegance",
+      "maxPortions": 3,
+      "feeling": "Classic and restrained"
+    },
+    "highball": {
+      "id": "highball",
+      "name": "Highball Glass",
+      "icon": "🥃",
+      "bonus": [
+        "joy",
+        "anticipation"
+      ],
+      "description": "Relaxed and easygoing",
+      "maxPortions": 3,
+      "feeling": "Light and direct"
+    },
+    "rock": {
+      "id": "rock",
+      "name": "Rocks Glass",
+      "icon": "🥛",
+      "bonus": [
+        "sadness",
+        "fear"
+      ],
+      "description": "Steady and weighty",
+      "maxPortions": 3,
+      "feeling": "Heavy and grounding"
+    }
+  },
+  "emotionTargets": {}
+}

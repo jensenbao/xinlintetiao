@@ -1,0 +1,292 @@
+/* 游戏规则弹窗样式 */
+.rules-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.8);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10000;
+  animation: overlayFadeIn 0.3s ease;
+  backdrop-filter: blur(5px);
+}
+
+@keyframes overlayFadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.rules-modal {
+  position: relative;
+  background: linear-gradient(135deg, rgba(26, 26, 58, 0.98), rgba(10, 10, 26, 0.98));
+  border: 2px solid rgba(168, 85, 247, 0.3);
+  border-radius: 20px;
+  padding: 30px;
+  max-width: 600px;
+  max-height: 80vh;
+  overflow-y: auto;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+  animation: modalSlideIn 0.4s ease;
+}
+
+@keyframes modalSlideIn {
+  from {
+    opacity: 0;
+    transform: translateY(-50px) scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.rules-modal::-webkit-scrollbar {
+  width: 8px;
+}
+
+.rules-modal::-webkit-scrollbar-thumb {
+  background: rgba(168, 85, 247, 0.3);
+  border-radius: 4px;
+}
+
+.rules-close {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  width: 36px;
+  height: 36px;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 50%;
+  color: #ffffff;
+  font-size: 24px;
+  line-height: 1;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.rules-close:hover {
+  background: rgba(231, 57, 70, 0.3);
+  border-color: #E63946;
+  transform: rotate(90deg);
+}
+
+.rules-title {
+  margin: 0 0 25px 0;
+  font-size: 28px;
+  color: #ffffff;
+  text-align: center;
+  background: linear-gradient(135deg, #A855F7, #7E22CE, #8B5CF6);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.rules-content {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.rule-section {
+  padding: 15px;
+  background: rgba(255, 255, 255, 0.03);
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.rule-section.highlight {
+  background: linear-gradient(135deg, rgba(255, 183, 3, 0.1), rgba(255, 149, 0, 0.1));
+  border-color: rgba(255, 183, 3, 0.3);
+}
+
+.rule-section.warning {
+  background: linear-gradient(135deg, rgba(231, 57, 70, 0.1), rgba(200, 50, 60, 0.1));
+  border-color: rgba(231, 57, 70, 0.3);
+}
+
+.rule-section.warning h3 {
+  color: #E63946;
+}
+
+.rule-section.warning li::before {
+  color: #E63946;
+}
+
+.rule-section.combo-guide {
+  background: linear-gradient(135deg, rgba(139, 92, 246, 0.1), rgba(100, 70, 200, 0.1));
+  border-color: rgba(139, 92, 246, 0.3);
+}
+
+.rule-section.combo-guide h3 {
+  color: #8B5CF6;
+}
+
+.rule-section.combo-guide li::before {
+  content: '';
+}
+
+.rule-section.guess-guide {
+  background: linear-gradient(135deg, rgba(139, 92, 246, 0.15), rgba(100, 70, 200, 0.15));
+  border-color: rgba(139, 92, 246, 0.4);
+}
+
+.rule-section.guess-guide h3 {
+  color: #B8A9F7;
+}
+
+.rule-section.guess-guide li::before {
+  color: #B8A9F7;
+}
+
+.rule-section.guess-guide .danger {
+  color: #E63946;
+  font-weight: bold;
+}
+
+.rule-section.recipe-guide {
+  background: linear-gradient(135deg, rgba(168, 85, 247, 0.1), rgba(126, 34, 206, 0.1));
+  border-color: rgba(168, 85, 247, 0.3);
+}
+
+.rule-section.recipe-guide h3 {
+  color: #A855F7;
+}
+
+.rule-section.recipe-guide li::before {
+  color: #A855F7;
+}
+
+.rule-section.bonus-guide {
+  background: linear-gradient(135deg, rgba(255, 183, 3, 0.15), rgba(255, 149, 0, 0.1));
+  border-color: rgba(255, 183, 3, 0.4);
+}
+
+.rule-section.bonus-guide h3 {
+  color: #FFB703;
+}
+
+.rule-section.bonus-guide li::before {
+  color: #FFB703;
+}
+
+.rule-section.combo-special {
+  background: linear-gradient(135deg, rgba(147, 112, 219, 0.15), rgba(102, 126, 234, 0.1));
+  border-color: rgba(147, 112, 219, 0.4);
+}
+
+.rule-section.combo-special h3 {
+  color: #9370DB;
+}
+
+.rule-section.combo-special li::before {
+  content: '';
+}
+
+.rule-section.endless-mode {
+  background: linear-gradient(135deg, rgba(168, 85, 247, 0.15), rgba(255, 183, 3, 0.15));
+  border-color: rgba(168, 85, 247, 0.4);
+}
+
+.rule-section.endless-mode h3 {
+  background: linear-gradient(135deg, #A855F7, #FFB703);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.rule-section.endless-mode li::before {
+  color: #A855F7;
+}
+
+.rule-section h3 {
+  margin: 0 0 12px 0;
+  font-size: 18px;
+  color: #A855F7;
+}
+
+.rule-section p {
+  margin: 0;
+  font-size: 14px;
+  color: rgba(255, 255, 255, 0.8);
+  line-height: 1.6;
+}
+
+.rule-section ul {
+  margin: 0;
+  padding-left: 20px;
+  list-style: none;
+}
+
+.rule-section li {
+  font-size: 14px;
+  color: rgba(255, 255, 255, 0.7);
+  line-height: 1.8;
+  margin-bottom: 8px;
+  position: relative;
+}
+
+.rule-section li::before {
+  content: '•';
+  position: absolute;
+  left: -15px;
+  color: #A855F7;
+  font-weight: bold;
+}
+
+.rule-section li:last-child {
+  margin-bottom: 0;
+}
+
+.rule-section strong {
+  color: #ffffff;
+  font-weight: 600;
+}
+
+.rules-start-button {
+  width: 100%;
+  padding: 15px;
+  margin-top: 25px;
+  background: linear-gradient(135deg, #A855F7, #7E22CE);
+  border: none;
+  border-radius: 12px;
+  color: #0a0a1a;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.rules-start-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(168, 85, 247, 0.4);
+}
+
+/* 响应式 */
+@media (max-width: 768px) {
+  .rules-modal {
+    max-width: 90%;
+    padding: 20px;
+    max-height: 90vh;
+  }
+  
+  .rules-title {
+    font-size: 24px;
+  }
+  
+  .rule-section h3 {
+    font-size: 16px;
+  }
+  
+  .rule-section p,
+  .rule-section li {
+    font-size: 13px;
+  }
+}

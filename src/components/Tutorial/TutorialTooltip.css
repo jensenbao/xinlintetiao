@@ -1,0 +1,104 @@
+/* 教学引导气泡样式 */
+
+.tutorial-tooltip {
+  position: fixed;
+  z-index: 10010;
+  max-width: 380px;
+  padding: 16px 20px;
+  background: linear-gradient(135deg, rgba(30, 25, 60, 0.97), rgba(20, 15, 45, 0.97));
+  border: 1.5px solid rgba(168, 85, 247, 0.5);
+  border-radius: 14px;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.5), 0 0 20px rgba(168, 85, 247, 0.15);
+  animation: tooltipFadeIn 0.4s ease-out;
+}
+
+@keyframes tooltipFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* 位置 */
+.tutorial-tooltip.tooltip-bottom {
+  bottom: 100px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.tutorial-tooltip.tooltip-top {
+  top: 100px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.tutorial-tooltip.tooltip-center {
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.tutorial-tooltip.tooltip-left {
+  top: 50%;
+  left: 30px;
+  transform: translateY(-50%);
+}
+
+.tutorial-tooltip.tooltip-right {
+  top: 50%;
+  right: 30px;
+  transform: translateY(-50%);
+}
+
+/* 内容 */
+.tooltip-content {
+  margin-bottom: 10px;
+}
+
+.tooltip-line {
+  margin: 0 0 4px 0;
+  font-size: 14px;
+  color: rgba(255, 255, 255, 0.92);
+  line-height: 1.7;
+}
+
+.tooltip-line:last-child {
+  margin-bottom: 0;
+}
+
+/* 关闭按钮 */
+.tooltip-dismiss {
+  display: block;
+  width: 100%;
+  padding: 8px 16px;
+  margin-top: 12px;
+  background: rgba(168, 85, 247, 0.15);
+  border: 1px solid rgba(168, 85, 247, 0.4);
+  border-radius: 8px;
+  color: #A855F7;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.tooltip-dismiss:hover {
+  background: rgba(168, 85, 247, 0.25);
+  transform: translateY(-1px);
+}
+
+/* 响应式 */
+@media (max-width: 768px) {
+  .tutorial-tooltip {
+    max-width: 320px;
+    padding: 14px 16px;
+  }
+
+  .tooltip-line {
+    font-size: 13px;
+  }
+}

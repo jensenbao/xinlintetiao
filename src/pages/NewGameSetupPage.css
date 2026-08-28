@@ -1,0 +1,177 @@
+.newgame-setup-page {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  background: linear-gradient(160deg, #050510 0%, #0a0a25 40%, #0d1035 70%, #080818 100%);
+}
+
+.newgame-setup-panel {
+  width: min(760px, 100%);
+  border-radius: 18px;
+  padding: 22px;
+  background: rgba(9, 14, 24, 0.82);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  box-shadow: 0 20px 48px rgba(0, 0, 0, 0.35);
+}
+
+.newgame-setup-title {
+  margin: 0;
+  color: rgba(255, 255, 255, 0.96);
+  font-size: 28px;
+}
+
+.newgame-setup-desc {
+  margin: 8px 0 18px;
+  color: rgba(255, 255, 255, 0.65);
+  font-size: 14px;
+}
+
+.newgame-role-panel {
+  padding: 14px;
+  border-radius: 14px;
+  background: rgba(6, 12, 24, 0.5);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+.newgame-role-title {
+  color: rgba(255, 255, 255, 0.92);
+  font-weight: 700;
+  font-size: 15px;
+  text-align: left;
+}
+
+.newgame-role-hint {
+  margin: 8px 0 10px;
+  color: rgba(255, 255, 255, 0.6);
+  font-size: 12px;
+  text-align: left;
+}
+
+.newgame-mode-list {
+  display: grid;
+  gap: 10px;
+}
+
+.newgame-mode-option {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 12px;
+  min-height: 72px;
+  padding: 12px 14px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.045);
+  cursor: pointer;
+  transition: border-color 160ms ease, background 160ms ease, transform 160ms ease;
+}
+
+.newgame-mode-option:hover:not(.is-disabled) {
+  transform: translateY(-1px);
+  border-color: rgba(93, 211, 255, 0.38);
+}
+
+.newgame-mode-option.is-selected {
+  border-color: rgba(113, 205, 255, 0.62);
+  background: linear-gradient(135deg, rgba(168, 85, 247, 0.14), rgba(47, 212, 255, 0.1));
+  box-shadow: 0 0 0 1px rgba(168, 85, 247, 0.12);
+}
+
+.newgame-mode-option.is-disabled {
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+
+.newgame-mode-option input {
+  width: 17px;
+  height: 17px;
+  margin: 0;
+  accent-color: #5dcfff;
+}
+
+.newgame-mode-copy {
+  display: flex;
+  min-width: 0;
+  flex-direction: column;
+  gap: 5px;
+  text-align: left;
+}
+
+.newgame-mode-title {
+  color: rgba(255, 255, 255, 0.94);
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.newgame-mode-description {
+  color: rgba(255, 255, 255, 0.58);
+  font-size: 11px;
+  line-height: 1.5;
+}
+
+.newgame-mode-badge {
+  padding: 5px 8px;
+  border: 1px solid rgba(94, 213, 255, 0.34);
+  border-radius: 999px;
+  color: rgba(168, 229, 255, 0.94);
+  background: rgba(47, 212, 255, 0.08);
+  font-size: 9px;
+  white-space: nowrap;
+}
+
+.newgame-mode-badge--optional {
+  border-color: rgba(183, 130, 255, 0.34);
+  color: rgba(219, 188, 255, 0.92);
+  background: rgba(168, 85, 247, 0.08);
+}
+
+.newgame-actions {
+  margin-top: 16px;
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+}
+
+.newgame-back-btn,
+.newgame-start-btn {
+  border: none;
+  border-radius: 10px;
+  padding: 10px 16px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.newgame-back-btn {
+  color: rgba(255, 255, 255, 0.9);
+  background: rgba(255, 255, 255, 0.12);
+}
+
+.newgame-start-btn {
+  color: #041622;
+  background: linear-gradient(135deg, #A855F7, #2fd4ff);
+}
+
+@media (max-width: 768px) {
+  .newgame-setup-panel {
+    padding: 14px;
+  }
+
+  .newgame-mode-option {
+    grid-template-columns: auto minmax(0, 1fr);
+  }
+
+  .newgame-mode-badge {
+    display: none;
+  }
+
+  .newgame-actions {
+    flex-direction: column;
+  }
+
+  .newgame-back-btn,
+  .newgame-start-btn {
+    width: 100%;
+  }
+}

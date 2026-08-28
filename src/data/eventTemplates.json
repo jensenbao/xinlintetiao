@@ -1,0 +1,41 @@
+﻿{
+  "eventTriggerConfig": {
+    "dayScaling": {
+      "day1to3": { "types": ["narrative", "customer"] },
+      "day4to7": { "types": ["narrative", "customer", "atmosphere", "challenge"] },
+      "day8plus": { "types": ["narrative", "customer", "atmosphere", "challenge", "reward"] }
+    }
+  },
+  "eventTypeIcons": {
+    "atmosphere": "🌍",
+    "customer": "🧍",
+    "challenge": "⚔️",
+    "reward": "🎁",
+    "narrative": "📖"
+  },
+  "eventTypeNames": {
+    "atmosphere": "Atmosphere",
+    "customer": "Guest",
+    "challenge": "Challenge",
+    "reward": "Reward",
+    "narrative": "Narrative"
+  },
+  "fallbackEvents": {
+    "atmosphere": [
+      { "type": "atmosphere", "narrative": "Wind grows louder outside, and the glasses on the bar tremble slightly.", "effects": { "trustModifier": 0.01, "emotionShift": "surprise" }, "duration": "current_customer", "choices": [{ "text": "🫖 Keep it steady", "effect": { "trustModifier": 0.02 } }, { "text": "⚡ Raise the intensity", "effect": { "trustModifier": 0.04 } }] }
+    ],
+    "customer": [
+      { "type": "customer", "narrative": "A regular pauses at the door for a few seconds before stepping in.", "effects": { "trustModifier": 0.01, "emotionShift": "trust" }, "duration": "current_customer", "choices": [{ "text": "🙂 Start with small talk", "effect": { "trustModifier": 0.02 } }, { "text": "🎯 Go straight to the point", "effect": { "trustModifier": 0.04 } }] }
+    ],
+    "challenge": [
+      { "type": "challenge", "narrative": "Only one portion remains of your most-used base ingredient.", "effects": { "trustModifier": 0.0, "emotionShift": "fear" }, "duration": "rest_of_day", "choices": [{ "text": "🧮 Play it safe", "effect": { "trustModifier": 0.02 } }, { "text": "🧪 Try a bold substitute", "effect": { "trustModifier": 0.05 } }] }
+    ],
+    "reward": [
+      { "type": "reward", "narrative": "Someone leaves a thank-you note under the coaster.", "effects": { "trustModifier": 0.03, "emotionShift": "joy" }, "duration": "immediate", "choices": [{ "text": "🙏 Accept it", "effect": { "trustModifier": 0.02 } }, { "text": "🥂 Offer them a sip", "effect": { "trustModifier": 0.05 } }] }
+    ],
+    "narrative": [
+      { "type": "narrative", "narrative": "An old vinyl skips for a beat, and the room holds its breath.", "effects": { "trustModifier": 0.01, "emotionShift": "sadness" }, "duration": "immediate", "choices": [{ "text": "🎵 Gently guide the needle", "effect": { "trustModifier": 0.02 } }, { "text": "🔊 Switch tracks immediately", "effect": { "trustModifier": 0.04 } }] }
+    ]
+  },
+  "eventChains": {}
+}

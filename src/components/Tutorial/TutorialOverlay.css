@@ -1,0 +1,42 @@
+/* 教学遮罩层样式 */
+
+.tutorial-mask {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(10, 10, 26, 0.75);
+  backdrop-filter: blur(3px);
+  z-index: 100;
+  border-radius: 16px;
+  pointer-events: all;
+  transition: opacity 0.5s ease;
+}
+
+/* 情绪面板遮罩 - 覆盖右上区域 */
+.tutorial-mask-emotion {
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 50%;
+}
+
+/* 调酒面板遮罩 - 覆盖右下区域 */
+.tutorial-mask-bartender {
+  top: 50%;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
+
+/* 遮罩标签 */
+.mask-label {
+  padding: 12px 24px;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 12px;
+  color: rgba(255, 255, 255, 0.5);
+  font-size: 14px;
+  font-weight: 500;
+  letter-spacing: 0.05em;
+}

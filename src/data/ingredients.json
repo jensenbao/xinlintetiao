@@ -1,0 +1,232 @@
+{
+  "baseSpirits": {
+    "vodka": {
+      "id": "vodka",
+      "name": "Vodka",
+      "icon": "🍶",
+      "category": "spirit",
+      "thickness": 0,
+      "sweetness": -1,
+      "strength": 2,
+      "description": "Clean spirit, neutral profile",
+      "feeling": "Like a plain, unedited truth"
+    },
+    "rum": {
+      "id": "rum",
+      "name": "Rum",
+      "icon": "🥃",
+      "category": "spirit",
+      "thickness": 1,
+      "sweetness": 1,
+      "strength": 2,
+      "description": "Sugarcane spirit, mildly sweet and rich",
+      "feeling": "Like faded sweetness in an old photo"
+    },
+    "whiskey": {
+      "id": "whiskey",
+      "name": "Whiskey",
+      "icon": "🥃",
+      "category": "spirit",
+      "thickness": 2,
+      "sweetness": 0,
+      "strength": 3,
+      "description": "Oak-aged, deep and full-bodied",
+      "feeling": "Like the first words after a long silence"
+    },
+    "tequila": {
+      "id": "tequila",
+      "name": "Tequila",
+      "icon": "🌵",
+      "category": "spirit",
+      "thickness": 1,
+      "sweetness": -1,
+      "strength": 3,
+      "description": "Mexican spirit, spicy and assertive",
+      "feeling": "Like someone impatiently pushing you to decide"
+    }
+  },
+  "juices": {
+    "juice_orange": {
+      "id": "juice_orange",
+      "name": "Orange Juice",
+      "icon": "🍊",
+      "category": "juice",
+      "thickness": 1,
+      "sweetness": 2,
+      "strength": 0,
+      "description": "Fresh orange, sweet and bright",
+      "feeling": "Like someone opening the curtains for you"
+    },
+    "juice_lemon": {
+      "id": "juice_lemon",
+      "name": "Lemon Juice",
+      "icon": "🍋",
+      "category": "juice",
+      "thickness": 0,
+      "sweetness": -2,
+      "strength": 0,
+      "description": "Sharp lemon, crisp and refreshing",
+      "feeling": "Like a splash of cold water—harsh but clarifying"
+    },
+    "juice_cranberry": {
+      "id": "juice_cranberry",
+      "name": "Cranberry Juice",
+      "icon": "🫐",
+      "category": "juice",
+      "thickness": 1,
+      "sweetness": -1,
+      "strength": 0,
+      "description": "Tart berry profile with clean finish",
+      "feeling": "Like a message written and deleted"
+    },
+    "juice_mango": {
+      "id": "juice_mango",
+      "name": "Mango Juice",
+      "icon": "🥭",
+      "category": "juice",
+      "thickness": 2,
+      "sweetness": 3,
+      "strength": 0,
+      "description": "Tropical mango, rich and sweet",
+      "feeling": "Like sinking into a dream you do not want to leave"
+    }
+  },
+  "mixers": {
+    "soda": {
+      "id": "soda",
+      "name": "Soda Water",
+      "icon": "🫧",
+      "category": "mixer",
+      "thickness": -1,
+      "sweetness": 0,
+      "strength": -1,
+      "description": "Sparkling and light, reduces intensity",
+      "feeling": "Like delivering a heavy truth lightly"
+    },
+    "tonic": {
+      "id": "tonic",
+      "name": "Tonic Water",
+      "icon": "💧",
+      "category": "mixer",
+      "thickness": 0,
+      "sweetness": -1,
+      "strength": -1,
+      "description": "Quinine bitterness, classic pairing",
+      "feeling": "Like adding one honest line after a joke"
+    },
+    "syrup": {
+      "id": "syrup",
+      "name": "Syrup",
+      "icon": "🍯",
+      "category": "mixer",
+      "thickness": 1,
+      "sweetness": 3,
+      "strength": 0,
+      "description": "Pure sweet syrup, boosts sweetness",
+      "feeling": "Like deliberately framing bad news as good"
+    },
+    "cream": {
+      "id": "cream",
+      "name": "Cream",
+      "icon": "🥛",
+      "category": "mixer",
+      "thickness": 3,
+      "sweetness": 1,
+      "strength": 0,
+      "description": "Silky cream, extra body",
+      "feeling": "Like a quiet hug"
+    },
+    "coffee": {
+      "id": "coffee",
+      "name": "Espresso",
+      "icon": "☕",
+      "category": "mixer",
+      "thickness": 1,
+      "sweetness": -2,
+      "strength": 0,
+      "description": "Bitter aromatic coffee, awakening",
+      "feeling": "Like a light still on at 3 a.m."
+    }
+  },
+  "liqueurs": {
+    "triple_sec": {
+      "id": "triple_sec",
+      "name": "Triple Sec",
+      "icon": "🍊",
+      "category": "liqueur",
+      "thickness": 1,
+      "sweetness": 2,
+      "strength": 1,
+      "description": "Orange liqueur, fragrant and sweet",
+      "feeling": "Like finding a trace of sweetness in bitterness"
+    },
+    "kahlua": {
+      "id": "kahlua",
+      "name": "Kahlua",
+      "icon": "☕",
+      "category": "liqueur",
+      "thickness": 2,
+      "sweetness": 2,
+      "strength": 1,
+      "description": "Coffee liqueur, bittersweet",
+      "feeling": "Like finally being allowed to cry after a long night"
+    },
+    "baileys": {
+      "id": "baileys",
+      "name": "Baileys",
+      "icon": "🍫",
+      "category": "liqueur",
+      "thickness": 3,
+      "sweetness": 3,
+      "strength": 1,
+      "description": "Cream whiskey liqueur, smooth and sweet",
+      "feeling": "Like being wrapped in a blanket and letting go"
+    },
+    "sambuca": {
+      "id": "sambuca",
+      "name": "Sambuca",
+      "icon": "⭐",
+      "category": "liqueur",
+      "thickness": 0,
+      "sweetness": 1,
+      "strength": 2,
+      "description": "Anise-flavored liqueur, rich spice",
+      "feeling": "Like a stubbornness both feared and loved"
+    }
+  },
+  "ingredientCategories": [
+    {
+      "id": "spirit",
+      "name": "Spirits",
+      "icon": "🥃",
+      "description": "Spirit base"
+    },
+    {
+      "id": "juice",
+      "name": "Juices",
+      "icon": "🍹",
+      "description": "Fresh juices"
+    },
+    {
+      "id": "mixer",
+      "name": "Mixers",
+      "icon": "🫧",
+      "description": "Balancing modifiers"
+    },
+    {
+      "id": "liqueur",
+      "name": "Liqueurs",
+      "icon": "🍸",
+      "description": "Sweet liqueurs"
+    }
+  ],
+  "initialUnlockedIngredients": [
+    "vodka",
+    "juice_orange",
+    "juice_lemon",
+    "soda",
+    "syrup"
+  ],
+  "maxPortionsPerIngredient": 5,
+  "maxTotalPortions": 10
+}

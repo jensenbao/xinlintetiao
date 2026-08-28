@@ -1,0 +1,342 @@
+/* 游戏页面动态氛围层 — 纯装饰，不影响交互 */
+.game-atmosphere-layer {
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  pointer-events: none;
+  z-index: 0;
+  overflow: hidden;
+}
+
+/* ====== 扫描线 ====== */
+.game-scanlines {
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 3px,
+    rgba(255, 255, 255, 0.006) 3px,
+    rgba(255, 255, 255, 0.006) 6px
+  );
+  animation: gameScanDrift 15s linear infinite;
+}
+
+@keyframes gameScanDrift {
+  0% { background-position: 0 0; }
+  100% { background-position: 0 200px; }
+}
+
+/* ====== 霓虹竖线 ====== */
+.game-neon-lines {
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+}
+
+.game-neon-line {
+  position: absolute;
+  width: 1px;
+  height: 100%;
+  background: linear-gradient(180deg, transparent 0%, var(--neon-color, #A855F7) 50%, transparent 100%);
+  animation: gameNeonMove linear infinite;
+  opacity: 0.08;
+}
+
+.game-neon-line:nth-child(1) { left: 10%; animation-duration: 10s; animation-delay: 0s; }
+.game-neon-line:nth-child(2) { left: 55%; animation-duration: 8s; animation-delay: 4s; opacity: 0.06; }
+.game-neon-line:nth-child(3) { left: 90%; animation-duration: 12s; animation-delay: 7s; opacity: 0.05; }
+
+@keyframes gameNeonMove {
+  0% { transform: translateY(-100%); }
+  100% { transform: translateY(100vh); }
+}
+
+/* ====== 霓虹光晕 ====== */
+.game-glow-orbs {
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+}
+
+.game-glow {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(120px);
+}
+
+.game-glow-1 {
+  width: 350px; height: 350px;
+  background: rgba(139, 92, 246, 0.04);
+  top: 15%; left: -5%;
+  animation: gameGlowBreath 10s ease-in-out infinite;
+}
+
+.game-glow-2 {
+  width: 300px; height: 300px;
+  background: rgba(168, 85, 247, 0.03);
+  bottom: 10%; right: -3%;
+  animation: gameGlowBreath 12s ease-in-out infinite 3s;
+}
+
+@keyframes gameGlowBreath {
+  0%, 100% { opacity: 0.3; transform: scale(1); }
+  50% { opacity: 0.6; transform: scale(1.1); }
+}
+
+/* ====== 天气：雨滴 ====== */
+.game-rain {
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+}
+
+.game-raindrop {
+  position: absolute;
+  top: -15px;
+  width: 1px;
+  height: 18px;
+  background: linear-gradient(180deg, transparent, rgba(100, 140, 255, 0.25), transparent);
+  animation: gameRainFall linear infinite;
+}
+
+.game-rain.heavy .game-raindrop {
+  height: 22px;
+  background: linear-gradient(180deg, transparent, rgba(100, 140, 255, 0.35), transparent);
+}
+
+@keyframes gameRainFall {
+  0% { transform: translateY(-20px); }
+  100% { transform: translateY(100vh); }
+}
+
+/* ====== 天气：雪花 ====== */
+.game-snow {
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+}
+
+.game-snowflake {
+  position: absolute;
+  top: -10px;
+  background: rgba(255, 255, 255, 0.4);
+  border-radius: 50%;
+  animation: gameSnowFall linear infinite;
+}
+
+@keyframes gameSnowFall {
+  0% { transform: translateY(-10px) translateX(0); }
+  25% { transform: translateY(25vh) translateX(12px); }
+  50% { transform: translateY(50vh) translateX(-8px); }
+  75% { transform: translateY(75vh) translateX(6px); }
+  100% { transform: translateY(100vh) translateX(-4px); }
+}
+
+/* ====== 天气：雾 ====== */
+.game-fog {
+  position: absolute;
+  top: 0; left: -20%; right: -20%; bottom: 0;
+  background:
+    radial-gradient(ellipse at 25% 50%, rgba(255, 255, 255, 0.03) 0%, transparent 60%),
+    radial-gradient(ellipse at 75% 60%, rgba(255, 255, 255, 0.02) 0%, transparent 50%);
+  animation: gameFogDrift 20s ease-in-out infinite;
+}
+
+@keyframes gameFogDrift {
+  0%, 100% { transform: translateX(0); }
+  50% { transform: translateX(4%); }
+}
+
+/* ====== 天气：闪电 (暴风雨) ====== */
+.game-lightning {
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  animation: gameLightningFlash 8s ease infinite;
+  pointer-events: none;
+}
+
+@keyframes gameLightningFlash {
+  0%, 95%, 100% { background: transparent; }
+  96% { background: rgba(180, 200, 255, 0.06); }
+  97% { background: transparent; }
+  98% { background: rgba(180, 200, 255, 0.04); }
+}
+
+/* ====== 天气：热浪 ====== */
+.game-heatwave {
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: linear-gradient(180deg, rgba(255, 100, 50, 0.02) 0%, transparent 50%);
+  animation: gameHeatShimmer 4s ease-in-out infinite;
+}
+
+@keyframes gameHeatShimmer {
+  0%, 100% { opacity: 0.3; }
+  50% { opacity: 0.8; }
+}
+
+/* ====== 灯光变体 ====== */
+.lighting-warm { --neon-color: #A855F7; }
+.lighting-cold { --neon-color: #6488FF; }
+.lighting-dim .game-glow { opacity: 0.15; }
+.lighting-neon .game-neon-line { opacity: 0.12; }
+.lighting-candlelight { --neon-color: #FFB347; }
+.lighting-candlelight .game-glow-1 {
+  background: rgba(255, 179, 71, 0.04);
+}
+
+/* ====== 城市剪影层 - 窗外的城市 ====== */
+.city-silhouette-layer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+/* 远景城市轮廓 - 使用 CSS 绘制简化剪影 */
+.city-skyline {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 25%;
+  background: 
+    /* 渐变遮罩 */
+    linear-gradient(to top, rgba(10, 10, 30, 0.6) 0%, transparent 100%),
+    /* 简化的楼群剪影 - 用多个 linear-gradient 模拟 */
+    linear-gradient(to top, rgba(20, 20, 40, 0.4) 0%, rgba(20, 20, 40, 0.4) 60%, transparent 60%),
+    linear-gradient(to top, rgba(15, 15, 35, 0.3) 0%, rgba(15, 15, 35, 0.3) 45%, transparent 45%),
+    linear-gradient(to top, rgba(25, 25, 45, 0.35) 0%, rgba(25, 25, 45, 0.35) 70%, transparent 70%);
+  background-size: 100% 100%, 80px 100%, 120px 100%, 60px 100%;
+  background-position: 0 0, 10% 0, 30% 0, 55% 0;
+  background-repeat: no-repeat, repeat-x, repeat-x, repeat-x;
+  opacity: 0.15;
+}
+
+/* 偶尔出现的窗户灯光 */
+.city-skyline::after {
+  content: '';
+  position: absolute;
+  bottom: 20%;
+  left: 15%;
+  width: 2px;
+  height: 3px;
+  background: rgba(255, 200, 100, 0.6);
+  box-shadow:
+    40px 10px 0 rgba(255, 200, 100, 0.4),
+    85px -5px 0 rgba(100, 200, 255, 0.5),
+    130px 15px 0 rgba(255, 100, 150, 0.4),
+    200px 5px 0 rgba(255, 200, 100, 0.3),
+    280px -8px 0 rgba(100, 255, 200, 0.3),
+    350px 12px 0 rgba(255, 150, 100, 0.4);
+  animation: windowFlicker 8s ease-in-out infinite;
+}
+
+@keyframes windowFlicker {
+  0%, 100% { opacity: 0.6; }
+  10% { opacity: 0.8; }
+  15% { opacity: 0.3; }
+  20% { opacity: 0.7; }
+  50% { opacity: 0.5; }
+  80% { opacity: 0.9; }
+  85% { opacity: 0.4; }
+}
+
+/* 飞行器尾灯 */
+.aircraft-light {
+  position: absolute;
+  left: -20px;
+  width: 6px;
+  height: 3px;
+  background: radial-gradient(ellipse, #ff4466 0%, transparent 70%);
+  filter: blur(1px);
+  animation: flyAcross 25s linear infinite;
+  opacity: 0;
+}
+
+.aircraft-light::after {
+  content: '';
+  position: absolute;
+  right: 6px;
+  top: 0;
+  width: 4px;
+  height: 3px;
+  background: radial-gradient(ellipse, #44ff66 0%, transparent 70%);
+}
+
+@keyframes flyAcross {
+  0% {
+    transform: translateX(-20px);
+    opacity: 0;
+  }
+  5% {
+    opacity: 0.5;
+  }
+  95% {
+    opacity: 0.5;
+  }
+  100% {
+    transform: translateX(calc(100vw + 40px));
+    opacity: 0;
+  }
+}
+
+/* 远处霓虹广告的微光 */
+.distant-neon-glow {
+  position: absolute;
+  top: 8%;
+  right: 5%;
+  width: 100px;
+  height: 60px;
+  background: radial-gradient(
+    ellipse,
+    rgba(255, 50, 100, 0.025) 0%,
+    transparent 70%
+  );
+  animation: neonPulse 6s ease-in-out infinite;
+}
+
+.distant-neon-glow::before {
+  content: '';
+  position: absolute;
+  top: 40px;
+  left: -100px;
+  width: 80px;
+  height: 50px;
+  background: radial-gradient(
+    ellipse,
+    rgba(50, 150, 255, 0.02) 0%,
+    transparent 70%
+  );
+  animation: neonPulse 8s ease-in-out infinite 2s;
+}
+
+.distant-neon-glow::after {
+  content: '';
+  position: absolute;
+  top: -20px;
+  left: -180px;
+  width: 60px;
+  height: 40px;
+  background: radial-gradient(
+    ellipse,
+    rgba(100, 255, 150, 0.015) 0%,
+    transparent 70%
+  );
+  animation: neonPulse 10s ease-in-out infinite 4s;
+}
+
+@keyframes neonPulse {
+  0%, 100% { opacity: 0.4; transform: scale(1); }
+  50% { opacity: 0.9; transform: scale(1.1); }
+}
+
+/* ====== 无障碍 ====== */
+@media (prefers-reduced-motion: reduce) {
+  .game-atmosphere-layer * {
+    animation: none !important;
+  }
+  .game-fog, .game-rain, .game-snow, .game-lightning, .game-heatwave,
+  .city-silhouette-layer, .aircraft-light, .distant-neon-glow {
+    display: none;
+  }
+}

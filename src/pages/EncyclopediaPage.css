@@ -1,0 +1,726 @@
+/* 图鉴页样式 */
+.encyclopedia-page {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background: linear-gradient(135deg, #0a0a1a 0%, #1a1a3a 100%);
+  overflow: hidden;
+}
+
+.encyclopedia-header {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  padding: 20px 30px;
+  background: rgba(0, 0, 0, 0.3);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.encyclopedia-header h1 {
+  margin: 0;
+  font-size: 28px;
+  color: #ffffff;
+}
+
+.encyclopedia-tabs {
+  display: flex;
+  gap: 10px;
+  padding: 20px 30px;
+  background: rgba(255, 255, 255, 0.03);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  overflow-x: auto;
+}
+
+.encyclopedia-tabs button {
+  padding: 12px 24px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 10px;
+  color: rgba(255, 255, 255, 0.6);
+  font-size: 14px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+}
+
+.encyclopedia-tabs button:hover {
+  background: rgba(255, 255, 255, 0.1);
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.encyclopedia-tabs button.active {
+  background: linear-gradient(135deg, rgba(139, 92, 246, 0.3), rgba(75, 123, 236, 0.3));
+  border-color: rgba(139, 92, 246, 0.6);
+  color: #B8A9F7;
+}
+
+.encyclopedia-content {
+  flex: 1;
+  padding: 30px;
+  overflow-y: auto;
+}
+
+.encyclopedia-content::-webkit-scrollbar {
+  width: 8px;
+}
+
+.encyclopedia-content::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 4px;
+}
+
+/* 图鉴网格 */
+.encyclopedia-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  gap: 20px;
+}
+
+.encyclopedia-grid.large {
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+}
+
+/* 图鉴卡片 */
+.encyclopedia-card {
+  position: relative;
+  padding: 20px;
+  background: linear-gradient(135deg, rgba(26, 26, 58, 0.8), rgba(10, 10, 26, 0.8));
+  border: 2px solid rgba(255, 255, 255, 0.1);
+  border-radius: 16px;
+  text-align: center;
+  transition: all 0.3s ease;
+  min-height: 180px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+/* 已解锁卡片 — 微光边框 + 悬浮效果 */
+.encyclopedia-card.unlocked {
+  border-color: rgba(168, 85, 247, 0.15);
+  box-shadow: 0 0 0 1px rgba(168, 85, 247, 0.05);
+  transition: all 0.3s ease;
+}
+
+.encyclopedia-card.unlocked:hover {
+  transform: translateY(-5px);
+  border-color: rgba(168, 85, 247, 0.4);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3), 0 0 15px rgba(168, 85, 247, 0.1);
+}
+
+/* 未解锁卡片 — 灰度 + 模糊 + 虚线边框 */
+.encyclopedia-card.locked {
+  opacity: 0.65;
+  filter: grayscale(0.7) brightness(0.7);
+  border-style: dashed;
+  border-color: rgba(255, 255, 255, 0.15);
+  position: relative;
+  overflow: hidden;
+}
+
+.encyclopedia-card.locked::after {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(10, 10, 26, 0.4);
+  backdrop-filter: blur(2px);
+  border-radius: 14px;
+  pointer-events: none;
+}
+
+.encyclopedia-card.locked:hover {
+  opacity: 0.8;
+  filter: grayscale(0.5) brightness(0.8);
+  border-color: rgba(255, 255, 255, 0.25);
+}
+
+.encyclopedia-card.large {
+  min-height: 220px;
+}
+
+.encyclopedia-card.xlarge {
+  min-height: 300px;
+}
+
+.lock-badge {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  font-size: 24px;
+  z-index: 2;
+  filter: drop-shadow(0 0 4px rgba(255, 255, 255, 0.3));
+  animation: lockBreathe 3s ease-in-out infinite;
+}
+
+@keyframes lockBreathe {
+  0%, 100% { opacity: 0.6; transform: scale(1); }
+  50% { opacity: 1; transform: scale(1.1); }
+}
+
+.card-icon {
+  font-size: 48px;
+  margin-bottom: 15px;
+}
+
+.card-icon.large {
+  font-size: 64px;
+}
+
+.card-icon.xlarge {
+  font-size: 80px;
+}
+
+.card-title {
+  font-size: 16px;
+  color: #ffffff;
+  margin: 0 0 10px 0;
+  position: relative;
+  z-index: 1;
+}
+
+/* 锁定状态下的 ??? 使用打码风格 */
+.encyclopedia-card.locked .card-title {
+  color: rgba(255, 255, 255, 0.35);
+  letter-spacing: 0.2em;
+  font-style: italic;
+}
+
+.card-color {
+  width: 80%;
+  height: 8px;
+  border-radius: 4px;
+  margin-top: 10px;
+}
+
+.card-description {
+  font-size: 13px;
+  color: rgba(255, 255, 255, 0.6);
+  margin: 10px 0;
+}
+
+.card-bonus {
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.7);
+  margin-top: 10px;
+  padding: 8px;
+  background: rgba(255, 183, 3, 0.1);
+  border-radius: 8px;
+}
+
+/* AI顾客卡片 */
+.customer-personality {
+  display: flex;
+  gap: 8px;
+  margin: 15px 0;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.personality-badge {
+  padding: 5px 12px;
+  background: rgba(139, 92, 246, 0.2);
+  border: 1px solid rgba(139, 92, 246, 0.4);
+  border-radius: 12px;
+  font-size: 12px;
+  color: #B8A9F7;
+}
+
+.customer-style {
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.5);
+  margin: 10px 0;
+}
+
+.customer-emotions {
+  margin-top: 15px;
+  padding: 12px;
+  background: rgba(0, 0, 0, 0.3);
+  border-radius: 8px;
+  width: 100%;
+}
+
+.emotion-row {
+  font-size: 13px;
+  color: rgba(255, 255, 255, 0.7);
+  margin: 5px 0;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* 配方历史 */
+.recipes-container {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+
+.recipe-group {
+  background: rgba(255, 255, 255, 0.03);
+  border-radius: 16px;
+  padding: 20px;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.recipe-group-title {
+  margin: 0 0 20px 0;
+  font-size: 20px;
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.recipe-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 15px;
+}
+
+.recipe-card {
+  padding: 15px;
+  background: rgba(0, 0, 0, 0.3);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  transition: all 0.2s ease;
+}
+
+.recipe-card:hover {
+  border-color: rgba(255, 255, 255, 0.2);
+  transform: translateY(-2px);
+}
+
+.recipe-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+}
+
+.recipe-date {
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.5);
+}
+
+.recipe-badge {
+  padding: 4px 10px;
+  border-radius: 10px;
+  font-size: 11px;
+  font-weight: bold;
+}
+
+.recipe-badge.compatible {
+  background: rgba(168, 85, 247, 0.2);
+  color: #A855F7;
+}
+
+.recipe-badge.conflict {
+  background: rgba(231, 57, 70, 0.2);
+  color: #E63946;
+}
+
+.recipe-badge.neutral {
+  background: rgba(255, 183, 3, 0.2);
+  color: #FFB703;
+}
+
+.recipe-badge.success {
+  background: rgba(168, 85, 247, 0.2);
+  color: #A855F7;
+}
+
+.recipe-badge.failed {
+  background: rgba(231, 57, 70, 0.2);
+  color: #E63946;
+}
+
+.recipe-content {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.recipe-item {
+  font-size: 13px;
+  color: rgba(255, 255, 255, 0.7);
+  padding: 8px 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.recipe-item strong {
+  color: rgba(255, 255, 255, 0.9);
+  margin-right: 8px;
+}
+
+.recipe-mixture {
+  font-size: 13px;
+  color: rgba(255, 255, 255, 0.7);
+  padding: 8px 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.recipe-mixture strong {
+  color: rgba(255, 255, 255, 0.9);
+  margin-right: 8px;
+}
+
+.mixture-values {
+  display: flex;
+  gap: 12px;
+  margin-top: 6px;
+}
+
+.mixture-item {
+  font-size: 12px;
+  padding: 4px 10px;
+  background: rgba(139, 92, 246, 0.15);
+  border: 1px solid rgba(139, 92, 246, 0.3);
+  border-radius: 8px;
+  color: #B8A9F7;
+}
+
+.recipe-addons {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  padding: 8px 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.addon-tag {
+  font-size: 12px;
+  padding: 5px 10px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.addon-tag.ice {
+  background: rgba(99, 179, 237, 0.15);
+  border: 1px solid rgba(99, 179, 237, 0.3);
+  color: #63B3ED;
+}
+
+.addon-tag.garnish {
+  background: rgba(72, 187, 120, 0.15);
+  border: 1px solid rgba(72, 187, 120, 0.3);
+  color: #48BB78;
+}
+
+.addon-tag.decoration {
+  background: rgba(246, 173, 85, 0.15);
+  border: 1px solid rgba(246, 173, 85, 0.3);
+  color: #F6AD55;
+}
+
+.recipe-satisfaction {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 13px;
+  color: rgba(255, 255, 255, 0.7);
+  padding: 8px 0;
+}
+
+.recipe-satisfaction strong {
+  color: rgba(255, 255, 255, 0.9);
+  white-space: nowrap;
+}
+
+.satisfaction-bar {
+  flex: 1;
+  height: 8px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.satisfaction-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #E63946 0%, #FFB703 50%, #A855F7 100%);
+  transition: width 0.3s ease;
+}
+
+.satisfaction-value {
+  font-weight: bold;
+  color: #FFB703;
+  min-width: 45px;
+  text-align: right;
+}
+
+.recipe-emotions {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.recipe-emotion {
+  font-size: 13px;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.recipe-glass {
+  font-size: 13px;
+  color: rgba(255, 255, 255, 0.7);
+  padding-top: 10px;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* 空状态 */
+.empty-state {
+  text-align: center;
+  padding: 80px 20px;
+  color: rgba(255, 255, 255, 0.5);
+}
+
+.empty-icon {
+  font-size: 64px;
+  margin-bottom: 20px;
+}
+
+.empty-state p {
+  margin: 0 0 10px 0;
+  font-size: 18px;
+}
+
+.empty-hint {
+  font-size: 14px !important;
+  color: rgba(255, 255, 255, 0.3) !important;
+}
+
+/* 黄金组合图鉴 */
+.encyclopedia-grid.combos {
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+}
+
+.encyclopedia-card.combo-card {
+  min-height: 240px;
+  padding: 20px 15px;
+}
+
+.encyclopedia-card.combo-card.unlocked {
+  background: linear-gradient(135deg, rgba(147, 112, 219, 0.15), rgba(26, 26, 58, 0.8));
+  border-color: rgba(147, 112, 219, 0.3);
+}
+
+.encyclopedia-card.combo-card.unlocked:hover {
+  border-color: rgba(147, 112, 219, 0.6);
+  box-shadow: 0 8px 25px rgba(147, 112, 219, 0.2);
+}
+
+.card-icon.combo-icon {
+  font-size: 56px;
+  margin-bottom: 10px;
+}
+
+.combo-description {
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.6);
+  margin: 8px 0;
+}
+
+.combo-bonus-value {
+  font-size: 18px;
+  font-weight: bold;
+  color: #FFB703;
+  margin: 8px 0;
+  padding: 6px 16px;
+  background: rgba(255, 183, 3, 0.15);
+  border-radius: 20px;
+}
+
+.combo-requires {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  justify-content: center;
+  margin: 10px 0;
+}
+
+.require-item {
+  font-size: 11px;
+  padding: 4px 8px;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 6px;
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.combo-stats {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin-top: 10px;
+  padding-top: 10px;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  width: 100%;
+}
+
+.combo-stats span {
+  font-size: 11px;
+  color: rgba(255, 255, 255, 0.4);
+}
+
+.combo-hint {
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.4);
+  margin-top: 10px;
+  font-style: italic;
+}
+
+/* ====== 成就图鉴 ====== */
+.achievements-container {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.achievement-category {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 12px;
+  padding: 16px;
+}
+
+.achievement-category-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+.achievement-category-name {
+  margin: 0;
+  font-size: 16px;
+  color: #fff;
+}
+
+.achievement-category-desc {
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.4);
+  margin-left: 10px;
+}
+
+.achievement-category-count {
+  font-size: 13px;
+  color: rgba(168, 85, 247, 0.8);
+  font-family: monospace;
+  font-weight: 600;
+}
+
+.achievement-category-progress {
+  width: 100%;
+  height: 3px;
+  background: rgba(255, 255, 255, 0.06);
+  border-radius: 3px;
+  margin-bottom: 12px;
+  overflow: hidden;
+}
+
+.achievement-progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #A855F7, #8B5CF6);
+  border-radius: 3px;
+  transition: width 0.5s ease;
+}
+
+.achievement-list {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.achievement-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 12px;
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  transition: all 0.2s ease;
+}
+
+.achievement-item.unlocked {
+  background: rgba(168, 85, 247, 0.04);
+  border-color: rgba(168, 85, 247, 0.1);
+}
+
+.achievement-item.locked {
+  opacity: 0.6;
+}
+
+.achievement-item-left {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex: 1;
+  min-width: 0;
+}
+
+.achievement-icon-slot {
+  width: 36px;
+  height: 36px;
+  border-radius: 8px;
+  border: 2px solid;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  flex-shrink: 0;
+  background: rgba(0, 0, 0, 0.3);
+}
+
+.achievement-icon-slot.locked {
+  filter: grayscale(1);
+  opacity: 0.5;
+}
+
+.achievement-item-info {
+  min-width: 0;
+}
+
+.achievement-item-name {
+  font-size: 14px;
+  font-weight: 600;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.achievement-rarity-badge {
+  font-size: 10px;
+  font-weight: 500;
+  opacity: 0.8;
+}
+
+.achievement-item-desc {
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.45);
+  margin-top: 2px;
+  line-height: 1.4;
+}
+
+.achievement-item-date {
+  font-size: 11px;
+  color: rgba(255, 255, 255, 0.3);
+  font-family: monospace;
+  flex-shrink: 0;
+  margin-left: 10px;
+}
+
+.achievement-item-reward {
+  font-size: 12px;
+  color: #FFD700;
+  font-weight: 600;
+  font-family: monospace;
+  flex-shrink: 0;
+  margin-left: 8px;
+}

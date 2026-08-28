@@ -1,0 +1,385 @@
+/* 每日氛围开场展示叠加层 - 优化版 */
+
+.atmosphere-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(5, 5, 15, 0.95);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10001;
+  opacity: 0;
+  transition: opacity 0.8s ease;
+  backdrop-filter: blur(12px);
+  overflow: hidden;
+}
+
+.atmosphere-overlay.fade-in {
+  opacity: 1;
+}
+
+/* ====== 天气粒子 ====== */
+.atmo-weather-particles {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.weather-particle.rain {
+  position: absolute;
+  top: -10px;
+  width: 1px;
+  height: 18px;
+  background: linear-gradient(180deg, transparent, rgba(120, 160, 255, 0.5), transparent);
+  animation: atmoRainFall linear infinite;
+}
+
+@keyframes atmoRainFall {
+  0% { transform: translateY(-20px); }
+  100% { transform: translateY(100vh); }
+}
+
+.weather-particle.snow {
+  position: absolute;
+  top: -10px;
+  width: 4px;
+  height: 4px;
+  background: rgba(255, 255, 255, 0.5);
+  border-radius: 50%;
+  animation: snowFall linear infinite;
+}
+
+@keyframes snowFall {
+  0% { transform: translateY(-10px) translateX(0); }
+  25% { transform: translateY(25vh) translateX(15px); }
+  50% { transform: translateY(50vh) translateX(-10px); }
+  75% { transform: translateY(75vh) translateX(8px); }
+  100% { transform: translateY(100vh) translateX(-5px); }
+}
+
+/* 雾效果 */
+.atmo-fog {
+  position: absolute;
+  top: 0;
+  left: -20%;
+  right: -20%;
+  bottom: 0;
+  background: radial-gradient(ellipse at 30% 50%, rgba(255, 255, 255, 0.06) 0%, transparent 60%),
+              radial-gradient(ellipse at 70% 60%, rgba(255, 255, 255, 0.04) 0%, transparent 50%);
+  animation: fogDrift 12s ease-in-out infinite;
+  pointer-events: none;
+  z-index: 0;
+}
+
+@keyframes fogDrift {
+  0%, 100% { transform: translateX(0); }
+  50% { transform: translateX(5%); }
+}
+
+/* ====== 卡片 ====== */
+.atmosphere-card {
+  max-width: 520px;
+  width: 90%;
+  padding: 40px 35px;
+  background: linear-gradient(145deg, rgba(15, 15, 40, 0.95), rgba(8, 8, 25, 0.98));
+  border: 1px solid rgba(139, 92, 246, 0.25);
+  border-radius: 20px;
+  box-shadow: 0 25px 80px rgba(0, 0, 0, 0.6), 0 0 50px rgba(139, 92, 246, 0.08);
+  text-align: center;
+  position: relative;
+  z-index: 1;
+}
+
+/* ====== 头部 - 错开动画 ====== */
+.atmosphere-header {
+  margin-bottom: 24px;
+  opacity: 0;
+  transform: translateY(15px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.atmosphere-header.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.atmosphere-weather-icon {
+  font-size: 52px;
+  display: block;
+  margin-bottom: 12px;
+  animation: iconFloat 4s ease-in-out infinite;
+  filter: drop-shadow(0 0 15px rgba(139, 92, 246, 0.3));
+}
+
+@keyframes iconFloat {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-6px); }
+}
+
+.atmosphere-day-label {
+  font-size: 12px;
+  font-family: monospace;
+  color: rgba(168, 85, 247, 0.6);
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  margin-bottom: 6px;
+}
+
+.atmosphere-day-title {
+  margin: 0;
+  font-size: 26px;
+  color: #ffffff;
+  font-weight: 700;
+  background: linear-gradient(135deg, #e0d4ff, #A855F7);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* ====== 叙述文字 ====== */
+.atmosphere-narrative {
+  margin: 0 0 20px;
+  padding: 18px 22px;
+  background: rgba(255, 255, 255, 0.03);
+  border-radius: 12px;
+  border-left: 3px solid rgba(139, 92, 246, 0.4);
+  min-height: 70px;
+  opacity: 0;
+  transform: translateY(10px);
+  transition: opacity 0.5s ease, transform 0.5s ease;
+}
+
+.atmosphere-narrative.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.atmosphere-narrative p {
+  margin: 0;
+  font-size: 14.5px;
+  color: rgba(255, 255, 255, 0.85);
+  line-height: 1.9;
+  font-style: italic;
+  text-align: left;
+}
+
+.narrative-cursor {
+  color: #A855F7;
+  animation: cursorBlink 0.6s steps(2) infinite;
+  font-style: normal;
+  opacity: 0.7;
+}
+
+@keyframes cursorBlink {
+  0%, 100% { opacity: 0.7; }
+  50% { opacity: 0; }
+}
+
+/* ====== 气味描述 ====== */
+.atmosphere-scent {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  margin: 0 0 18px;
+  color: rgba(255, 255, 255, 0.5);
+  font-size: 13px;
+  opacity: 0;
+  transition: opacity 0.5s ease 0.1s;
+}
+
+.atmosphere-scent.show {
+  opacity: 1;
+}
+
+/* ====== 环境标签 ====== */
+.atmosphere-tags {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-bottom: 20px;
+}
+
+.atmosphere-tags .atmo-tag {
+  opacity: 0;
+  transform: translateY(8px);
+  transition: opacity 0.4s ease, transform 0.4s ease;
+}
+
+.atmosphere-tags.show .atmo-tag {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.atmo-tag {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 7px 14px;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 20px;
+  font-size: 13px;
+  color: rgba(255, 255, 255, 0.8);
+}
+
+/* ====== 今晚特效 ====== */
+.atmosphere-effects {
+  padding: 14px 16px;
+  background: rgba(168, 85, 247, 0.04);
+  border: 1px solid rgba(168, 85, 247, 0.12);
+  border-radius: 12px;
+  margin-bottom: 22px;
+  opacity: 0;
+  transform: translateY(10px);
+  transition: all 0.5s ease;
+}
+
+.atmosphere-effects.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.effects-header {
+  margin-bottom: 10px;
+}
+
+.effects-title {
+  font-size: 12px;
+  font-weight: 600;
+  color: rgba(168, 85, 247, 0.7);
+  letter-spacing: 0.1em;
+  font-family: monospace;
+  text-transform: uppercase;
+}
+
+.effects-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  justify-content: center;
+}
+
+.effect-chip {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 5px 12px;
+  border-radius: 14px;
+  font-size: 12px;
+}
+
+.effect-chip.positive {
+  background: rgba(168, 85, 247, 0.08);
+  border: 1px solid rgba(168, 85, 247, 0.15);
+  color: rgba(168, 85, 247, 0.9);
+}
+
+.effect-chip.negative {
+  background: rgba(255, 80, 80, 0.08);
+  border: 1px solid rgba(255, 80, 80, 0.15);
+  color: rgba(255, 120, 120, 0.9);
+}
+
+.effect-text {
+  font-weight: 500;
+}
+
+.effect-detail {
+  font-family: monospace;
+  font-size: 11px;
+  opacity: 0.7;
+}
+
+/* ====== 开始营业按钮 ====== */
+.start-business-btn {
+  position: relative;
+  width: 100%;
+  padding: 16px 30px;
+  background: linear-gradient(135deg, #A855F7, #7E22CE);
+  border: none;
+  border-radius: 12px;
+  font-size: 17px;
+  font-weight: 700;
+  color: #0a0a1a;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 6px 25px rgba(168, 85, 247, 0.25);
+  overflow: hidden;
+  opacity: 0;
+  transform: translateY(10px);
+}
+
+.start-business-btn.show {
+  opacity: 1;
+  transform: translateY(0);
+  transition: opacity 0.5s ease, transform 0.5s ease, box-shadow 0.3s ease;
+}
+
+.start-business-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 35px rgba(168, 85, 247, 0.4);
+}
+
+.start-business-btn:active {
+  transform: translateY(0);
+}
+
+.btn-text {
+  position: relative;
+  z-index: 1;
+  letter-spacing: 0.1em;
+}
+
+.btn-glow {
+  position: absolute;
+  top: 50%;
+  left: -20%;
+  width: 60%;
+  height: 200%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  transform: translateY(-50%) skewX(-20deg);
+  animation: btnSweep 3s ease-in-out infinite 3s;
+}
+
+@keyframes btnSweep {
+  0% { left: -60%; }
+  100% { left: 120%; }
+}
+
+/* ====== 响应式 ====== */
+@media (max-width: 768px) {
+  .atmosphere-card {
+    padding: 28px 20px;
+    margin: 15px;
+  }
+
+  .atmosphere-weather-icon {
+    font-size: 42px;
+  }
+
+  .atmosphere-day-title {
+    font-size: 21px;
+  }
+
+  .atmosphere-narrative p {
+    font-size: 13.5px;
+  }
+
+  .atmosphere-tags {
+    gap: 8px;
+  }
+
+  .atmo-tag {
+    padding: 5px 10px;
+    font-size: 12px;
+  }
+}

@@ -1,0 +1,27 @@
+﻿.balanced-pixel-text {
+  display: inline-flex;
+  align-items: center;
+  flex-wrap: wrap; /* Allow natural text wrapping */
+  /* Remove baseline gap usually found in inline elements */
+  vertical-align: baseline;
+  white-space: pre-wrap; /* Preserve spaces from the input string */
+}
+
+.pixel-text-en {
+  font-family: "PressStart2P", sans-serif;
+  /* Maintain the inherited font-size */
+  font-size: 1em;
+  /* Slightly adjust if necessary, but usually standard sizing is ok */
+}
+
+.pixel-text-zh {
+  font-family: "zpix", monospace;
+  /* Scale Chinese font size by approximately 1.25x to match the English visual weight */
+  font-size: 1.25em;
+  /* Fine-tuning offset to align the smaller-feeling "zpix" with the blocky "PressStart2P" baselines */
+  transform: translateY(-0.5px);
+  /* A tiny bit of margin can prevent English/Chinese characters from touching each other */
+  margin: 0 1px;
+  line-height: 1; /* Keep it tight for better center alignment */
+}
+

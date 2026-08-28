@@ -1,0 +1,360 @@
+/* 目标三维显示组件样式 */
+
+.target-display {
+  background: rgba(30, 20, 50, 0.6);
+  border-radius: 12px;
+  padding: 16px;
+  border: 1px solid rgba(150, 100, 255, 0.2);
+}
+
+.target-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.target-header h4 {
+  margin: 0;
+  color: #fff;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.no-target-hint {
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.5);
+}
+
+.attributes-container {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+/* 单个属性行 */
+.attribute-row {
+  transition: all 0.3s ease;
+}
+
+.attribute-row.met {
+  /* 满足条件时的高亮效果 */
+}
+
+.attribute-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 6px;
+}
+
+.attribute-icon {
+  font-size: 16px;
+}
+
+.attribute-name {
+  font-size: 13px;
+  color: rgba(255, 255, 255, 0.8);
+  min-width: 50px;
+}
+
+.attribute-value {
+  font-size: 14px;
+  font-weight: 600;
+  color: #fff;
+  min-width: 40px;
+  text-align: right;
+}
+
+.attribute-condition {
+  font-size: 12px;
+  padding: 2px 8px;
+  border-radius: 10px;
+  margin-left: auto;
+}
+
+.attribute-condition.met {
+  background: rgba(168, 85, 247, 0.2);
+  color: #A855F7;
+}
+
+.attribute-condition.unmet {
+  background: rgba(255, 107, 107, 0.2);
+  color: #FF6B6B;
+}
+
+/* 进度条容器 */
+.attribute-bar-container {
+  position: relative;
+}
+
+.attribute-bar {
+  position: relative;
+  height: 20px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 10px;
+  overflow: visible;
+}
+
+/* 零点标记 */
+.zero-marker {
+  position: absolute;
+  top: -4px;
+  bottom: -4px;
+  width: 2px;
+  background: rgba(255, 255, 255, 0.3);
+  z-index: 2;
+}
+
+/* 条件区域（目标范围高亮） */
+.condition-zone {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  background: rgba(168, 85, 247, 0.15);
+  border-radius: 10px;
+  pointer-events: none;
+}
+
+/* 条件标记线 */
+.condition-marker {
+  position: absolute;
+  top: -6px;
+  bottom: -6px;
+  width: 3px;
+  background: #FFB703;
+  border-radius: 2px;
+  z-index: 3;
+  transform: translateX(-50%);
+}
+
+.condition-marker::before {
+  content: '';
+  position: absolute;
+  top: -4px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 0;
+  height: 0;
+  border-left: 5px solid transparent;
+  border-right: 5px solid transparent;
+  border-top: 6px solid #FFB703;
+}
+
+.marker-value {
+  position: absolute;
+  bottom: -18px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 10px;
+  color: #FFB703;
+  white-space: nowrap;
+}
+
+/* 当前值指示器 */
+.current-value-indicator {
+  position: absolute;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 5;
+  transition: left 0.3s ease;
+}
+
+.indicator-dot {
+  width: 14px;
+  height: 14px;
+  background: #fff;
+  border-radius: 50%;
+  border: 3px solid #457B9D;
+  box-shadow: 0 0 8px rgba(69, 123, 157, 0.6);
+  transition: all 0.3s ease;
+}
+
+.current-value-indicator.met .indicator-dot {
+  border-color: #A855F7;
+  box-shadow: 0 0 12px rgba(168, 85, 247, 0.8);
+}
+
+/* 填充条 */
+.attribute-fill {
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  border-radius: 10px;
+  transition: width 0.3s ease, background 0.3s ease;
+  opacity: 0.8;
+}
+
+.attribute-fill.met {
+  opacity: 1;
+}
+
+/* 刻度 */
+.attribute-scale {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 4px;
+  font-size: 10px;
+  color: rgba(255, 255, 255, 0.4);
+  padding: 0 2px;
+}
+
+/* 状态指示器 */
+.target-status {
+  margin-top: 16px;
+  padding-top: 12px;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.status-indicator {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 10px 16px;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.status-indicator.success {
+  background: rgba(168, 85, 247, 0.15);
+  color: #A855F7;
+  border: 1px solid rgba(168, 85, 247, 0.3);
+}
+
+.status-indicator.pending {
+  background: rgba(255, 183, 3, 0.15);
+  color: #FFB703;
+  border: 1px solid rgba(255, 183, 3, 0.3);
+}
+
+.status-icon {
+  font-size: 16px;
+}
+
+.status-text {
+  font-size: 13px;
+}
+
+/* 动画效果 */
+@keyframes pulse-success {
+  0%, 100% {
+    box-shadow: 0 0 8px rgba(168, 85, 247, 0.4);
+  }
+  50% {
+    box-shadow: 0 0 16px rgba(168, 85, 247, 0.8);
+  }
+}
+
+.status-indicator.success {
+  animation: pulse-success 2s ease-in-out infinite;
+}
+
+/* 酒的态度实时预览 */
+.attitude-realtime {
+  margin-top: 14px;
+  padding: 10px 14px;
+  background: rgba(139, 92, 246, 0.06);
+  border: 1px solid rgba(139, 92, 246, 0.15);
+  border-radius: 10px;
+  text-align: center;
+  transition: all 0.4s ease;
+}
+
+.attitude-realtime-label {
+  font-size: 11px;
+  color: rgba(255, 255, 255, 0.4);
+  letter-spacing: 0.5px;
+}
+
+.attitude-realtime-text {
+  margin: 6px 0 0;
+  font-size: 13px;
+  color: rgba(255, 255, 255, 0.8);
+  font-style: italic;
+  line-height: 1.6;
+  transition: color 0.3s ease;
+}
+
+/* ========================================
+   UI Phase 3 - Pixel Target HUD
+   ======================================== */
+
+.target-display {
+  width: 100%;
+  box-sizing: border-box;
+  align-self: stretch;
+  flex: 0 0 auto;
+  background:
+    linear-gradient(180deg, rgba(54, 36, 100, 0.72), rgba(20, 16, 40, 0.66));
+  border-radius: 20px;
+  padding: 18px 18px 16px;
+  border: 1px solid rgba(228, 220, 255, 0.14);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  box-shadow:
+    0 14px 28px rgba(14, 10, 28, 0.16),
+    inset 0 1px 0 rgba(255, 255, 255, 0.05);
+}
+
+.target-header h4 {
+  font-family: "PressStart2P", "zpix", sans-serif;
+  font-size: 13px;
+  letter-spacing: 0.08em;
+  color: #fff8ff;
+}
+
+.attributes-container {
+  gap: 14px;
+}
+
+.attribute-row {
+  padding: 10px 10px 12px;
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(228, 220, 255, 0.08);
+}
+
+.attribute-name,
+.attribute-value,
+.status-text {
+  color: rgba(250, 248, 255, 0.92);
+}
+
+.attribute-bar {
+  height: 18px;
+  background: rgba(8, 8, 18, 0.34);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.condition-zone {
+  background: rgba(168, 85, 247, 0.2);
+}
+
+.marker-value,
+.attribute-scale {
+  color: rgba(255, 235, 174, 0.8);
+}
+
+.target-status {
+  margin-top: 14px;
+  padding-top: 14px;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.status-indicator {
+  border-radius: 12px;
+  font-family: "zpix", "PressStart2P", sans-serif;
+  font-size: 12px;
+  letter-spacing: 0.04em;
+}
+
+.attitude-realtime {
+  margin-top: 16px;
+  padding: 12px 14px;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.04));
+  border: 1px solid rgba(228, 220, 255, 0.1);
+  border-radius: 14px;
+}

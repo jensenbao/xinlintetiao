@@ -1,0 +1,140 @@
+/* ===== 章节转场动画 ===== */
+
+.chapter-transition-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  background: #000;
+  cursor: pointer;
+  transition: opacity 1s ease;
+  overflow-y: auto;
+}
+
+.chapter-transition-overlay.phase-fade-in {
+  opacity: 0;
+  animation: chapterFadeIn 0.8s ease forwards;
+}
+
+.chapter-transition-overlay.phase-fade-out {
+  animation: chapterFadeOut 1s ease forwards;
+}
+
+@keyframes chapterFadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes chapterFadeOut {
+  from { opacity: 1; }
+  to { opacity: 0; }
+}
+
+.chapter-transition-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  max-width: 600px;
+  width: 90%;
+  padding: 60px 40px 80px;
+  margin: auto;
+  text-align: center;
+  min-height: 100vh;
+  justify-content: center;
+}
+
+.chapter-number-display {
+  font-size: 14px;
+  letter-spacing: 8px;
+  text-transform: uppercase;
+  color: rgba(147, 130, 220, 0.6);
+  opacity: 0;
+  transform: translateY(10px);
+  transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+.chapter-number-display.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.chapter-title-display {
+  font-size: 36px;
+  font-weight: 300;
+  color: #fff;
+  margin: 8px 0;
+  letter-spacing: 4px;
+  opacity: 0;
+  transform: translateY(10px);
+  transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+.chapter-title-display.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.chapter-subtitle-display {
+  font-size: 15px;
+  color: rgba(255, 255, 255, 0.5);
+  font-style: italic;
+  line-height: 1.6;
+  opacity: 0;
+  transform: translateY(10px);
+  transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+.chapter-subtitle-display.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.chapter-narrative-display {
+  font-size: 14px;
+  color: rgba(255, 255, 255, 0.7);
+  line-height: 1.8;
+  margin-top: 24px;
+  padding-top: 24px;
+  border-top: 1px solid rgba(147, 130, 220, 0.2);
+  opacity: 0;
+  transform: translateY(10px);
+  transition: opacity 1s ease, transform 1s ease;
+  word-break: break-word;
+  overflow-wrap: break-word;
+  white-space: pre-line;
+}
+
+.chapter-narrative-display.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.chapter-mechanic-hint {
+  font-size: 0.85rem;
+  color: rgba(255, 255, 255, 0.5);
+  line-height: 1.8;
+  margin-top: 24px;
+  padding-top: 24px;
+  border-top: 1px solid rgba(255, 255, 255, 0.12);
+  letter-spacing: 0.05em;
+  white-space: pre-line;
+  opacity: 0;
+  transform: translateY(10px);
+  transition: opacity 1s ease, transform 1s ease;
+}
+
+.chapter-mechanic-hint.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.chapter-skip-hint {
+  position: fixed;
+  bottom: 40px;
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.2);
+  letter-spacing: 2px;
+}

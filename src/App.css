@@ -1,0 +1,1030 @@
+
+@font-face {
+  font-family: "PressStart2P";
+  src: url("/asset/字体/PressStart2P-Regular.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "zpix";
+  src: url("/asset/字体/zpix.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
+/* ========================================
+   全局 CSS 变量（设计令牌）
+   ======================================== */
+:root {
+  /* ---- 主色 ---- */
+  --color-primary: #A855F7;
+  --color-primary-dark: #7E22CE;
+  --color-secondary: #8B5CF6;
+  --color-secondary-light: #B8A9F7;
+  --color-secondary-dark: #7C3AED;
+  --color-accent: #FFB703;
+  --color-accent-dark: #FF9500;
+  --color-danger: #E63946;
+  --color-danger-light: #FF6B6B;
+  --color-info: #A8DADC;
+  --color-gold: #FFD700;
+
+  /* ---- 背景 ---- */
+  --bg-dark: #0a0a1a;
+  --bg-darker: #050510;
+  --bg-card: rgba(26, 26, 58, 0.95);
+  --bg-card-solid: #1a1a3a;
+  --bg-subtle: rgba(255, 255, 255, 0.05);
+  --bg-hover: rgba(255, 255, 255, 0.1);
+  --bg-overlay: rgba(0, 0, 0, 0.85);
+
+  /* ---- 文字 ---- */
+  --text-primary: #ffffff;
+  --text-secondary: rgba(255, 255, 255, 0.8);
+  --text-muted: rgba(255, 255, 255, 0.55);
+  --text-dim: rgba(255, 255, 255, 0.4);
+
+  /* ---- 边框 ---- */
+  --border-subtle: rgba(255, 255, 255, 0.1);
+  --border-light: rgba(255, 255, 255, 0.2);
+  --border-primary: rgba(168, 85, 247, 0.4);
+  --border-secondary: rgba(139, 92, 246, 0.4);
+  --border-accent: rgba(255, 183, 3, 0.4);
+
+  /* ---- 圆角 ---- */
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 16px;
+  --radius-xl: 20px;
+  --radius-pill: 50px;
+  --ui-avatar-radius: 22%;
+
+  /* ---- 阴影 ---- */
+  --shadow-card: 0 8px 32px rgba(0, 0, 0, 0.4);
+  --shadow-elevated: 0 20px 60px rgba(0, 0, 0, 0.5);
+  --shadow-glow-primary: 0 0 20px rgba(168, 85, 247, 0.3);
+  --shadow-glow-secondary: 0 0 20px rgba(139, 92, 246, 0.3);
+  /* 层次阴影系统 */
+  --shadow-depth-1: 0 2px 8px rgba(0, 0, 0, 0.3);
+  --shadow-depth-2: 0 4px 16px rgba(0, 0, 0, 0.35);
+  --shadow-depth-3: 0 8px 32px rgba(0, 0, 0, 0.4);
+  --shadow-depth-4: 0 16px 48px rgba(0, 0, 0, 0.5);
+  --shadow-inset: inset 0 2px 6px rgba(0, 0, 0, 0.3);
+
+  /* ---- 过渡 ---- */
+  --transition-fast: 0.2s ease;
+  --transition-normal: 0.3s ease;
+  --transition-slow: 0.5s ease;
+
+  /* ---- 情绪颜色 ---- */
+  --emotion-anger: #ff4466;
+  --emotion-sadness: #4466ff;
+  --emotion-joy: #ffcc00;
+  --emotion-fear: #9944ff;
+  --emotion-calm: #00ccaa;
+  --emotion-hope: #ff88cc;
+  --emotion-loneliness: #6688aa;
+  --emotion-nostalgia: #aa8866;
+  --emotion-anxiety: #ff6464;
+  --emotion-frustration: #ff7832;
+  --emotion-confusion: #9696c8;
+  --emotion-exhaustion: #646482;
+
+  /* ---- 发光颜色 ---- */
+  --color-primary-glow: rgba(168, 85, 247, 0.4);
+  --color-secondary-glow: rgba(139, 92, 246, 0.4);
+  --color-accent-glow: rgba(255, 183, 3, 0.4);
+  --color-danger-glow: rgba(231, 57, 70, 0.4);
+
+  /* ---- Z-Index 层级系统 ---- */
+  --z-background: 0;
+  --z-atmosphere: 1;
+  --z-content: 10;
+  --z-panel: 20;
+  --z-interaction: 50;
+  --z-overlay: 100;
+  --z-modal: 1000;
+  --z-notification: 5000;
+  --z-critical: 10000;
+}
+
+/* 全局应用样式 */
+.app {
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+}
+
+/* 全局样式重置 */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "PressStart2P", "zpix", sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background: var(--bg-dark);
+  color: var(--text-primary);
+  overflow: hidden;
+}
+
+/* 按钮基础样式 */
+button {
+  font-family: inherit;
+  outline: none;
+  border: none;
+  cursor: pointer;
+}
+
+button:active {
+  transform: scale(0.98);
+}
+
+/* 输入框基础样式 */
+input, textarea {
+  font-family: inherit;
+  outline: none;
+}
+
+/* 滚动条样式 */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.2);
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.3);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.4);
+}
+
+/* 选择文本样式 */
+::selection {
+  background: rgba(168, 85, 247, 0.3);
+  color: var(--text-primary);
+}
+
+/* ========================================
+   公共组件样式（从重复定义中提取）
+   ======================================== */
+
+/* ---- 猜测按钮公共样式 ---- */
+.start-guess-btn {
+  width: 100%;
+  padding: 14px 20px;
+  background: linear-gradient(135deg, var(--color-secondary), var(--color-secondary-dark));
+  border: none;
+  border-radius: var(--radius-md);
+  color: #fff;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all var(--transition-normal);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.start-guess-btn:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(139, 92, 246, 0.4);
+}
+
+.start-guess-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.start-guess-btn .hint {
+  font-size: 11px;
+  opacity: 0.7;
+}
+
+/* ---- 猜测操作区公共样式 ---- */
+.guess-actions {
+  text-align: center;
+}
+
+.guess-prompt {
+  font-size: 13px;
+  color: var(--text-secondary);
+  margin: 0 0 12px 0;
+}
+
+.guess-buttons {
+  display: flex;
+  gap: 10px;
+}
+
+.guess-btn {
+  flex: 1;
+  padding: 12px 16px;
+  border-radius: var(--radius-sm);
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.guess-btn.cancel {
+  background: var(--bg-hover);
+  border: 1px solid var(--border-light);
+  color: var(--text-secondary);
+}
+
+.guess-btn.cancel:hover {
+  background: rgba(255, 255, 255, 0.15);
+}
+
+.guess-btn.confirm {
+  background: linear-gradient(135deg, var(--color-primary), var(--color-primary-dark));
+  border: none;
+  color: var(--bg-dark);
+}
+
+.guess-btn.confirm:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-glow-primary);
+}
+
+.guess-btn.confirm:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.guess-success {
+  text-align: center;
+  padding: 12px;
+  background: rgba(168, 85, 247, 0.1);
+  border: 1px solid var(--border-primary);
+  border-radius: var(--radius-sm);
+  color: var(--color-primary);
+  font-size: 14px;
+  font-weight: 600;
+}
+
+/* ---- 信任度飞字公共动画 ---- */
+.trust-fly {
+  position: absolute;
+  font-size: 14px;
+  font-weight: 700;
+  pointer-events: none;
+  animation: trustFlyUp 1s ease-out forwards;
+  z-index: 100;
+  top: -5px;
+  right: 20px;
+  white-space: nowrap;
+  text-shadow: 0 0 6px currentColor;
+}
+
+.trust-fly.positive { color: var(--color-primary); }
+.trust-fly.negative { color: var(--color-danger); }
+
+@keyframes trustFlyUp {
+  0% { opacity: 1; transform: translateY(0) scale(1); }
+  30% { opacity: 1; transform: translateY(-12px) scale(1.15); }
+  100% { opacity: 0; transform: translateY(-40px) scale(0.8); }
+}
+
+/* ---- 调酒报告卡片 ---- */
+.cocktail-result-card {
+  position: fixed;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 10005;
+  pointer-events: none;
+  animation: resultCardIn 2s ease-out forwards;
+  min-width: 300px;
+  max-width: 420px;
+  padding: 28px 32px;
+  background: linear-gradient(135deg, rgba(26, 26, 58, 0.98), rgba(10, 10, 26, 0.98));
+  border: 2px solid var(--border-secondary);
+  border-radius: var(--radius-xl);
+  box-shadow: var(--shadow-elevated), var(--shadow-glow-secondary);
+  text-align: center;
+}
+
+.cocktail-result-card.success {
+  border-color: var(--border-primary);
+  box-shadow: var(--shadow-elevated), var(--shadow-glow-primary);
+}
+
+.result-icon { font-size: 48px; margin-bottom: 10px; }
+.result-title {
+  font-size: 20px;
+  font-weight: 700;
+  margin-bottom: 14px;
+  background: linear-gradient(135deg, var(--color-secondary-light), var(--color-primary));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+.cocktail-result-card.success .result-title {
+  background: linear-gradient(135deg, var(--color-primary), var(--color-primary-dark));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.result-stats {
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+  margin-bottom: 12px;
+}
+
+.result-stat {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  padding: 8px 14px;
+  background: var(--bg-subtle);
+  border-radius: var(--radius-sm);
+}
+
+.result-stat-label {
+  font-size: 11px;
+  color: var(--text-dim);
+}
+
+.result-stat-value {
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.result-stat.met .result-stat-value { color: var(--color-primary); }
+.result-stat.unmet .result-stat-value { color: var(--color-danger-light); }
+
+.result-recipe-summary {
+  font-size: 12px;
+  color: var(--text-muted);
+  padding-top: 10px;
+  border-top: 1px solid var(--border-subtle);
+}
+
+.result-judgment {
+  margin-top: 8px;
+  font-size: 11px;
+  color: var(--text-dim);
+}
+
+.result-judgment .judgment-mode {
+  color: rgba(255, 255, 255, 0.6);
+}
+
+.result-judgment .judgment-resonance {
+  color: rgba(168, 85, 247, 0.75);
+}
+
+.cocktail-result-card:not(.success) .result-judgment .judgment-resonance {
+  color: rgba(255, 107, 107, 0.75);
+}
+
+@keyframes resultCardIn {
+  0% { opacity: 0; transform: translate(-50%, -50%) scale(0.7); }
+  15% { opacity: 1; transform: translate(-50%, -50%) scale(1.05); }
+  30% { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+  75% { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+  100% { opacity: 0; transform: translate(-50%, -50%) scale(0.9) translateY(-20px); }
+}
+
+/* ---- 情绪猜测增强动画 ---- */
+.emotion-card.guess-wrong-shake {
+  animation: guessWrongShake 0.5s ease-out !important;
+}
+
+@keyframes guessWrongShake {
+  0%, 100% { transform: translateX(0); }
+  15% { transform: translateX(-8px); border-color: var(--color-danger); }
+  30% { transform: translateX(8px); }
+  45% { transform: translateX(-5px); }
+  60% { transform: translateX(5px); }
+  75% { transform: translateX(-2px); }
+}
+
+.emotion-card.guess-correct-flip {
+  animation: guessCorrectFlipCard 0.7s ease-out !important;
+}
+
+@keyframes guessCorrectFlipCard {
+  0% { transform: rotateY(0deg) scale(1); }
+  40% { transform: rotateY(180deg) scale(1.1); border-color: var(--color-primary); box-shadow: 0 0 25px rgba(168, 85, 247, 0.5); }
+  60% { transform: rotateY(360deg) scale(1.05); }
+  100% { transform: rotateY(360deg) scale(1); }
+}
+
+/* 通用返回按钮样式 */
+.back-button {
+  padding: 10px 20px;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 8px;
+  color: #ffffff;
+  font-size: 14px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.back-button:hover {
+  background: rgba(255, 255, 255, 0.15);
+  transform: translateX(-2px);
+}
+
+/* 加载动画 */
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.loading {
+  animation: spin 1s linear infinite;
+}
+
+/* 淡入动画 */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.fade-in {
+  animation: fadeIn 0.5s ease;
+}
+
+/* 响应式断点 */
+@media (max-width: 1200px) {
+  body {
+    font-size: 14px;
+  }
+}
+
+@media (max-width: 768px) {
+  body {
+    font-size: 13px;
+  }
+}
+
+/* 防止拖拽选择 */
+.no-select {
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+/* ========================================
+   面板质感系统 (玻璃拟态)
+   ======================================== */
+
+/* 基础面板 - 毛玻璃效果 */
+.panel-base {
+  background: linear-gradient(
+    135deg,
+    rgba(30, 30, 60, 0.85) 0%,
+    rgba(20, 20, 45, 0.9) 100%
+  );
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: var(--radius-lg);
+  box-shadow: 
+    var(--shadow-depth-3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.05);
+}
+
+/* 顶部高光条 */
+.panel-base::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 10%;
+  right: 10%;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(255, 255, 255, 0.15) 30%,
+    rgba(255, 255, 255, 0.2) 50%,
+    rgba(255, 255, 255, 0.15) 70%,
+    transparent 100%
+  );
+  border-radius: 50%;
+}
+
+/* 凹陷面板 - 用于内部区域 */
+.panel-inset {
+  background: rgba(0, 0, 0, 0.25);
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-inset);
+}
+
+/* 凸起面板 - 用于按钮、卡片 */
+.panel-raised {
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.08) 0%,
+    rgba(255, 255, 255, 0.02) 100%
+  );
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: var(--radius-md);
+  box-shadow: 
+    var(--shadow-depth-1),
+    inset 0 1px 0 rgba(255, 255, 255, 0.08);
+}
+
+/* 高亮面板 - 用于重要信息 */
+.panel-highlight {
+  position: relative;
+  background: linear-gradient(
+    135deg,
+    rgba(139, 92, 246, 0.15) 0%,
+    rgba(168, 85, 247, 0.1) 100%
+  );
+  border: 1px solid rgba(139, 92, 246, 0.3);
+  border-radius: var(--radius-md);
+}
+
+.panel-highlight::before {
+  content: '';
+  position: absolute;
+  inset: -1px;
+  border-radius: inherit;
+  background: linear-gradient(
+    135deg,
+    rgba(139, 92, 246, 0.3),
+    rgba(168, 85, 247, 0.3)
+  );
+  z-index: -1;
+  filter: blur(8px);
+  opacity: 0.5;
+}
+
+/* ========================================
+   微交互精细化 - Phase 6
+   ======================================== */
+
+/* ---- 按钮涟漪效果 ---- */
+.btn-ripple {
+  position: relative;
+  overflow: hidden;
+}
+
+.btn-ripple::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  background: radial-gradient(
+    circle,
+    rgba(255, 255, 255, 0.4) 0%,
+    transparent 70%
+  );
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  transition: width 0.5s ease, height 0.5s ease, opacity 0.5s ease;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.btn-ripple:active::before {
+  width: 300%;
+  height: 300%;
+  opacity: 1;
+  transition: width 0s, height 0s, opacity 0s;
+}
+
+/* ---- 按钮流光效果 ---- */
+.btn-shine {
+  position: relative;
+  overflow: hidden;
+}
+
+.btn-shine::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 50%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(255, 255, 255, 0.15) 50%,
+    transparent 100%
+  );
+  transform: skewX(-20deg);
+  transition: left 0.6s ease;
+}
+
+.btn-shine:hover::after {
+  left: 150%;
+}
+
+/* ---- 禁用状态条纹 ---- */
+.btn-disabled-stripe {
+  position: relative;
+}
+
+.btn-disabled-stripe:disabled::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(
+    135deg,
+    transparent 0px,
+    transparent 4px,
+    rgba(0, 0, 0, 0.15) 4px,
+    rgba(0, 0, 0, 0.15) 8px
+  );
+  border-radius: inherit;
+  pointer-events: none;
+}
+
+/* ---- 可选卡片边框流光 ---- */
+.card-selectable {
+  position: relative;
+}
+
+.card-selectable::before {
+  content: '';
+  position: absolute;
+  inset: -2px;
+  border-radius: inherit;
+  background: conic-gradient(
+    from 0deg,
+    transparent 0%,
+    rgba(168, 85, 247, 0.4) 25%,
+    transparent 50%,
+    rgba(139, 92, 246, 0.4) 75%,
+    transparent 100%
+  );
+  z-index: -1;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.card-selectable.selected::before {
+  opacity: 1;
+  animation: borderFlow 3s linear infinite;
+}
+
+@keyframes borderFlow {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* 内部遮罩保持圆角 */
+.card-selectable.selected::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: inherit;
+  border-radius: inherit;
+  z-index: -1;
+}
+
+/* ---- 输入框聚焦下划线 ---- */
+.input-focus-line {
+  position: relative;
+}
+
+.input-focus-line::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  width: 0;
+  height: 2px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    var(--color-primary),
+    transparent
+  );
+  transition: width 0.3s ease, left 0.3s ease;
+}
+
+.input-focus-line:focus-within::after {
+  width: 100%;
+  left: 0;
+}
+
+/* ---- 悬停光标跟踪 (需要JS配合) ---- */
+.card-cursor-glow {
+  position: relative;
+  overflow: hidden;
+}
+
+.card-cursor-glow .cursor-glow {
+  position: absolute;
+  width: 150px;
+  height: 150px;
+  background: radial-gradient(
+    circle,
+    rgba(255, 255, 255, 0.08) 0%,
+    transparent 70%
+  );
+  pointer-events: none;
+  transform: translate(-50%, -50%);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.card-cursor-glow:hover .cursor-glow {
+  opacity: 1;
+}
+
+/* ========================================
+   关键时刻仪式感 - Phase 7
+   ======================================== */
+
+/* ---- 调酒成功光芒迸发 ---- */
+.cocktail-success-burst {
+  position: relative;
+}
+
+.cocktail-success-burst::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  background: radial-gradient(
+    circle,
+    rgba(168, 85, 247, 0.6) 0%,
+    rgba(168, 85, 247, 0.2) 30%,
+    transparent 70%
+  );
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  animation: successBurst 1s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+  pointer-events: none;
+  z-index: 100;
+}
+
+@keyframes successBurst {
+  0% {
+    width: 0;
+    height: 0;
+    opacity: 1;
+  }
+  50% {
+    width: 400px;
+    height: 400px;
+    opacity: 0.8;
+  }
+  100% {
+    width: 600px;
+    height: 600px;
+    opacity: 0;
+  }
+}
+
+/* ---- 数值变化动画 ---- */
+.stat-value-animated {
+  display: inline-block;
+  transition: transform 0.3s ease, color 0.3s ease;
+}
+
+.stat-value-animated.counting {
+  animation: countingPulse 0.15s ease infinite;
+}
+
+@keyframes countingPulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+}
+
+.stat-value-animated.increased {
+  color: var(--color-primary);
+  animation: valueIncrease 0.5s ease;
+}
+
+.stat-value-animated.decreased {
+  color: var(--color-danger);
+  animation: valueDecrease 0.5s ease;
+}
+
+@keyframes valueIncrease {
+  0% { transform: scale(1); }
+  30% { transform: scale(1.2) translateY(-2px); }
+  100% { transform: scale(1); }
+}
+
+@keyframes valueDecrease {
+  0% { transform: scale(1); }
+  30% { transform: scale(0.9) translateY(2px); }
+  60% { transform: scale(1.1); }
+  100% { transform: scale(1); }
+}
+
+/* ---- 顾客离场涟漪 ---- */
+.customer-leave-ripple {
+  position: relative;
+}
+
+.customer-leave-ripple::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  border-radius: 50%;
+  background: radial-gradient(
+    circle,
+    rgba(139, 92, 246, 0.3) 0%,
+    transparent 70%
+  );
+  transform: translate(-50%, -50%);
+  animation: leaveRipple 1.5s ease-out forwards;
+  pointer-events: none;
+}
+
+@keyframes leaveRipple {
+  0% {
+    width: 0;
+    height: 0;
+    opacity: 1;
+  }
+  100% {
+    width: 300px;
+    height: 300px;
+    opacity: 0;
+  }
+}
+
+/* 满意离开 - 偏绿 */
+.customer-leave-ripple.satisfied::after {
+  background: radial-gradient(
+    circle,
+    rgba(168, 85, 247, 0.3) 0%,
+    transparent 70%
+  );
+}
+
+/* 普通离开 - 中性淡出 */
+.customer-leave-ripple.neutral::after {
+  background: radial-gradient(
+    circle,
+    rgba(180, 190, 210, 0.24) 0%,
+    transparent 70%
+  );
+}
+
+/* ---- 新一天开始动画 ---- */
+.new-day-transition {
+  position: fixed;
+  inset: 0;
+  background: linear-gradient(
+    180deg,
+    rgba(10, 10, 26, 1) 0%,
+    rgba(26, 26, 58, 0.95) 50%,
+    rgba(10, 10, 26, 1) 100%
+  );
+  z-index: var(--z-critical);
+  animation: newDayFade 2s ease-in-out forwards;
+  pointer-events: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.new-day-transition .day-number {
+  font-size: 72px;
+  font-weight: 700;
+  background: linear-gradient(135deg, var(--color-primary), var(--color-secondary));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: dayNumberPop 2s ease-in-out;
+}
+
+@keyframes newDayFade {
+  0% { opacity: 1; }
+  70% { opacity: 1; }
+  100% { opacity: 0; }
+}
+
+@keyframes dayNumberPop {
+  0% { transform: scale(0.5); opacity: 0; }
+  20% { transform: scale(1.1); opacity: 1; }
+  40% { transform: scale(1); }
+  80% { transform: scale(1); opacity: 1; }
+  100% { transform: scale(1.5); opacity: 0; }
+}
+
+/* ========================================
+   无障碍与性能优化
+   ======================================== */
+
+/* 尊重用户动画偏好 */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+  
+  .cocktail-success-burst::before,
+  .customer-leave-ripple::after,
+  .new-day-transition {
+    display: none;
+  }
+}
+
+/* 降低特效模式 */
+.effects-level-reduced {
+  .btn-shine::after,
+  .card-selectable::before,
+  .panel-highlight::before {
+    display: none;
+  }
+}
+
+/* GPU 加速提示 */
+.will-animate {
+  will-change: transform, opacity;
+}
+
+/* 动画结束后清理 will-change */
+.animation-done {
+  will-change: auto;
+}
+
+/* ========================================
+   UI Refresh Showcase - Global Design Pass
+   ======================================== */
+
+:root {
+  --font-display: "Georgia", "Times New Roman", "STSong", serif;
+  --font-body: "Microsoft YaHei", "PingFang SC", "Segoe UI", sans-serif;
+  --surface-noir: rgba(10, 14, 24, 0.82);
+  --surface-noir-strong: rgba(6, 9, 16, 0.94);
+  --stroke-soft: rgba(255, 255, 255, 0.08);
+  --stroke-accent: rgba(255, 194, 122, 0.22);
+  --glow-amber: rgba(255, 194, 122, 0.16);
+  --glow-mint: rgba(168, 85, 247, 0.14);
+  --text-cream: rgba(247, 239, 224, 0.92);
+}
+
+body {
+  font-family: "PressStart2P", "zpix", sans-serif;
+  background:
+    radial-gradient(circle at 12% 18%, rgba(168, 85, 247, 0.08), transparent 24%),
+    radial-gradient(circle at 88% 4%, rgba(255, 176, 86, 0.12), transparent 22%),
+    linear-gradient(180deg, #05070d 0%, #090d16 35%, #05070d 100%);
+  color-scheme: dark;
+}
+
+/* ========================================
+   UI Polish V2 - Reset Baseline
+   ======================================== */
+
+body {
+  font-family: "PressStart2P", "zpix", sans-serif;
+  background: var(--bg-dark);
+}
+
+
+/* --- Global Pixel Art Font Config --- */
+body {
+  font-family: "PressStart2P", "zpix", sans-serif;
+  line-height: 1.4;
+  -webkit-font-smoothing: none;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeSpeed;
+}
+
+button, input, textarea, select {
+  font-family: "PressStart2P", "zpix", sans-serif;
+}
+
+* {
+  image-rendering: crisp-edges;
+  image-rendering: pixelated;
+}

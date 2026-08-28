@@ -1,0 +1,125 @@
+{
+  "iceTypes": {
+    "no_ice": {
+      "id": "no_ice",
+      "name": "No Ice",
+      "icon": "🧊",
+      "description": "No dilution",
+      "compatibleEmotions": [
+        "trust",
+        "sadness"
+      ],
+      "thicknessEffect": 0,
+      "sweetnessEffect": 0,
+      "strengthEffect": 1
+    },
+    "normal": {
+      "id": "normal",
+      "name": "Normal Ice",
+      "icon": "🧊",
+      "description": "Balanced",
+      "compatibleEmotions": [
+        "trust",
+        "surprise"
+      ],
+      "thicknessEffect": 0,
+      "sweetnessEffect": 0,
+      "strengthEffect": -1
+    },
+    "more_ice": {
+      "id": "more_ice",
+      "name": "More Ice",
+      "icon": "🧊",
+      "description": "Chilled and softer",
+      "compatibleEmotions": [
+        "joy",
+        "anticipation"
+      ],
+      "thicknessEffect": 0,
+      "sweetnessEffect": 0,
+      "strengthEffect": -2
+    }
+  },
+  "garnishTypes": {
+    "none": {
+      "id": "none",
+      "name": "None",
+      "icon": "-",
+      "description": "No garnish",
+      "compatibleEmotions": [
+        "fear",
+        "disgust"
+      ],
+      "thicknessEffect": 0,
+      "sweetnessEffect": 0,
+      "strengthEffect": 0
+    },
+    "bitters": {
+      "id": "bitters",
+      "name": "Bitters",
+      "icon": "🥃",
+      "description": "Dry and sharp",
+      "compatibleEmotions": [
+        "disgust",
+        "anger"
+      ],
+      "thicknessEffect": 0,
+      "sweetnessEffect": -1,
+      "strengthEffect": 1
+    }
+  },
+  "decorationTypes": {
+    "mint": {
+      "id": "mint",
+      "name": "Mint",
+      "icon": "🌿",
+      "description": "Cooling finish",
+      "compatibleEmotions": [
+        "trust",
+        "joy"
+      ],
+      "thicknessEffect": 0,
+      "sweetnessEffect": 0,
+      "strengthEffect": -1
+    },
+    "lemon_slice": {
+      "id": "lemon_slice",
+      "name": "Lemon Slice",
+      "icon": "🍋",
+      "description": "Sharp citrus edge",
+      "compatibleEmotions": [
+        "disgust",
+        "anger"
+      ],
+      "thicknessEffect": 0,
+      "sweetnessEffect": -1,
+      "strengthEffect": 1
+    }
+  },
+  "addonBonusConfig": {
+    "ice": {
+      "base": 5,
+      "perfect": 10
+    },
+    "garnish": {
+      "base": 8,
+      "perfect": 15
+    },
+    "decoration": {
+      "base": 8,
+      "perfect": 15
+    }
+  },
+  "comboBonus": {
+    "mint_highball": {
+      "name": "Fresh Highball",
+      "icon": "✨",
+      "description": "Mint + highball combo",
+      "bonus": 25,
+      "requires": {
+        "glass": "highball",
+        "decoration": "mint"
+      }
+    }
+  }
+}

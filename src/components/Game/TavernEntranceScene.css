@@ -1,0 +1,101 @@
+.tavern-entrance-scene {
+  position: fixed;
+  inset: 0;
+  z-index: 1200;
+  overflow: hidden;
+  background: #050608;
+  cursor: pointer;
+}
+
+.tavern-scene-content {
+  position: absolute;
+  inset: 0;
+  will-change: opacity, filter;
+}
+
+.tavern-background {
+  position: absolute;
+  inset: 0;
+}
+
+.tavern-bg-main,
+.tavern-bg-foreground {
+  position: absolute;
+  inset: 0;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.tavern-bg-main {
+  background-image: url('/asset/场景/酒馆内景全景（角色入场动画）.png');
+}
+
+.tavern-bg-foreground {
+  background-image: url('/asset/场景/酒馆内景全景前景.png');
+  z-index: 3;
+  pointer-events: none;
+}
+
+.character-entrance-wrapper {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  height: min(52vh, 420px);
+  z-index: 2;
+  will-change: transform;
+  pointer-events: none;
+}
+
+.character-sprite {
+  position: absolute;
+  left: 0;
+  bottom: 8vh;
+  width: 100%;
+  image-rendering: pixelated;
+  filter: drop-shadow(0 6px 10px rgba(0, 0, 0, 0.28));
+  user-select: none;
+}
+
+.entrance-hint-text {
+  position: absolute;
+  left: 50%;
+  bottom: 6vh;
+  z-index: 4;
+  transform: translateX(-50%);
+  color: rgba(248, 231, 197, 0.92);
+  font-family: 'PressStart2P-Regular', monospace;
+  font-size: clamp(9px, 0.9vw, 12px);
+  letter-spacing: 0.08em;
+  text-shadow: 0 1px 0 rgba(0, 0, 0, 0.7);
+  animation: entranceHintPulse 1.4s ease-in-out infinite;
+}
+
+.tavern-fade-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 10;
+  background: #000;
+  pointer-events: none;
+}
+
+@keyframes entranceHintPulse {
+  0%,
+  100% {
+    opacity: 0.55;
+  }
+
+  50% {
+    opacity: 1;
+  }
+}
+
+@media (max-width: 768px) {
+  .character-entrance-wrapper {
+    height: min(48vh, 340px);
+  }
+
+  .character-sprite {
+    bottom: 10vh;
+  }
+}
